@@ -78,10 +78,12 @@ def rm_other_category(df, annots, classes):
             list_label.append(label)
     
     # Hasta que no se arregle esto lo voy a poner en hold
-    if df_v.empty:
+    if len(l)==0:
         print('DataFrame is empty!')
-    print("1 process goes to sleep")
-    time.sleep(120)
+        print("1 process goes to sleep")
+        time.sleep(120)
+    else: 
+        print('DataFrame is NOT empty olee!')
     df_v = pd.concat(df_v)
     return df_v
 
@@ -134,9 +136,8 @@ def gen_retrieval_multicore(opt):
     for key, value in classes.items():
         idx_classes[value] = key
         
-    print("ego4d_gt=", ego4d_gt)
-    print("video_list=", video_list)
-
+    lista_annots = [len(ego4d_gt[video_name]) for video_name in video_list]
+    print("lista_annots=", lista_annots)
 
     result = {
         video:
