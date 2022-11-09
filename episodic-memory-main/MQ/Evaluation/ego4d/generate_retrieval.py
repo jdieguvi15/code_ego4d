@@ -5,6 +5,7 @@ import pandas as pd
 import json
 import os
 from joblib import Parallel, delayed
+import time
 
 def IOU(s1, e1, s2, e2):
     if (s2 > e1) or (s1 > e2):
@@ -75,7 +76,12 @@ def rm_other_category(df, annots, classes):
             print("df[df['label'] == label] =", df[df['label'] == label])
             df_v.append(df[df['label'] == label])
             list_label.append(label)
-
+    
+    # Hasta que no se arregle esto lo voy a poner en hold
+    if df_v.empty:
+        print('DataFrame is empty!')
+    print("1 process goes to sleep")
+    time.sleep(120)
     df_v = pd.concat(df_v)
     return df_v
 
@@ -127,6 +133,9 @@ def gen_retrieval_multicore(opt):
     idx_classes = {}
     for key, value in classes.items():
         idx_classes[value] = key
+        
+    print("ego4d_gt=", ego4d_gt)
+    print("video_list=", video_list)
 
 
     result = {
