@@ -133,11 +133,13 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
+    name1 = "Train_batch:" + str(opt["batch_size"]) + "_lr:" + str(opt["train_lr"])
+    
     if opt["wandb"] == "true":
-    wandb.login()
-    wandb.init(
+        wandb.login()
+        wandb.init(
             project="Ego4d default",
-            name="Given checkpoint",
+            name=name1,
             config={
                 "architecture": "VSGN",
                 "dataset": "ego4d",

@@ -25,8 +25,8 @@ def Infer_SegTAD(opt):
     if not os.path.exists(opt["checkpoint_path"] + "/best.pth.tar"):
         print("There is no checkpoint. Please train first!!!")
     else:
-        checkpoint2 = torch.load(opt["checkpoint_path"] + "/best.pth.tar")
-        checkpoint = torch.load(opt["checkpoint_path"] + "/moments.pth.tar")
+        checkpoint = torch.load(opt["checkpoint_path"] + "/best.pth.tar")
+        checkpoint2 = torch.load(opt["checkpoint_path"] + "/moments.pth.tar")
         print("Infer with checkpoint from moments.pth.tar")
         model.load_state_dict(checkpoint['state_dict'])
     #print(checkpoint)

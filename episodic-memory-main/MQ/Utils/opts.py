@@ -63,8 +63,6 @@ def parse_opt():
         type=str,
         default="./history.json")
         
-        history_path
-
     # Training hyper-parameters
     parser.add_argument(
         '--batch_size',
@@ -79,7 +77,7 @@ def parse_opt():
         type=float,
         default=0.0001)
     parser.add_argument(
-        '--f',
+        '--num_epoch',
         type=int,
         default=30)
     parser.add_argument(

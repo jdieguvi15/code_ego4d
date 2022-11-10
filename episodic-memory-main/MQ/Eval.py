@@ -17,6 +17,7 @@ if __name__ == '__main__':
     if not os.path.exists(opt["output_path"]):
         print('No predictions! Please run inference first!')
 
+    average_mAP, recall = 0, 0 
 
     if opt['eval_stage'] == 'eval_detection' or opt['eval_stage'] == 'all':
         print("---------------------------------------------------------------------------------------------")
