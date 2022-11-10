@@ -78,7 +78,7 @@ def rm_other_category(df, annots, classes):
             list_label.append(label)
     
     # Hasta que no se arregle esto lo voy a poner en hold
-    if len(l)==0:
+    if len(df_v)==0:
         print('DataFrame is empty!')
         print("1 process goes to sleep")
         time.sleep(120)
@@ -88,6 +88,7 @@ def rm_other_category(df, annots, classes):
     return df_v
 
 def _gen_retrieval_video(video_name, result, classes, idx_classes, opt, test_anno, num_prop=200,  topk = 2):
+    print("test_anno_after=", test_anno)
     path = os.path.join(opt["output_path"], opt["prop_path"]) + "/"
     files = [path + f for f in os.listdir(path) if  video_name in f]
     if len(files) == 0:
@@ -136,7 +137,7 @@ def gen_retrieval_multicore(opt):
     for key, value in classes.items():
         idx_classes[value] = key
         
-    lista_annots = [len(ego4d_gt[video_name]) for video_name in video_list]
+    lista_annots = [len(ego4d_gt[video_name]['annotations']) for video_name in ego4d_gt]
     print("lista_annots=", lista_annots)
 
     result = {
@@ -146,7 +147,8 @@ def gen_retrieval_multicore(opt):
             }
         for video in video_list
     }
-
+    
+    print("test_anno_before=", ego4d_gt[video_list[0]])
     parallel = Parallel(n_jobs=16, prefer="processes")
     detection = parallel(delayed(_gen_retrieval_video)(video_name, result[video_name], classes, idx_classes, opt, ego4d_gt[video_name])
                         for video_name in video_list)

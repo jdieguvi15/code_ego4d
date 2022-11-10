@@ -219,7 +219,7 @@ def parse_opt():
 
     parser.add_argument(
         '--infer_datasplit',
-        default='test',
+        default='validation',
         type=str,
         choices=['test', 'validation'])
     args = parser.parse_args()
