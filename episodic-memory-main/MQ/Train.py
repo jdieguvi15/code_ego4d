@@ -1,4 +1,5 @@
 import sys
+import wandb
 sys.dont_write_bytecode = True
 import os
 import torch
@@ -41,6 +42,9 @@ def Train_VSGN(opt):
 
         train_VSGN_epoch(train_loader, model, optimizer, epoch, writer, opt)
         epoch_loss = test_VSGN_epoch(test_loader, model, epoch, writer, opt)
+        
+        if opt["wandb"] == "true":
+            wandb.log({"epoch_loss": epoch_loss, "epoch": epoch + 1})
 
         print((datetime.datetime.now()))
         state = {'epoch': epoch + 1,
@@ -128,8 +132,27 @@ if __name__ == '__main__':
     print("---------------------------------------------------------------------------------------------")
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
+    
+    if opt["wandb"] == "true":
+    wandb.login()
+    wandb.init(
+            project="Ego4d default",
+            name="Given checkpoint",
+            config={
+                "architecture": "VSGN",
+                "dataset": "ego4d",
+                "batch_size": opt["batch_size"],
+                "optimizer_name": "Adam",
+                "learning_rate": opt["train_lr"],
+                "num_epoch": opt["num_epoch"]
+            })
+
+    
     Train_VSGN(opt)
     print("Training finishes!")
+    
+    if opt["wandb"] == "true":
+        wandb.finish()
 
     print(datetime.datetime.now())
 

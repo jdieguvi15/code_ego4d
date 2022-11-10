@@ -153,3 +153,5 @@ def evaluation_retrieval(opt):
     eval_result = ego4d_MR.evaluate()
 
     print(eval_result)
+    
+    return eval_result[1][0]

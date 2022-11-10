@@ -59,9 +59,11 @@ def parse_opt():
         type=str,
         default="retrieval_postNMS.json")
     parser.add_argument(
-        '--detad_sensitivity_file',
+        '--history_path',
         type=str,
-        default="detad_sensitivity")
+        default="./history.json")
+        
+        history_path
 
     # Training hyper-parameters
     parser.add_argument(
@@ -77,7 +79,7 @@ def parse_opt():
         type=float,
         default=0.0001)
     parser.add_argument(
-        '--num_epoch',
+        '--f',
         type=int,
         default=30)
     parser.add_argument(
@@ -222,6 +224,13 @@ def parse_opt():
         default='val',
         type=str,
         choices=['test', 'validation'])
+        
+    parser.add_argument(
+        '--wandb',
+        default='true',
+        type=str,
+        choices=['true', 'false'])
+        
     args = parser.parse_args()
 
     return args

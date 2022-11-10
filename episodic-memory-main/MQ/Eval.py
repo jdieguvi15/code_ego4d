@@ -5,6 +5,8 @@ from Evaluation.ego4d.get_retrieval_performance import evaluation_retrieval as e
 
 import Utils.opts as opts
 import os
+import json
+import os.path
 if __name__ == '__main__':
 
     opt = opts.parse_opt()
@@ -26,8 +28,9 @@ if __name__ == '__main__':
 
         if 'val' in opt['infer_datasplit']:
             print("b. Evaluate the detection results!")
-            eval_det_ego4d(opt)
+            average_mAP = eval_det_ego4d(opt)
             print("Detection evaluation finishes! \n")
+            
 
     if opt['eval_stage'] == 'eval_retrieval' or opt['eval_stage'] == 'all':
 
@@ -40,5 +43,29 @@ if __name__ == '__main__':
 
         if 'val' in opt['infer_datasplit']:
             print("b. Evaluate the retrieval results!")
-            eval_retrieval(opt)
+            recall = eval_retrieval(opt)
             print("Detection evaluation finishes! \n")
+            
+            
+    config={
+        "architecture": "VSGN_default",
+        "dataset": "ego4d",
+        "batch_size": opt["batch_size"],
+        "optimizer_name": "Adam",
+        "learning_rate": opt["train_lr"],
+        "num_epoch": opt["num_epoch"],
+        "average_mAP": average_mAP,
+        "recall": recall
+    }
+    
+    history_path = opt["history_path"]
+    if not os.path.exists(history_path):
+        data = {0: config}
+        with open(history_path, "w") as f:
+            json.dump(data, f)
+    else:
+        with open(history_path, "r") as f:
+            data = json.load(f)
+        data[len(data)] = config
+        with open(history_path, "w") as f:
+            json.dump(data, f)

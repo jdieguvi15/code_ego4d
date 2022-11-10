@@ -13,11 +13,13 @@ def run_evaluation(ground_truth_filename, prediction_filename,
 
     for (tiou, mAP) in zip(tiou_thresholds, mAPs):
         print("mAP at tIoU {} is {}".format(tiou, mAP))
+        
+    return average_mAP
 
 
 
 def evaluation_detection(opt):
 
-    run_evaluation(ground_truth_filename = opt["clip_anno"],
+    return run_evaluation(ground_truth_filename = opt["clip_anno"],
                    prediction_filename = os.path.join(opt["output_path"], opt["detect_result_file"]),
                    subset=opt['infer_datasplit'], tiou_thresholds=opt['tIoU_thr'])
