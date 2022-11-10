@@ -63,32 +63,19 @@ def Soft_NMS(df, nms_threshold=1e-5, num_prop=200):
 
 #cambios
 def rm_other_category(df, annots, classes):
-    print("HOLAAAA ENTRO EN rm_other_category")
     df_v = []
     list_label = []
-    print("ANNOTS!!=", annots)
     for ann in annots:
-        print("ann=", ann)
         label = classes[ann['label']]
-        print("label=", label)
 
         if not label in list_label:
-            print("df[df['label'] == label] =", df[df['label'] == label])
             df_v.append(df[df['label'] == label])
             list_label.append(label)
     
-    # Hasta que no se arregle esto lo voy a poner en hold
-    if len(df_v)==0:
-        print('DataFrame is empty!')
-        print("1 process goes to sleep")
-        time.sleep(120)
-    else: 
-        print('DataFrame is NOT empty olee!')
     df_v = pd.concat(df_v)
     return df_v
 
 def _gen_retrieval_video(video_name, result, classes, idx_classes, opt, test_anno, num_prop=200,  topk = 2):
-    print("test_anno_after=", test_anno)
     path = os.path.join(opt["output_path"], opt["prop_path"]) + "/"
     files = [path + f for f in os.listdir(path) if  video_name in f]
     if len(files) == 0:
@@ -101,7 +88,6 @@ def _gen_retrieval_video(video_name, result, classes, idx_classes, opt, test_ann
         dfs.append(snippet_df)
     df = pd.concat(dfs)
     
-    print("antes del rm_other_category", "\ndf=", df, "\ntest_anno=", test_anno['annotations'], "\nclasses=", classes)
     df = rm_other_category(df, test_anno['annotations'], classes)
 
     df = df.sort_values(by="score", ascending=False)
@@ -136,9 +122,6 @@ def gen_retrieval_multicore(opt):
     idx_classes = {}
     for key, value in classes.items():
         idx_classes[value] = key
-        
-    lista_annots = [len(ego4d_gt[video_name]['annotations']) for video_name in ego4d_gt]
-    print("lista_annots=", lista_annots)
 
     result = {
         video:
@@ -148,7 +131,6 @@ def gen_retrieval_multicore(opt):
         for video in video_list
     }
     
-    print("test_anno_before=", ego4d_gt[video_list[0]])
     parallel = Parallel(n_jobs=16, prefer="processes")
     detection = parallel(delayed(_gen_retrieval_video)(video_name, result[video_name], classes, idx_classes, opt, ego4d_gt[video_name])
                         for video_name in video_list)
