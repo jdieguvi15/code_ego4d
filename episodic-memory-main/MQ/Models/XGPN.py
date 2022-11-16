@@ -2,6 +2,7 @@
 import torch.nn as nn
 # from Utils.Sync_batchnorm.batchnorm import SynchronizedBatchNorm1d
 from .GCNs import xGN
+from .ViT import ViT
 
 
 
@@ -13,6 +14,7 @@ class XGPN(nn.Module):
         self.batch_size = opt["batch_size"]
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
+        self.use_ViT = opt['use_ViT']
         self.use_xGPN = opt['use_xGPN']
 
         self.conv0 = nn.Sequential(
@@ -43,7 +45,11 @@ class XGPN(nn.Module):
 
 
     def _make_levels_enc(self, opt, in_channels, out_channels, stride = 2):
-        if self.use_xGPN:
+        if self.use_ViT:
+            return ViT(0, 0, 512, 2048,
+                 8, 1, 0.1, 0.1, lr=0.1,
+                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD"))
+        elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:
             return nn.Sequential(
