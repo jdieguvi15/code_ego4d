@@ -46,9 +46,9 @@ class XGPN(nn.Module):
 
     def _make_levels_enc(self, opt, in_channels, out_channels, stride = 2):
         if self.use_ViT:
-            return ViT(0, 0, 512, 2048,
-                 8, 1, 0.1, 0.1, lr=0.1,
-                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD"))
+            print("---- Creamos un ViT ----")
+            return ViT(0, 0, 512, 2048, 8, 1, 0.1, 0.1, lr=0.1,
+                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD")
         elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:
