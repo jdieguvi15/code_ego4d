@@ -43,7 +43,7 @@ def Train_VSGN(opt):
         train_VSGN_epoch(train_loader, model, optimizer, epoch, writer, opt)
         epoch_loss = test_VSGN_epoch(test_loader, model, epoch, writer, opt)
         
-        if opt["wandb"] == "true":
+        if opt["not_wandb"]:
             wandb.log({"epoch_loss": epoch_loss, "epoch": epoch + 1})
 
         print((datetime.datetime.now()))
@@ -135,7 +135,7 @@ if __name__ == '__main__':
     
     name1 = "Train_batch:" + str(opt["batch_size"]) + "_lr:" + str(opt["train_lr"])
     
-    if opt["wandb"] == "true":
+    if opt["not_wandb"]:
         wandb.login()
         wandb.init(
             project="Ego4d default",
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     Train_VSGN(opt)
     print("Training finishes!")
     
-    if opt["wandb"] == "true":
+    if opt["not_wandb"]:
         wandb.finish()
 
     print(datetime.datetime.now())
