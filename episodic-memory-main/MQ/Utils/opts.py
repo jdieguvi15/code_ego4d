@@ -228,10 +228,9 @@ def parse_opt():
         choices=['test', 'validation'])
         
     parser.add_argument(
-        '--wandb',
-        default='true',
-        type=str,
-        choices=['true', 'false'])
+        '--not_wandb',
+        default=True,
+        action='store_false')
         
     args = parser.parse_args()
 
