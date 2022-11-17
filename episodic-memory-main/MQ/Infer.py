@@ -27,7 +27,7 @@ def Infer_SegTAD(opt):
     else:
         checkpoint = torch.load(opt["checkpoint_path"] + "/best.pth.tar")
         checkpoint2 = torch.load(opt["checkpoint_path"] + "/moments.pth.tar")
-        print("Infer with checkpoint from moments.pth.tar")
+        print("Infer with checkpoint from best.pth.tar")
         model.load_state_dict(checkpoint['state_dict'])
     #print(checkpoint)
     #print(checkpoint2)

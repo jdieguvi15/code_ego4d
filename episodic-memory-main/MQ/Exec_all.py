@@ -29,6 +29,7 @@ if __name__ == '__main__':
 
     opt = opts.parse_opt()
     opt = vars(opt)
+    opt['is_train'] = 'true'
 
     if not os.path.exists(opt["checkpoint_path"]):
         os.makedirs(opt["checkpoint_path"])
@@ -67,6 +68,8 @@ if __name__ == '__main__':
 
     print(datetime.datetime.now())
 
+    opt['is_train'] = 'false'
+    print(opt)
     print(datetime.datetime.now())
     print("---------------------------------------------------------------------------------------------")
     print("1. Inference starts!")

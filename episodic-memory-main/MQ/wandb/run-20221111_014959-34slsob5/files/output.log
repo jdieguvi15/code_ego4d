@@ -1,0 +1,7 @@
+
+Train loss (epoch 0):  loss: 6.6220 loss_cls_dec: 5.6015 loss_reg_dec: 0.3925 loss_action: 0.6879 loss_start: 0.6891 loss_end: 0.6869 loss_bd_adjust: 0.2153
+Val loss (epoch 0):  loss: 5.9655 loss_cls_dec: 4.8996 loss_reg_dec: 0.4144 loss_action: 0.6868 loss_start: 0.6809 loss_end: 0.6747 loss_bd_adjust: 0.2431
+2022-11-11 01:51:38.645831
+2022-11-11 01:51:38.896406
+The best model up to now is from Epoch 0
+Training finishes!
