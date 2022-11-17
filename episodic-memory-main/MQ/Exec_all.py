@@ -56,7 +56,9 @@ if __name__ == '__main__':
                 "batch_size": opt["batch_size"],
                 "optimizer_name": "Adam",
                 "learning_rate": opt["train_lr"],
-                "num_epoch": opt["num_epoch"]
+                "num_epoch": opt["num_epoch"],
+                "use_xGPN": opt["use_xGPN"],
+                "use_ViT": opt["use_ViT"]
             })
 
     
@@ -118,6 +120,8 @@ if __name__ == '__main__':
         "optimizer_name": "Adam",
         "learning_rate": opt["train_lr"],
         "num_epoch": opt["num_epoch"],
+        "use_xGPN": opt["use_xGPN"],
+        "use_ViT": opt["use_ViT"],
         "average_mAP": average_mAP,
         "recall": recall
     }
