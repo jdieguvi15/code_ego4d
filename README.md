@@ -2,6 +2,10 @@
 
 Este es el código que estoy usando para las modificaciones y las pruebas.
 
+
+
+----- EJECUCIÓN -----
+
 El clip_annotations está configurado para los videos que yo tengo descargados, puede haber alguna discrepancia con el que tengas descargado, si ese es el caso tienes que ejecutar el código con tu clip_annotations.
 
 Para ejecutar el training usa yo uso:
@@ -21,6 +25,10 @@ Para evaluar los resultados de la predicción uso:
 python Eval.py --dataset ego4d --output_path /data/s5091217/Ego4d-main/ego4d_output --out_prop_map true --eval_stage all
 
 Aproximadamente toda esta ejecución tarda un poco menos de una hora.
+
+
+
+----- APUNTES SOBRE EL CÓDIGO -----
 
 Los parametros y resultados de cada ejecución se almacenan en el history.json (pero hay un problema, si cambias los parámetros y el training falla, el eval se ejecuta igual y guardara los resultados como si sí que se hubiera acabado el training pero usando el checkpoint del último training que se haya hecho.
 
