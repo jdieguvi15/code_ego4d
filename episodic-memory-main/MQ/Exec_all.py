@@ -45,7 +45,7 @@ if __name__ == '__main__':
     
     name1 = "Train_batch:" + str(opt["batch_size"]) + "_lr:" + str(opt["train_lr"])
     
-    if opt["wandb"] == "true":
+    if opt["not_wandb"] == "true":
         wandb.login()
         wandb.init(
             project="Ego4d default",
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     Train_VSGN(opt)
     print("Training finishes!")
     
-    if opt["wandb"] == "true":
+    if opt["not_wandb"] == "true":
         wandb.finish()
 
     print(datetime.datetime.now())
