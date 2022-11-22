@@ -91,7 +91,7 @@ class XGPN(nn.Module):
             feats.append(x)
             print("x", i, ":", x.shape)
 
-        print("print:", feats.shape)
+        print("feats:", len(feats))
         return feats
 
     def _decoder(self, input):
