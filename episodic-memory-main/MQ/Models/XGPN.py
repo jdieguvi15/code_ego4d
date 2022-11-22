@@ -23,12 +23,15 @@ class XGPN(nn.Module):
         )
 
         self.levels_enc = nn.ModuleList()
+        num_hiddens = 928 # viene determinado por la forma de los features de SlowFast
         for i in range(self.num_levels):
             if i == 0:
                 stride = 1
             else:
                 stride = 2
-            self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, stride = stride))
+            # Añado num_hiddens para controlar como decrece
+            num_hiddens /= 2
+            self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens=num_hiddens, stride = stride))
 
         self.levels_dec = nn.ModuleList()
         for i in range(self.num_levels - 1):
@@ -44,14 +47,16 @@ class XGPN(nn.Module):
             self.levels2.append(self._make_levels(in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim))
 
 
-    def _make_levels_enc(self, opt, in_channels, out_channels, stride = 2):
+    def _make_levels_enc(self, opt, in_channels, out_channels, num_hiddens, stride = 2):
         if self.use_ViT:
             print("---- Creamos un ViT ----")
-            return ViT(0, 0, 512, 2048, 8, 1, 0.1, 0.1, lr=0.1,
-                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD")
+            # in_channels, num_hiddens, mlp_num_hiddens, num_heads
+            return ViT(in_channels, num_hiddens, 2048, 8)
         elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:
+            #input: (Cin, Lin), output: (Cout, Lout), en aquest cas Cin = Cout será el numero de frames?
+            #la segunda dimensión si que se va reduciendo, empieza en 928 y se va reduciendo a la mitad en cada level hasta 58
             return nn.Sequential(
                 nn.Conv1d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=stride, padding=1,
                           groups=1),
@@ -59,7 +64,7 @@ class XGPN(nn.Module):
             )
 
     def _make_levels_dec(self, in_channels, out_channels, output_padding = 1):
-
+        #esto si funciona con xGN deberia funcional igual con ViT pero parece un poco sorprendente
         return nn.Sequential(
             nn.ConvTranspose1d(in_channels=in_channels, out_channels=out_channels,kernel_size=3,stride=2,padding=1, output_padding=output_padding, groups=1),
             nn.ReLU(inplace=True),

@@ -12,23 +12,6 @@ from torchvision import transforms
 import wandb
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-class PatchEmbedding(nn.Module):
-    def __init__(self, img_size=96, patch_size=16, num_hiddens=512):
-        super().__init__()
-        def _make_tuple(x):
-            if not isinstance(x, (list, tuple)):
-                return (x, x)
-            return x
-        img_size, patch_size = _make_tuple(img_size), _make_tuple(patch_size)
-        self.num_patches = (img_size[0] // patch_size[0]) * (
-            img_size[1] // patch_size[1])
-        self.conv = nn.LazyConv2d(num_hiddens, kernel_size=patch_size,
-                                  stride=patch_size)
-
-    def forward(self, X):
-        # Output shape: (batch size, no. of patches, no. of channels)
-        return self.conv(X).flatten(2).transpose(1, 2)
     
 class ViTMLP(nn.Module):
     def __init__(self, mlp_num_hiddens, mlp_num_outputs, dropout=0.5):
@@ -50,7 +33,7 @@ class ViTBlock(nn.Module):
         self.ln1 = nn.LayerNorm(norm_shape)
         self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout, use_bias)
         self.ln2 = nn.LayerNorm(norm_shape)
-        self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout)
+        self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout) #alomejor esto es redundante si solo hay 1 bloque
 
     def forward(self, X, valid_lens=None):
         X = self.ln1(X)
@@ -58,19 +41,25 @@ class ViTBlock(nn.Module):
             X + self.attention(X, X, X, valid_lens)))
     
 class ViT(d2l.Classifier):
-    """Vision transformer."""
-    def __init__(self, img_size, patch_size, num_hiddens, mlp_num_hiddens,
-                 num_heads, num_blks, emb_dropout, blk_dropout, lr=0.1,
-                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD"):
+    """Vision transformer.
+    Modificación para que solo aplique el positional embedding, bloques de encoder y head para dar el formato de salida.
+    He tocado lo mínimo del Vit original, vamos a ver como va.
+    
+    (mlp_num_hiddens dice las neuronas que tendrán los mlp en la capa intermedia)
+    (num_hiddens dice cuantos valores tiene cada feature)
+    *podria modificarlo ?
+    
+    input: (Cin, Lin) = (in_channels, num_hiddens)
+    output: (Cout, Lin) = (out_channels, num_hiddens / 2)   in_channels = out_channels
+    """
+    def __init__(self, in_channels, num_hiddens, mlp_num_hiddens,
+                 num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
+                 use_bias=False, usewandb=False):
         super().__init__()
         self.save_hyperparameters()
-        self.patch_embedding = PatchEmbedding(
-            img_size, patch_size, num_hiddens)
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, num_hiddens))
-        num_steps = self.patch_embedding.num_patches + 1  # Add the cls token
         # Positional embeddings are learnable
         self.pos_embedding = nn.Parameter(
-            torch.randn(1, num_steps, num_hiddens))
+            torch.randn(1, in_channels, num_hiddens))
         self.dropout = nn.Dropout(emb_dropout)
         self.blks = nn.Sequential()
         for i in range(num_blks):
@@ -78,31 +67,31 @@ class ViT(d2l.Classifier):
                 num_hiddens, num_hiddens, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
         self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
-                                  nn.Linear(num_hiddens, num_classes))
+                                  nn.Linear(num_hiddens, num_hiddens/2))
 
     def forward(self, X):
-        #X = self.patch_embedding(X)
-        #X = torch.cat((self.cls_token.expand(X.shape[0], -1, -1), X), 1)
+        #No hace patch embedding ni añade un token para la clase
+        #Hacemos positional embedding y el vit block
+        #Al final le damos el formato del output con linear
         X = self.dropout(X + self.pos_embedding)
         for blk in self.blks:
             X = blk(X)
-        return X
-        #return self.head(X[:, 0])
+        return self.head(X)
     
     def training_step(self, batch):
         l = self.loss(self(*batch[:-1]), batch[-1])
         #self.plot('loss', l, train=True)
-        a = self.accuracy(self(*batch[:-1]), batch[-1])
-        wandb.log({"train_loss": l, "train_acc": a})
+        #a = self.accuracy(self(*batch[:-1]), batch[-1])
+        #wandb.log({"train_loss": l, "train_acc": a})
         return l
 
     def validation_step(self, batch):
         l = self.loss(self(*batch[:-1]), batch[-1])
-        a = self.accuracy(self(*batch[:-1]), batch[-1])
-        wandb.log({"val_loss": l, "val_acc": a})
+        #a = self.accuracy(self(*batch[:-1]), batch[-1])
+        #wandb.log({"val_loss": l, "val_acc": a})
         #self.plot('loss', l, train=False)
         
-    def configure_optimizers(self):
-        return eval("torch.optim."+ self.optimizer_name + "(self.parameters(), lr=self.lr)")
+    #def configure_optimizers(self):
+    #    return eval("torch.optim."+ self.optimizer_name + "(self.parameters(), lr=self.lr)")
     
 
