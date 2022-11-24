@@ -67,7 +67,7 @@ class ViT(d2l.Classifier):
                 num_hiddens, num_hiddens, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
         self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
-                                  nn.Linear(num_hiddens, num_hiddens/2))
+                                  nn.Linear(num_hiddens, num_hiddens//2))
 
     def forward(self, X):
         #No hace patch embedding ni añade un token para la clase
