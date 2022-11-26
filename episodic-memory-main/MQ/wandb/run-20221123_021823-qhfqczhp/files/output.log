@@ -1,0 +1,21 @@
+/home/s5091217/.local/lib/python3.9/site-packages/torch/nn/modules/lazy.py:178: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+Traceback (most recent call last):
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 155, in <module>
+    Train_VSGN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 21, in Train_VSGN
+    model = VSGN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/VSGN.py", line 23, in __init__
+    self.xGPN = XGPN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/XGPN.py", line 34, in __init__
+    self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens=num_hiddens, stride = stride))
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/XGPN.py", line 54, in _make_levels_enc
+    return ViT(in_channels, num_hiddens, 2048, 8)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/ViT.py", line 70, in __init__
+    nn.Linear(num_hiddens, num_hiddens/2))
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/nn/modules/linear.py", line 96, in __init__
+    self.weight = Parameter(torch.empty((out_features, in_features), **factory_kwargs))
+TypeError: empty() received an invalid combination of arguments - got (tuple, dtype=NoneType, device=NoneType), but expected one of:
+ * (tuple of ints size, *, tuple of names names, torch.memory_format memory_format, torch.dtype dtype, torch.layout layout, torch.device device, bool pin_memory, bool requires_grad)
+ * (tuple of ints size, *, torch.memory_format memory_format, Tensor out, torch.dtype dtype, torch.layout layout, torch.device device, bool pin_memory, bool requires_grad)
+---- Creamos un ViT ----

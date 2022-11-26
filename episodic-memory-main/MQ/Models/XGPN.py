@@ -30,8 +30,8 @@ class XGPN(nn.Module):
             else:
                 stride = 2
             # Añado num_hiddens para controlar como decrece
-            num_hiddens = num_hiddens // 2
             self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens=num_hiddens, stride = stride))
+            num_hiddens = num_hiddens // 2
 
         self.levels_dec = nn.ModuleList()
         for i in range(self.num_levels - 1):
@@ -80,7 +80,6 @@ class XGPN(nn.Module):
     def _encoder(self, input, num_frms):
 
         feats = []
-        print("input:", input.shape)
         x = self.conv0(input)
         print("x0:", x.shape)
         for i in range(0, self.num_levels):
@@ -91,7 +90,6 @@ class XGPN(nn.Module):
             feats.append(x)
             print("x", i, ":", x.shape)
 
-        print("feats:", len(feats))
         return feats
 
     def _decoder(self, input):
