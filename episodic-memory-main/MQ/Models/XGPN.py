@@ -23,7 +23,7 @@ class XGPN(nn.Module):
         )
 
         self.levels_enc = nn.ModuleList()
-        num_hiddens = 928 # viene determinado por la forma de los features de SlowFast
+        num_hiddens = 1856 # viene determinado por la forma de los features de SlowFast
         for i in range(self.num_levels):
             if i == 0:
                 stride = 1
