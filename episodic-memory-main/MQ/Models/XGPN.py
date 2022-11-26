@@ -30,8 +30,8 @@ class XGPN(nn.Module):
             else:
                 stride = 2
             # Añado num_hiddens para controlar como decrece
-            num_hiddens = num_hiddens // 2
             self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens=num_hiddens, stride = stride))
+            num_hiddens = num_hiddens // 2
 
         self.levels_dec = nn.ModuleList()
         for i in range(self.num_levels - 1):
