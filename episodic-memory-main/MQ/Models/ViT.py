@@ -46,13 +46,15 @@ class ViT(d2l.Classifier):
     He tocado lo mínimo del Vit original, vamos a ver como va.
     
     (mlp_num_hiddens dice las neuronas que tendrán los mlp en la capa intermedia)
-    (num_hiddens dice cuantos valores tiene cada feature)
-    *podria modificarlo ?
+    (num_hiddens dice cuantos valores tiene cada feature) -> podria modificarlo para calcular con más valores
+    Además, por como está codificado el código del libro, num_heads ha de ser divisor de num_hiddens -> demasiado rígido
+    Problema: divisores de 58: 2 y 29
+    (num_hiddens = largada del vector features de momento, lo más simple)
     
     input: (Cin, Lin) = (in_channels, num_hiddens)
     output: (Cout, Lin) = (out_channels, num_hiddens / 2)   in_channels = out_channels
     """
-    def __init__(self, in_channels, num_hiddens, mlp_num_hiddens,
+    def __init__(self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
                  num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
                  use_bias=False, usewandb=False):
         super().__init__()
@@ -67,7 +69,7 @@ class ViT(d2l.Classifier):
                 num_hiddens, num_hiddens, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
         self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
-                                  nn.Linear(num_hiddens, num_hiddens//2))
+                                  nn.Linear(num_hiddens, num_hiddens_out))
 
     def forward(self, X):
         #No hace patch embedding ni añade un token para la clase

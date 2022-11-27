@@ -23,16 +23,16 @@ class XGPN(nn.Module):
         )
 
         self.levels_enc = nn.ModuleList()
-        num_hiddens = 928 # viene determinado por la forma de los features de SlowFast
+        num_hiddens_in, num_hiddens_out = 928, 928 # viene determinado por la forma de los features de SlowFast
         for i in range(self.num_levels):
+            num_hiddens_in = num_hiddens_out
             if i == 0:
                 stride = 1
-                num_hiddens = 928
             else:
                 stride = 2
-                num_hiddens = num_hiddens // 2
+                num_hiddens_out = num_hiddens_out // 2
             # Añado num_hiddens para controlar como decrece
-            self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens=num_hiddens, stride = stride))
+            self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens_in=num_hiddens_in, num_hiddens_out=num_hiddens_out, stride = stride))
 
         self.levels_dec = nn.ModuleList()
         for i in range(self.num_levels - 1):
@@ -48,11 +48,11 @@ class XGPN(nn.Module):
             self.levels2.append(self._make_levels(in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim))
 
 
-    def _make_levels_enc(self, opt, in_channels, out_channels, num_hiddens, stride = 2):
+    def _make_levels_enc(self, opt, in_channels, out_channels, num_hiddens_in, num_hiddens_out, stride = 2):
         if self.use_ViT:
             print("---- Creamos un ViT ----")
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
-            return ViT(in_channels, num_hiddens, 2048, 8)
+            return ViT(in_channels, num_hiddens_in, num_hiddens_out, 2048, 2)
         elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:
