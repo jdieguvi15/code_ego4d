@@ -82,14 +82,14 @@ class XGPN(nn.Module):
 
         feats = []
         x = self.conv0(input)
-        print("x0:", x.shape)
+        #print("x0:", x.shape)
         for i in range(0, self.num_levels):
             if self.use_xGPN:
                 x = self.levels_enc[i](x, num_frms)
             else:
                 x = self.levels_enc[i](x)
             feats.append(x)
-            print("x", i, ":", x.shape)
+            #print("x", i, ":", x.shape)
 
         return feats
 
