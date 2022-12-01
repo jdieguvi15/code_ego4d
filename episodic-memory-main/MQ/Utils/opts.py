@@ -190,6 +190,32 @@ def parse_opt():
         '--clip_win_size',
         type=float,
         default=0.38)
+        
+    # ViT hyper-parameters
+    parser.add_argument(
+        '--mlp_num_hiddens',
+        type=int,
+        default=2048)
+    parser.add_argument(
+        '--dim_attention',
+        type=int,
+        default=768)
+    parser.add_argument(
+        '--num_heads',
+        type=int,
+        default=2)
+    parser.add_argument(
+        '--num_blks',
+        type=int,
+        default=1)
+    parser.add_argument(
+        '--emb_dropout',
+        type=float,
+        default=0.1)
+    parser.add_argument(
+        '--blk_dropout',
+        type=float,
+        default=0.1)
 
     # Baselines
     parser.add_argument(

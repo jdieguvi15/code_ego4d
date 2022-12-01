@@ -12,6 +12,18 @@ from torchvision import transforms
 import wandb
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+class MultiHeadAttention2(d2l.MultiHeadAttention):
+    """Modificación en el Multi-head attention para permitir proyectar la atención en un espacio más grande"""
+    def __init__(self, dim_attention, num_hiddens, num_heads, dropout, bias=False, **kwargs):
+        super().__init__(num_hiddens, num_heads, dropout, bias, **kwargs)
+        #self.num_heads = num_heads
+        #self.attention = d2l.DotProductAttention(dropout, num_heads)
+        self.W_q = nn.LazyLinear(dim_attention, bias=bias)
+        self.W_k = nn.LazyLinear(dim_attention, bias=bias)
+        self.W_v = nn.LazyLinear(dim_attention, bias=bias)
+        #self.W_o = nn.LazyLinear(num_hiddens, bias=bias) #se definen en el super
+        if(dim_attention % num_heads != 0): print("Error: dim_attention no es divisible por num_heads")
     
 class ViTMLP(nn.Module):
     def __init__(self, mlp_num_hiddens, mlp_num_outputs, dropout=0.5):
@@ -27,11 +39,11 @@ class ViTMLP(nn.Module):
             self.dense1(x)))))
     
 class ViTBlock(nn.Module):
-    def __init__(self, num_hiddens, norm_shape, mlp_num_hiddens,
+    def __init__(self, dim_attention, num_hiddens, norm_shape, mlp_num_hiddens,
                  num_heads, dropout, use_bias=False):
         super().__init__()
         self.ln1 = nn.LayerNorm(norm_shape)
-        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout, use_bias)
+        self.attention = d2l.MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout, use_bias)
         self.ln2 = nn.LayerNorm(norm_shape)
         self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout) #alomejor esto es redundante si solo hay 1 bloque
 
@@ -55,7 +67,7 @@ class ViT(d2l.Classifier):
     output: (Cout, Lin) = (out_channels, num_hiddens / 2)   in_channels = out_channels
     """
     def __init__(self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
-                 num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
+                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
                  use_bias=False, usewandb=False):
         super().__init__()
         self.save_hyperparameters()
@@ -66,7 +78,7 @@ class ViT(d2l.Classifier):
         self.blks = nn.Sequential()
         for i in range(num_blks):
             self.blks.add_module(f"{i}", ViTBlock(
-                num_hiddens, num_hiddens, mlp_num_hiddens,
+                dim_attention, num_hiddens, num_hiddens, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
         self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
                                   nn.Linear(num_hiddens, num_hiddens_out))

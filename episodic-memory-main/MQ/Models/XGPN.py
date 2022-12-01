@@ -52,7 +52,7 @@ class XGPN(nn.Module):
         if self.use_ViT:
             print("---- Creamos un ViT ----")
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
-            return ViT(in_channels, num_hiddens_in, num_hiddens_out, 2048, 2)
+            return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"])
         elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:
