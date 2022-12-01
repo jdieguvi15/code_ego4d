@@ -43,7 +43,7 @@ class ViTBlock(nn.Module):
                  num_heads, dropout, use_bias=False):
         super().__init__()
         self.ln1 = nn.LayerNorm(norm_shape)
-        self.attention = d2l.MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout, use_bias)
+        self.attention = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout, use_bias)
         self.ln2 = nn.LayerNorm(norm_shape)
         self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout) #alomejor esto es redundante si solo hay 1 bloque
 
