@@ -57,6 +57,7 @@ if __name__ == '__main__':
         "num_epoch": opt["num_epoch"],
         "use_xGPN": opt["use_xGPN"],
         "use_ViT": opt["use_ViT"],
+        "num_heads": opt["num_heads"],
         "average_mAP": average_mAP,
         "recall": recall
     }

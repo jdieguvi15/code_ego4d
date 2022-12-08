@@ -148,7 +148,8 @@ if __name__ == '__main__':
                 "learning_rate": opt["train_lr"],
                 "num_epoch": opt["num_epoch"],
                 "use_xGPN": opt["use_xGPN"],
-                "use_ViT": opt["use_ViT"]
+                "use_ViT": opt["use_ViT"],
+                "num_heads": opt["num_heads"]
             })
 
     

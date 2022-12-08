@@ -48,7 +48,7 @@ class ViTBlock(nn.Module):
         self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout) #alomejor esto es redundante si solo hay 1 bloque
 
     def forward(self, X, valid_lens=None):
-        X = self.ln1(X)
+        X = self.ln1(X)                                         # se puede probar a quitar
         return X + self.mlp(self.ln2(
             X + self.attention(X, X, X, valid_lens)))
     
