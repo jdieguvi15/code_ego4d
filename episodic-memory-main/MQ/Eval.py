@@ -58,6 +58,7 @@ if __name__ == '__main__':
         "use_xGPN": opt["use_xGPN"],
         "use_ViT": opt["use_ViT"],
         "num_heads": opt["num_heads"],
+        "dim_attention": opt["dim_attention"],
         "average_mAP": average_mAP,
         "recall": recall
     }

@@ -138,7 +138,7 @@ if __name__ == '__main__':
     if opt["not_wandb"]:
         wandb.login()
         wandb.init(
-            project="Ego4d default",
+            project="Ego4d head testing",
             name=name1,
             config={
                 "architecture": "VSGN",
@@ -149,7 +149,8 @@ if __name__ == '__main__':
                 "num_epoch": opt["num_epoch"],
                 "use_xGPN": opt["use_xGPN"],
                 "use_ViT": opt["use_ViT"],
-                "num_heads": opt["num_heads"]
+                "num_heads": opt["num_heads"],
+                "dim_attention": opt["dim_attention"],
             })
 
     
