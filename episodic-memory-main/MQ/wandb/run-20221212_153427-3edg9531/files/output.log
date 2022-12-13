@@ -1,0 +1,126 @@
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+/home/s5091217/.local/lib/python3.9/site-packages/torch/nn/modules/lazy.py:178: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+Train loss (epoch 0):  loss: 6.4972 loss_cls_dec: 5.5079 loss_reg_dec: 0.3789 loss_action: 0.6849 loss_start: 0.6851 loss_end: 0.6733 loss_bd_adjust: 0.2017
+Val loss (epoch 0):  loss: 5.8788 loss_cls_dec: 4.8794 loss_reg_dec: 0.3861 loss_action: 0.6704 loss_start: 0.6612 loss_end: 0.6374 loss_bd_adjust: 0.2195
+2022-12-12 15:35:38.320776
+2022-12-12 15:35:38.964537
+The best model up to now is from Epoch 0
+Train loss (epoch 1):  loss: 5.8616 loss_cls_dec: 4.9299 loss_reg_dec: 0.3554 loss_action: 0.6702 loss_start: 0.6622 loss_end: 0.6448 loss_bd_adjust: 0.1809
+Val loss (epoch 1):  loss: 5.7798 loss_cls_dec: 4.8010 loss_reg_dec: 0.3815 loss_action: 0.6637 loss_start: 0.6491 loss_end: 0.6299 loss_bd_adjust: 0.2088
+2022-12-12 15:36:47.326612
+2022-12-12 15:36:47.969289
+The best model up to now is from Epoch 1
+Train loss (epoch 2):  loss: 5.7873 loss_cls_dec: 4.8717 loss_reg_dec: 0.3499 loss_action: 0.6650 loss_start: 0.6559 loss_end: 0.6390 loss_bd_adjust: 0.1737
+Val loss (epoch 2):  loss: 5.7501 loss_cls_dec: 4.7814 loss_reg_dec: 0.3789 loss_action: 0.6585 loss_start: 0.6470 loss_end: 0.6281 loss_bd_adjust: 0.2031
+2022-12-12 15:37:50.904506
+2022-12-12 15:37:51.556341
+The best model up to now is from Epoch 2
+Train loss (epoch 3):  loss: 5.7391 loss_cls_dec: 4.8385 loss_reg_dec: 0.3474 loss_action: 0.6587 loss_start: 0.6480 loss_end: 0.6311 loss_bd_adjust: 0.1656
+Val loss (epoch 3):  loss: 5.7105 loss_cls_dec: 4.7525 loss_reg_dec: 0.3760 loss_action: 0.6533 loss_start: 0.6446 loss_end: 0.6248 loss_bd_adjust: 0.1975
+2022-12-12 15:38:54.682413
+2022-12-12 15:38:55.339334
+The best model up to now is from Epoch 3
+Train loss (epoch 4):  loss: 5.6725 loss_cls_dec: 4.7848 loss_reg_dec: 0.3447 loss_action: 0.6518 loss_start: 0.6373 loss_end: 0.6212 loss_bd_adjust: 0.1609
+Val loss (epoch 4):  loss: 5.7076 loss_cls_dec: 4.7507 loss_reg_dec: 0.3765 loss_action: 0.6509 loss_start: 0.6511 loss_end: 0.6294 loss_bd_adjust: 0.1940
+2022-12-12 15:39:59.646057
+2022-12-12 15:40:00.288755
+The best model up to now is from Epoch 4
+Train loss (epoch 5):  loss: 5.5828 loss_cls_dec: 4.7094 loss_reg_dec: 0.3413 loss_action: 0.6473 loss_start: 0.6219 loss_end: 0.6038 loss_bd_adjust: 0.1574
+Val loss (epoch 5):  loss: 5.7065 loss_cls_dec: 4.7496 loss_reg_dec: 0.3779 loss_action: 0.6491 loss_start: 0.6556 loss_end: 0.6367 loss_bd_adjust: 0.1906
+2022-12-12 15:41:04.157307
+2022-12-12 15:41:04.876980
+The best model up to now is from Epoch 5
+Train loss (epoch 6):  loss: 5.4673 loss_cls_dec: 4.6090 loss_reg_dec: 0.3372 loss_action: 0.6407 loss_start: 0.6059 loss_end: 0.5890 loss_bd_adjust: 0.1539
+Val loss (epoch 6):  loss: 5.6864 loss_cls_dec: 4.7225 loss_reg_dec: 0.3801 loss_action: 0.6540 loss_start: 0.6663 loss_end: 0.6517 loss_bd_adjust: 0.1893
+2022-12-12 15:42:07.329498
+2022-12-12 15:42:07.973364
+The best model up to now is from Epoch 6
+Train loss (epoch 7):  loss: 5.2394 loss_cls_dec: 4.3930 loss_reg_dec: 0.3348 loss_action: 0.6346 loss_start: 0.5911 loss_end: 0.5717 loss_bd_adjust: 0.1521
+Val loss (epoch 7):  loss: 5.4168 loss_cls_dec: 4.4398 loss_reg_dec: 0.3883 loss_action: 0.6478 loss_start: 0.6723 loss_end: 0.6575 loss_bd_adjust: 0.1931
+2022-12-12 15:43:13.403124
+2022-12-12 15:43:14.063300
+The best model up to now is from Epoch 7
+Train loss (epoch 8):  loss: 4.9649 loss_cls_dec: 4.1294 loss_reg_dec: 0.3313 loss_action: 0.6294 loss_start: 0.5768 loss_end: 0.5561 loss_bd_adjust: 0.1517
+Val loss (epoch 8):  loss: 5.3246 loss_cls_dec: 4.3507 loss_reg_dec: 0.3863 loss_action: 0.6387 loss_start: 0.6797 loss_end: 0.6639 loss_bd_adjust: 0.1911
+2022-12-12 15:44:22.108017
+2022-12-12 15:44:24.207273
+The best model up to now is from Epoch 8
+Train loss (epoch 9):  loss: 4.7130 loss_cls_dec: 3.8905 loss_reg_dec: 0.3285 loss_action: 0.6219 loss_start: 0.5592 loss_end: 0.5372 loss_bd_adjust: 0.1502
+Val loss (epoch 9):  loss: 5.2849 loss_cls_dec: 4.2738 loss_reg_dec: 0.3955 loss_action: 0.6476 loss_start: 0.7418 loss_end: 0.7356 loss_bd_adjust: 0.1906
+2022-12-12 15:45:29.589362
+2022-12-12 15:45:30.342433
+The best model up to now is from Epoch 9
+Train loss (epoch 10):  loss: 4.4553 loss_cls_dec: 3.6454 loss_reg_dec: 0.3247 loss_action: 0.6185 loss_start: 0.5477 loss_end: 0.5223 loss_bd_adjust: 0.1476
+Val loss (epoch 10):  loss: 5.1115 loss_cls_dec: 4.0976 loss_reg_dec: 0.3954 loss_action: 0.6596 loss_start: 0.7396 loss_end: 0.7284 loss_bd_adjust: 0.1930
+2022-12-12 15:46:35.418493
+2022-12-12 15:46:36.212831
+The best model up to now is from Epoch 10
+Train loss (epoch 11):  loss: 4.2230 loss_cls_dec: 3.4253 loss_reg_dec: 0.3221 loss_action: 0.6102 loss_start: 0.5342 loss_end: 0.5037 loss_bd_adjust: 0.1460
+Val loss (epoch 11):  loss: 5.0470 loss_cls_dec: 4.0165 loss_reg_dec: 0.4014 loss_action: 0.6486 loss_start: 0.7755 loss_end: 0.7667 loss_bd_adjust: 0.1909
+2022-12-12 15:47:47.884584
+2022-12-12 15:47:48.496083
+The best model up to now is from Epoch 11
+Train loss (epoch 12):  loss: 4.0161 loss_cls_dec: 3.2323 loss_reg_dec: 0.3175 loss_action: 0.6075 loss_start: 0.5178 loss_end: 0.4855 loss_bd_adjust: 0.1443
+Val loss (epoch 12):  loss: 4.9835 loss_cls_dec: 3.9458 loss_reg_dec: 0.4040 loss_action: 0.6504 loss_start: 0.7780 loss_end: 0.7789 loss_bd_adjust: 0.1922
+2022-12-12 15:48:55.850242
+2022-12-12 15:48:56.527539
+The best model up to now is from Epoch 12
+Train loss (epoch 13):  loss: 3.7716 loss_cls_dec: 3.0007 loss_reg_dec: 0.3136 loss_action: 0.5963 loss_start: 0.5060 loss_end: 0.4704 loss_bd_adjust: 0.1428
+Val loss (epoch 13):  loss: 5.0663 loss_cls_dec: 4.0093 loss_reg_dec: 0.4082 loss_action: 0.6447 loss_start: 0.8100 loss_end: 0.8298 loss_bd_adjust: 0.1919
+2022-12-12 15:50:00.978736
+Train loss (epoch 14):  loss: 3.5884 loss_cls_dec: 2.8267 loss_reg_dec: 0.3111 loss_action: 0.5962 loss_start: 0.4963 loss_end: 0.4593 loss_bd_adjust: 0.1403
+Val loss (epoch 14):  loss: 4.9274 loss_cls_dec: 3.8749 loss_reg_dec: 0.4068 loss_action: 0.6544 loss_start: 0.8017 loss_end: 0.8208 loss_bd_adjust: 0.1903
+2022-12-12 15:51:06.671161
+2022-12-12 15:51:07.393136
+The best model up to now is from Epoch 14
+Train loss (epoch 15):  loss: 3.2205 loss_cls_dec: 2.4875 loss_reg_dec: 0.2983 loss_action: 0.5870 loss_start: 0.4759 loss_end: 0.4354 loss_bd_adjust: 0.1350
+Val loss (epoch 15):  loss: 4.9373 loss_cls_dec: 3.8777 loss_reg_dec: 0.4101 loss_action: 0.6470 loss_start: 0.8070 loss_end: 0.8363 loss_bd_adjust: 0.1915
+2022-12-12 15:52:10.993880
+Train loss (epoch 16):  loss: 3.1068 loss_cls_dec: 2.3830 loss_reg_dec: 0.2940 loss_action: 0.5847 loss_start: 0.4716 loss_end: 0.4309 loss_bd_adjust: 0.1324
+Val loss (epoch 16):  loss: 4.9615 loss_cls_dec: 3.8914 loss_reg_dec: 0.4125 loss_action: 0.6469 loss_start: 0.8254 loss_end: 0.8545 loss_bd_adjust: 0.1922
+2022-12-12 15:53:19.562845
+Train loss (epoch 17):  loss: 3.0248 loss_cls_dec: 2.3072 loss_reg_dec: 0.2926 loss_action: 0.5815 loss_start: 0.4665 loss_end: 0.4239 loss_bd_adjust: 0.1306
+Val loss (epoch 17):  loss: 4.9828 loss_cls_dec: 3.9087 loss_reg_dec: 0.4137 loss_action: 0.6469 loss_start: 0.8329 loss_end: 0.8611 loss_bd_adjust: 0.1922
+2022-12-12 15:54:22.239729
+Train loss (epoch 18):  loss: 2.9785 loss_cls_dec: 2.2652 loss_reg_dec: 0.2910 loss_action: 0.5790 loss_start: 0.4639 loss_end: 0.4205 loss_bd_adjust: 0.1295
+Val loss (epoch 18):  loss: 4.9964 loss_cls_dec: 3.9237 loss_reg_dec: 0.4142 loss_action: 0.6474 loss_start: 0.8227 loss_end: 0.8563 loss_bd_adjust: 0.1932
+2022-12-12 15:55:25.471714
+Train loss (epoch 19):  loss: 2.9359 loss_cls_dec: 2.2263 loss_reg_dec: 0.2888 loss_action: 0.5776 loss_start: 0.4642 loss_end: 0.4196 loss_bd_adjust: 0.1286
+Val loss (epoch 19):  loss: 5.0296 loss_cls_dec: 3.9460 loss_reg_dec: 0.4161 loss_action: 0.6491 loss_start: 0.8439 loss_end: 0.8817 loss_bd_adjust: 0.1925
+2022-12-12 15:56:28.913527
+Train loss (epoch 20):  loss: 2.8931 loss_cls_dec: 2.1873 loss_reg_dec: 0.2868 loss_action: 0.5799 loss_start: 0.4613 loss_end: 0.4162 loss_bd_adjust: 0.1274
+Val loss (epoch 20):  loss: 5.0371 loss_cls_dec: 3.9509 loss_reg_dec: 0.4188 loss_action: 0.6491 loss_start: 0.8423 loss_end: 0.8814 loss_bd_adjust: 0.1928
+2022-12-12 15:57:32.063010
+Train loss (epoch 21):  loss: 2.8429 loss_cls_dec: 2.1406 loss_reg_dec: 0.2856 loss_action: 0.5758 loss_start: 0.4592 loss_end: 0.4135 loss_bd_adjust: 0.1270
+Val loss (epoch 21):  loss: 5.0513 loss_cls_dec: 3.9615 loss_reg_dec: 0.4188 loss_action: 0.6502 loss_start: 0.8496 loss_end: 0.8894 loss_bd_adjust: 0.1932
+2022-12-12 15:58:35.320223
+Train loss (epoch 22):  loss: 2.7987 loss_cls_dec: 2.0997 loss_reg_dec: 0.2843 loss_action: 0.5739 loss_start: 0.4576 loss_end: 0.4112 loss_bd_adjust: 0.1262
+Val loss (epoch 22):  loss: 5.0885 loss_cls_dec: 3.9899 loss_reg_dec: 0.4198 loss_action: 0.6515 loss_start: 0.8635 loss_end: 0.9116 loss_bd_adjust: 0.1935
+2022-12-12 15:59:45.752321
+Train loss (epoch 23):  loss: 2.7727 loss_cls_dec: 2.0763 loss_reg_dec: 0.2826 loss_action: 0.5750 loss_start: 0.4545 loss_end: 0.4091 loss_bd_adjust: 0.1260
+Val loss (epoch 23):  loss: 5.1170 loss_cls_dec: 4.0119 loss_reg_dec: 0.4211 loss_action: 0.6540 loss_start: 0.8735 loss_end: 0.9238 loss_bd_adjust: 0.1937
+2022-12-12 16:00:50.065546
+Train loss (epoch 24):  loss: 2.7360 loss_cls_dec: 2.0431 loss_reg_dec: 0.2810 loss_action: 0.5728 loss_start: 0.4528 loss_end: 0.4051 loss_bd_adjust: 0.1258
+Val loss (epoch 24):  loss: 5.0974 loss_cls_dec: 3.9951 loss_reg_dec: 0.4211 loss_action: 0.6541 loss_start: 0.8658 loss_end: 0.9168 loss_bd_adjust: 0.1938
+2022-12-12 16:01:53.787976
+Train loss (epoch 25):  loss: 2.6976 loss_cls_dec: 2.0062 loss_reg_dec: 0.2810 loss_action: 0.5717 loss_start: 0.4514 loss_end: 0.4023 loss_bd_adjust: 0.1253
+Val loss (epoch 25):  loss: 5.1069 loss_cls_dec: 3.9994 loss_reg_dec: 0.4245 loss_action: 0.6541 loss_start: 0.8650 loss_end: 0.9232 loss_bd_adjust: 0.1946
+2022-12-12 16:02:58.148473
+Train loss (epoch 26):  loss: 2.6714 loss_cls_dec: 1.9830 loss_reg_dec: 0.2791 loss_action: 0.5712 loss_start: 0.4480 loss_end: 0.4014 loss_bd_adjust: 0.1252
+Val loss (epoch 26):  loss: 5.1298 loss_cls_dec: 4.0226 loss_reg_dec: 0.4241 loss_action: 0.6541 loss_start: 0.8684 loss_end: 0.9246 loss_bd_adjust: 0.1937
+2022-12-12 16:04:05.249979
+Train loss (epoch 27):  loss: 2.6377 loss_cls_dec: 1.9520 loss_reg_dec: 0.2783 loss_action: 0.5692 loss_start: 0.4473 loss_end: 0.3996 loss_bd_adjust: 0.1241
+Val loss (epoch 27):  loss: 5.1415 loss_cls_dec: 4.0329 loss_reg_dec: 0.4238 loss_action: 0.6534 loss_start: 0.8713 loss_end: 0.9232 loss_bd_adjust: 0.1952
+2022-12-12 16:05:07.895483
+Train loss (epoch 28):  loss: 2.5988 loss_cls_dec: 1.9170 loss_reg_dec: 0.2763 loss_action: 0.5681 loss_start: 0.4442 loss_end: 0.3966 loss_bd_adjust: 0.1237
+Val loss (epoch 28):  loss: 5.1538 loss_cls_dec: 4.0325 loss_reg_dec: 0.4270 loss_action: 0.6554 loss_start: 0.8947 loss_end: 0.9472 loss_bd_adjust: 0.1949
+2022-12-12 16:06:10.294193
+Train loss (epoch 29):  loss: 2.5704 loss_cls_dec: 1.8913 loss_reg_dec: 0.2747 loss_action: 0.5692 loss_start: 0.4434 loss_end: 0.3939 loss_bd_adjust: 0.1231
+Val loss (epoch 29):  loss: 5.1563 loss_cls_dec: 4.0353 loss_reg_dec: 0.4281 loss_action: 0.6560 loss_start: 0.8841 loss_end: 0.9472 loss_bd_adjust: 0.1954
+2022-12-12 16:07:14.036495
+Training finishes!

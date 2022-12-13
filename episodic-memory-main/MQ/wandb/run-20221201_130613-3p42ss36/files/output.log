@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 155, in <module>
+    Train_VSGN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 21, in Train_VSGN
+    model = VSGN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/VSGN.py", line 23, in __init__
+    self.xGPN = XGPN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/XGPN.py", line 35, in __init__
+    self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens_in=num_hiddens_in, num_hiddens_out=num_hiddens_out, stride = stride))
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/XGPN.py", line 55, in _make_levels_enc
+    return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"])
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/ViT.py", line 80, in __init__
+    self.blks.add_module(f"{i}", ViTBlock(
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Models/ViT.py", line 46, in __init__
+    self.attention = d2l.MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout, use_bias)
+AttributeError: module 'd2l.torch' has no attribute 'MultiHeadAttention2'
+---- Creamos un ViT ----

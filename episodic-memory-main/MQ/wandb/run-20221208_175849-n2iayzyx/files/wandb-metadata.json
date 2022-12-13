@@ -1,0 +1,42 @@
+{
+    "os": "Linux-3.10.0-1160.49.1.el7.x86_64-x86_64-with-glibc2.17",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-12-08T16:58:50.081526",
+    "startedAt": "2022-12-08T16:58:49.535090",
+    "docker": null,
+    "gpu": "GRID V100D-32Q",
+    "gpu_count": 1,
+    "cpu_count": 12,
+    "cuda": null,
+    "args": [
+        "--is_train",
+        "true",
+        "--dataset",
+        "ego4d",
+        "--feature_path",
+        "/data/s5091217/Ego4d-main/ego4d_data/v1/slowfast8x8_r101_k400",
+        "--checkpoint_path",
+        "/data/s5091217/Ego4d-main/ego4d_data/v1/moments_models",
+        "--use_ViT",
+        "--batch_size",
+        "11",
+        "--train_lr",
+        "0.0001",
+        "--num_epoch",
+        "100",
+        "--num_heads",
+        "8"
+    ],
+    "state": "running",
+    "program": "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py",
+    "codePath": "episodic-memory-main/MQ/Train.py",
+    "git": {
+        "remote": "https://github.com/jdieguvi15/code_ego4d.git",
+        "commit": "4ba2b44f519391c7ae5bdcb672bc266439664653"
+    },
+    "email": null,
+    "root": "/data/s5091217/code_ego4d",
+    "host": "pg-gpu33",
+    "username": "s5091217",
+    "executable": "/software/software/Anaconda3/2022.10/bin/python"
+}

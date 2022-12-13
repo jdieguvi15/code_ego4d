@@ -1,0 +1,93 @@
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+/home/s5091217/.local/lib/python3.9/site-packages/torch/nn/modules/lazy.py:178: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+Train loss (epoch 0):  loss: 6.7038 loss_cls_dec: 5.7061 loss_reg_dec: 0.3817 loss_action: 0.6890 loss_start: 0.6896 loss_end: 0.6819 loss_bd_adjust: 0.2039
+Val loss (epoch 0):  loss: 5.9924 loss_cls_dec: 4.9531 loss_reg_dec: 0.4011 loss_action: 0.6769 loss_start: 0.6746 loss_end: 0.6477 loss_bd_adjust: 0.2383
+2022-11-29 15:58:15.949749
+2022-11-29 15:58:16.677210
+The best model up to now is from Epoch 0
+Train loss (epoch 1):  loss: 5.8958 loss_cls_dec: 4.9593 loss_reg_dec: 0.3561 loss_action: 0.6732 loss_start: 0.6652 loss_end: 0.6471 loss_bd_adjust: 0.1834
+Val loss (epoch 1):  loss: 5.8206 loss_cls_dec: 4.8156 loss_reg_dec: 0.3932 loss_action: 0.6673 loss_start: 0.6500 loss_end: 0.6316 loss_bd_adjust: 0.2221
+2022-11-29 15:59:32.340760
+2022-11-29 15:59:33.046051
+The best model up to now is from Epoch 1
+Train loss (epoch 2):  loss: 5.8147 loss_cls_dec: 4.8947 loss_reg_dec: 0.3515 loss_action: 0.6683 loss_start: 0.6587 loss_end: 0.6419 loss_bd_adjust: 0.1748
+Val loss (epoch 2):  loss: 5.7874 loss_cls_dec: 4.7889 loss_reg_dec: 0.3912 loss_action: 0.6637 loss_start: 0.6495 loss_end: 0.6327 loss_bd_adjust: 0.2182
+2022-11-29 16:00:43.639218
+2022-11-29 16:00:44.393115
+The best model up to now is from Epoch 2
+Train loss (epoch 3):  loss: 5.7590 loss_cls_dec: 4.8518 loss_reg_dec: 0.3481 loss_action: 0.6631 loss_start: 0.6525 loss_end: 0.6358 loss_bd_adjust: 0.1688
+Val loss (epoch 3):  loss: 5.7567 loss_cls_dec: 4.7720 loss_reg_dec: 0.3888 loss_action: 0.6583 loss_start: 0.6436 loss_end: 0.6271 loss_bd_adjust: 0.2101
+2022-11-29 16:01:51.001421
+2022-11-29 16:01:51.700587
+The best model up to now is from Epoch 3
+Train loss (epoch 4):  loss: 5.6997 loss_cls_dec: 4.8048 loss_reg_dec: 0.3460 loss_action: 0.6548 loss_start: 0.6423 loss_end: 0.6258 loss_bd_adjust: 0.1643
+Val loss (epoch 4):  loss: 5.7432 loss_cls_dec: 4.7621 loss_reg_dec: 0.3873 loss_action: 0.6511 loss_start: 0.6477 loss_end: 0.6276 loss_bd_adjust: 0.2085
+2022-11-29 16:02:58.437337
+2022-11-29 16:02:59.172646
+The best model up to now is from Epoch 4
+Train loss (epoch 5):  loss: 5.6257 loss_cls_dec: 4.7456 loss_reg_dec: 0.3424 loss_action: 0.6472 loss_start: 0.6306 loss_end: 0.6134 loss_bd_adjust: 0.1594
+Val loss (epoch 5):  loss: 5.7653 loss_cls_dec: 4.7862 loss_reg_dec: 0.3889 loss_action: 0.6472 loss_start: 0.6487 loss_end: 0.6296 loss_bd_adjust: 0.2050
+2022-11-29 16:04:06.130202
+Train loss (epoch 6):  loss: 5.5472 loss_cls_dec: 4.6805 loss_reg_dec: 0.3386 loss_action: 0.6409 loss_start: 0.6153 loss_end: 0.6015 loss_bd_adjust: 0.1566
+Val loss (epoch 6):  loss: 5.7757 loss_cls_dec: 4.7916 loss_reg_dec: 0.3917 loss_action: 0.6516 loss_start: 0.6581 loss_end: 0.6380 loss_bd_adjust: 0.2029
+2022-11-29 16:05:12.172032
+Train loss (epoch 7):  loss: 5.4204 loss_cls_dec: 4.5678 loss_reg_dec: 0.3346 loss_action: 0.6355 loss_start: 0.5999 loss_end: 0.5849 loss_bd_adjust: 0.1540
+Val loss (epoch 7):  loss: 5.6762 loss_cls_dec: 4.6897 loss_reg_dec: 0.3945 loss_action: 0.6479 loss_start: 0.6632 loss_end: 0.6437 loss_bd_adjust: 0.2010
+2022-11-29 16:06:21.530084
+2022-11-29 16:06:22.430793
+The best model up to now is from Epoch 7
+Train loss (epoch 8):  loss: 5.2513 loss_cls_dec: 4.4096 loss_reg_dec: 0.3312 loss_action: 0.6277 loss_start: 0.5890 loss_end: 0.5716 loss_bd_adjust: 0.1528
+Val loss (epoch 8):  loss: 5.6049 loss_cls_dec: 4.5917 loss_reg_dec: 0.4060 loss_action: 0.6470 loss_start: 0.6870 loss_end: 0.6648 loss_bd_adjust: 0.2074
+2022-11-29 16:07:30.946844
+2022-11-29 16:07:31.676739
+The best model up to now is from Epoch 8
+Train loss (epoch 9):  loss: 5.0627 loss_cls_dec: 4.2324 loss_reg_dec: 0.3287 loss_action: 0.6219 loss_start: 0.5741 loss_end: 0.5529 loss_bd_adjust: 0.1518
+Val loss (epoch 9):  loss: 5.5309 loss_cls_dec: 4.5029 loss_reg_dec: 0.4083 loss_action: 0.6529 loss_start: 0.7128 loss_end: 0.6990 loss_bd_adjust: 0.2067
+2022-11-29 16:08:42.935440
+2022-11-29 16:08:43.690736
+The best model up to now is from Epoch 9
+Train loss (epoch 10):  loss: 4.8236 loss_cls_dec: 4.0059 loss_reg_dec: 0.3247 loss_action: 0.6152 loss_start: 0.5633 loss_end: 0.5403 loss_bd_adjust: 0.1492
+Val loss (epoch 10):  loss: 5.4421 loss_cls_dec: 4.4317 loss_reg_dec: 0.4057 loss_action: 0.6521 loss_start: 0.6865 loss_end: 0.6729 loss_bd_adjust: 0.2025
+2022-11-29 16:09:57.530302
+2022-11-29 16:09:58.291047
+The best model up to now is from Epoch 10
+Train loss (epoch 11):  loss: 4.5823 loss_cls_dec: 3.7755 loss_reg_dec: 0.3232 loss_action: 0.6077 loss_start: 0.5477 loss_end: 0.5214 loss_bd_adjust: 0.1483
+Val loss (epoch 11):  loss: 5.3287 loss_cls_dec: 4.2959 loss_reg_dec: 0.4113 loss_action: 0.6494 loss_start: 0.7272 loss_end: 0.7179 loss_bd_adjust: 0.2026
+2022-11-29 16:11:11.918972
+2022-11-29 16:11:12.647307
+The best model up to now is from Epoch 11
+Train loss (epoch 12):  loss: 4.3494 loss_cls_dec: 3.5532 loss_reg_dec: 0.3186 loss_action: 0.6031 loss_start: 0.5403 loss_end: 0.5125 loss_bd_adjust: 0.1464
+Traceback (most recent call last):
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1163, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/software/software/Anaconda3/2022.10/lib/python3.9/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/software/software/Anaconda3/2022.10/lib/python3.9/threading.py", line 316, in wait
+    gotit = waiter.acquire(True, timeout)
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 32464) is killed by signal: Killed.
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 155, in <module>
+    Train_VSGN(opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 44, in Train_VSGN
+    epoch_loss = test_VSGN_epoch(test_loader, model, epoch, writer, opt)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 115, in test_VSGN_epoch
+    return train_VSGN_epoch(data_loader, model, None, epoch, writer, opt, is_train=False)
+  File "/data/s5091217/code_ego4d/episodic-memory-main/MQ/Train.py", line 72, in train_VSGN_epoch
+    for n_iter, (input_data, gt_action, gt_start, gt_end, gt_bbox, num_gt, num_frms) in enumerate(data_loader):
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 681, in __next__
+    data = self._next_data()
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1359, in _next_data
+    idx, data = self._get_data()
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1315, in _get_data
+    success, data = self._try_get_data()
+  File "/home/s5091217/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1176, in _try_get_data
+    raise RuntimeError('DataLoader worker (pid(s) {}) exited unexpectedly'.format(pids_str)) from e
+RuntimeError: DataLoader worker (pid(s) 32464) exited unexpectedly

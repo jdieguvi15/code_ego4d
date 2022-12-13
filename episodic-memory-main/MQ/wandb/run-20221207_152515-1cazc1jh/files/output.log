@@ -1,0 +1,52 @@
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+---- Creamos un ViT ----
+/home/s5091217/.local/lib/python3.9/site-packages/torch/nn/modules/lazy.py:178: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+Train loss (epoch 0):  loss: 6.5001 loss_cls_dec: 5.5116 loss_reg_dec: 0.3776 loss_action: 0.6848 loss_start: 0.6850 loss_end: 0.6738 loss_bd_adjust: 0.2021
+Val loss (epoch 0):  loss: 5.8876 loss_cls_dec: 4.8888 loss_reg_dec: 0.3858 loss_action: 0.6700 loss_start: 0.6606 loss_end: 0.6369 loss_bd_adjust: 0.2195
+2022-12-07 15:26:43.550656
+2022-12-07 15:26:44.818350
+The best model up to now is from Epoch 0
+Train loss (epoch 1):  loss: 5.8652 loss_cls_dec: 4.9338 loss_reg_dec: 0.3550 loss_action: 0.6699 loss_start: 0.6619 loss_end: 0.6452 loss_bd_adjust: 0.1810
+Val loss (epoch 1):  loss: 5.7869 loss_cls_dec: 4.8069 loss_reg_dec: 0.3809 loss_action: 0.6635 loss_start: 0.6495 loss_end: 0.6302 loss_bd_adjust: 0.2105
+2022-12-07 15:27:56.595339
+2022-12-07 15:27:57.484482
+The best model up to now is from Epoch 1
+Train loss (epoch 2):  loss: 5.7912 loss_cls_dec: 4.8746 loss_reg_dec: 0.3500 loss_action: 0.6653 loss_start: 0.6564 loss_end: 0.6394 loss_bd_adjust: 0.1745
+Val loss (epoch 2):  loss: 5.7420 loss_cls_dec: 4.7756 loss_reg_dec: 0.3776 loss_action: 0.6588 loss_start: 0.6477 loss_end: 0.6291 loss_bd_adjust: 0.2017
+2022-12-07 15:29:11.142732
+2022-12-07 15:29:12.048647
+The best model up to now is from Epoch 2
+Train loss (epoch 3):  loss: 5.7448 loss_cls_dec: 4.8439 loss_reg_dec: 0.3470 loss_action: 0.6591 loss_start: 0.6487 loss_end: 0.6322 loss_bd_adjust: 0.1659
+Val loss (epoch 3):  loss: 5.7194 loss_cls_dec: 4.7605 loss_reg_dec: 0.3773 loss_action: 0.6537 loss_start: 0.6451 loss_end: 0.6257 loss_bd_adjust: 0.1968
+2022-12-07 15:30:22.739150
+2022-12-07 15:30:23.763117
+The best model up to now is from Epoch 3
+Train loss (epoch 4):  loss: 5.6850 loss_cls_dec: 4.7963 loss_reg_dec: 0.3447 loss_action: 0.6519 loss_start: 0.6380 loss_end: 0.6222 loss_bd_adjust: 0.1616
+Val loss (epoch 4):  loss: 5.7232 loss_cls_dec: 4.7637 loss_reg_dec: 0.3765 loss_action: 0.6512 loss_start: 0.6517 loss_end: 0.6307 loss_bd_adjust: 0.1964
+2022-12-07 15:31:38.305361
+Train loss (epoch 5):  loss: 5.5976 loss_cls_dec: 4.7235 loss_reg_dec: 0.3408 loss_action: 0.6483 loss_start: 0.6233 loss_end: 0.6058 loss_bd_adjust: 0.1579
+Val loss (epoch 5):  loss: 5.7455 loss_cls_dec: 4.7858 loss_reg_dec: 0.3788 loss_action: 0.6496 loss_start: 0.6583 loss_end: 0.6412 loss_bd_adjust: 0.1911
+2022-12-07 15:32:58.897943
+Train loss (epoch 6):  loss: 5.5096 loss_cls_dec: 4.6496 loss_reg_dec: 0.3374 loss_action: 0.6426 loss_start: 0.6059 loss_end: 0.5904 loss_bd_adjust: 0.1549
+Val loss (epoch 6):  loss: 5.7700 loss_cls_dec: 4.8011 loss_reg_dec: 0.3818 loss_action: 0.6519 loss_start: 0.6774 loss_end: 0.6610 loss_bd_adjust: 0.1890
+2022-12-07 15:34:17.937158
+Train loss (epoch 7):  loss: 5.3545 loss_cls_dec: 4.5077 loss_reg_dec: 0.3345 loss_action: 0.6391 loss_start: 0.5902 loss_end: 0.5744 loss_bd_adjust: 0.1515
+Val loss (epoch 7):  loss: 5.6189 loss_cls_dec: 4.6443 loss_reg_dec: 0.3883 loss_action: 0.6489 loss_start: 0.6802 loss_end: 0.6576 loss_bd_adjust: 0.1889
+2022-12-07 15:35:34.266571
+2022-12-07 15:35:35.256907
+The best model up to now is from Epoch 7
+Train loss (epoch 8):  loss: 5.1295 loss_cls_dec: 4.2950 loss_reg_dec: 0.3305 loss_action: 0.6312 loss_start: 0.5781 loss_end: 0.5580 loss_bd_adjust: 0.1505
+Val loss (epoch 8):  loss: 5.4755 loss_cls_dec: 4.4911 loss_reg_dec: 0.3888 loss_action: 0.6422 loss_start: 0.6885 loss_end: 0.6784 loss_bd_adjust: 0.1937
+2022-12-07 15:36:48.107290
+2022-12-07 15:36:49.034061
+The best model up to now is from Epoch 8
+Train loss (epoch 9):  loss: 4.8605 loss_cls_dec: 4.0391 loss_reg_dec: 0.3280 loss_action: 0.6249 loss_start: 0.5586 loss_end: 0.5383 loss_bd_adjust: 0.1490
+Val loss (epoch 9):  loss: 5.4075 loss_cls_dec: 4.4018 loss_reg_dec: 0.3928 loss_action: 0.6469 loss_start: 0.7358 loss_end: 0.7249 loss_bd_adjust: 0.1915
+2022-12-07 15:38:03.191512
+2022-12-07 15:38:04.154475
+The best model up to now is from Epoch 9
+Training finishes!

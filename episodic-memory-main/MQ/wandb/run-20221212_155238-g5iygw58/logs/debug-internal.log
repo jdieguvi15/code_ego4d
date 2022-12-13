@@ -1,0 +1,746 @@
+2022-12-12 15:52:38,105 INFO    StreamThr :6000 [internal.py:wandb_internal():88] W&B internal server running at pid: 6000, started at: 2022-12-12 15:52:38.102790
+2022-12-12 15:52:38,109 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: status
+2022-12-12 15:52:38,113 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: status
+2022-12-12 15:52:38,114 DEBUG   SenderThread:6000 [sender.py:send():301] send: header
+2022-12-12 15:52:38,114 INFO    WriterThread:6000 [datastore.py:open_for_write():75] open: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/run-g5iygw58.wandb
+2022-12-12 15:52:38,157 DEBUG   SenderThread:6000 [sender.py:send():301] send: run
+2022-12-12 15:52:38,522 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: check_version
+2022-12-12 15:52:38,532 INFO    SenderThread:6000 [dir_watcher.py:__init__():216] watching files in: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files
+2022-12-12 15:52:38,532 INFO    SenderThread:6000 [sender.py:_start_run_threads():912] run started: g5iygw58 with start time 1670856758.101372
+2022-12-12 15:52:38,532 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:52:38,537 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:52:38,539 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: check_version
+2022-12-12 15:52:38,598 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: run_start
+2022-12-12 15:52:38,603 DEBUG   HandlerThread:6000 [meta.py:__init__():34] meta init
+2022-12-12 15:52:38,603 DEBUG   HandlerThread:6000 [meta.py:__init__():49] meta init done
+2022-12-12 15:52:38,603 DEBUG   HandlerThread:6000 [meta.py:probe():215] probe
+2022-12-12 15:52:38,612 DEBUG   HandlerThread:6000 [meta.py:_setup_git():205] setup git
+2022-12-12 15:52:38,660 DEBUG   HandlerThread:6000 [meta.py:_setup_git():212] setup git done
+2022-12-12 15:52:38,660 DEBUG   HandlerThread:6000 [meta.py:_save_pip():53] save pip
+2022-12-12 15:52:38,666 DEBUG   HandlerThread:6000 [meta.py:_save_pip():67] save pip done
+2022-12-12 15:52:38,666 DEBUG   HandlerThread:6000 [meta.py:_save_conda():74] save conda
+2022-12-12 15:52:39,537 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_created():275] file/dir created: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/requirements.txt
+2022-12-12 15:52:39,538 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_created():275] file/dir created: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:52:39,538 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_created():275] file/dir created: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/conda-environment.yaml
+2022-12-12 15:52:41,103 DEBUG   HandlerThread:6000 [meta.py:_save_conda():84] save conda done
+2022-12-12 15:52:41,103 DEBUG   HandlerThread:6000 [meta.py:probe():253] probe done
+2022-12-12 15:52:41,120 DEBUG   SenderThread:6000 [sender.py:send():301] send: files
+2022-12-12 15:52:41,121 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-metadata.json with policy now
+2022-12-12 15:52:41,130 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:52:41,130 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:52:41,275 DEBUG   SenderThread:6000 [sender.py:send():301] send: telemetry
+2022-12-12 15:52:41,542 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/conda-environment.yaml
+2022-12-12 15:52:41,542 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_created():275] file/dir created: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:52:41,542 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_created():275] file/dir created: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-metadata.json
+2022-12-12 15:52:41,612 INFO    Thread-17 :6000 [upload_job.py:push():139] Uploaded file /local/tmp/tmpqiou7q6mwandb/ernubk6b-wandb-metadata.json
+2022-12-12 15:52:43,547 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:52:56,278 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:52:56,280 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:53:06,724 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:53:09,636 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/config.yaml
+2022-12-12 15:53:11,442 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:53:11,443 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:53:26,600 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:53:26,625 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:53:36,818 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:53:41,832 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:53:41,832 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:53:43,765 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:53:53,688 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:53:53,691 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:53:53,691 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:53:53,696 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:53:53,806 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:53:55,810 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:53:56,983 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:53:56,984 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:54:06,916 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:54:12,168 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:54:12,168 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:54:27,387 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:54:27,389 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:54:37,006 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:54:42,581 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:54:42,585 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:54:54,030 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:54:57,769 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:54:57,773 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:55:03,880 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:55:03,881 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:55:03,882 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:55:03,889 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:55:04,065 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:55:06,069 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:55:07,112 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:55:12,943 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:55:12,958 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:55:28,179 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:55:28,184 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:55:37,209 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:55:43,412 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:55:43,413 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:55:58,595 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:55:58,598 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:56:02,278 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:56:07,307 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:56:12,034 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:56:12,035 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:56:12,035 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:56:12,043 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:56:12,323 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:56:13,794 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:56:13,794 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:56:14,329 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:56:29,014 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:56:29,049 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:56:37,403 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:56:44,224 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:56:44,224 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:56:59,416 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:56:59,418 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:57:07,498 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:57:08,537 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:57:14,590 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:57:14,591 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:57:19,415 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:57:19,416 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:57:19,416 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:57:19,420 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:57:19,577 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:57:20,580 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:57:22,584 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:57:29,766 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:57:29,811 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:57:37,592 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:57:45,006 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:57:45,008 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:58:00,186 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:58:00,188 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:58:07,691 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:58:15,392 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:58:15,392 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:58:17,772 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:58:30,565 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:58:30,567 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:58:30,606 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:58:30,736 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:58:30,736 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:58:30,741 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:58:30,810 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:58:31,812 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:58:37,781 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:58:45,760 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:58:45,761 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:59:00,915 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:59:00,920 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:59:07,881 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:59:16,098 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:59:16,101 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:59:31,313 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:59:31,315 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:59:34,045 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 15:59:37,972 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 15:59:46,491 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 15:59:46,492 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 15:59:47,454 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 15:59:47,455 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 15:59:47,455 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 15:59:47,460 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 15:59:48,092 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 15:59:48,092 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:00:01,661 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:00:01,665 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:00:08,073 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:00:16,852 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:00:16,855 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:00:32,047 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:00:32,048 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:00:38,163 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:00:44,274 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:00:47,232 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:00:47,233 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:00:55,040 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:00:55,042 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:00:55,042 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:00:55,047 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:00:55,332 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:00:56,334 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:01:02,399 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:01:02,404 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:01:08,266 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:01:17,646 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:01:17,648 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:01:32,922 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:01:32,924 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:01:38,362 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:01:48,131 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:01:48,133 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:01:52,512 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:02:02,758 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:02:02,761 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:02:02,761 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:02:02,765 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:02:03,297 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:02:03,297 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:02:03,547 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:02:04,549 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:02:08,458 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:02:18,472 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:02:18,475 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:02:33,672 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:02:33,673 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:02:38,559 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:02:48,857 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:02:48,897 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:03:00,748 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:03:04,090 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:03:04,090 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:03:08,652 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:03:10,067 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:03:10,068 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:03:10,068 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:03:10,073 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:03:10,782 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:03:12,792 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:03:19,298 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:03:19,299 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:03:34,469 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:03:34,481 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:03:38,746 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:03:49,660 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:03:49,662 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:04:04,839 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:04:04,841 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:04:08,836 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:04:10,958 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:04:20,003 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:04:20,005 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:04:20,699 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:04:20,700 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:04:20,700 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:04:20,704 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:04:20,998 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:04:23,005 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:04:35,171 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:04:35,181 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:04:38,944 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:04:50,405 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:04:50,407 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:05:05,597 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:05:05,600 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:05:09,041 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:05:20,810 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:05:20,817 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:05:21,201 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:05:30,429 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:05:30,431 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:05:30,431 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:05:30,436 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:05:31,234 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:05:33,240 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:05:35,981 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:05:35,983 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:05:39,142 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:05:51,172 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:05:51,175 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:06:06,365 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:06:06,368 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:06:09,244 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:06:21,579 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:06:21,582 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:06:28,430 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:06:36,755 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:06:36,760 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:06:39,340 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:06:44,654 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:06:44,655 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:06:44,655 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:06:44,660 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:06:45,476 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:06:46,478 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:06:51,942 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:06:51,942 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:07:07,091 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:07:07,094 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:07:09,442 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:07:22,291 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:07:22,294 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:07:37,481 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:07:37,483 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:07:39,534 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:07:42,673 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:07:52,340 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:07:52,343 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:07:52,343 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:07:52,352 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:07:52,652 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:07:52,653 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:07:52,713 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:07:54,717 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:08:07,819 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:08:07,834 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:08:09,636 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:08:23,029 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:08:23,034 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:08:38,214 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:08:38,217 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:08:39,738 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:08:52,902 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:08:53,436 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:08:53,436 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:09:02,052 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:09:02,055 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:09:02,055 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:09:02,060 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:09:02,941 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:09:02,942 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:09:08,615 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:09:08,616 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:09:09,836 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:09:23,816 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:09:23,818 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:09:39,010 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:09:39,013 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:09:39,941 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:09:54,220 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:09:54,223 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:09:59,123 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:10:08,804 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:10:08,807 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:10:08,807 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:10:08,811 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:10:09,159 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:10:09,390 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:10:09,390 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:10:10,032 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:10:11,163 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:10:24,569 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:10:24,606 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:10:39,824 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:10:39,827 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:10:40,133 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:10:55,035 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:10:55,037 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:11:07,395 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:11:10,234 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:11:10,235 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:11:10,236 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:11:18,872 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:11:18,873 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:11:18,873 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:11:18,877 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:11:19,432 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:11:21,436 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:11:25,398 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:11:25,398 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:11:40,336 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:11:40,607 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:11:40,607 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:11:55,788 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:11:55,790 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:12:10,428 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:12:11,077 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:12:11,077 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:12:17,623 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:12:26,253 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:12:26,257 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:12:26,742 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:12:26,743 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:12:26,743 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:12:26,748 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:12:27,666 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:12:29,675 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:12:40,544 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:12:41,428 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:12:41,429 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:12:56,649 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:12:56,651 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:13:10,645 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:13:11,856 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:13:11,856 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:13:23,867 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:13:27,035 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:13:27,036 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:13:32,864 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:13:32,866 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:13:32,866 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:13:32,871 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:13:32,911 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:13:34,915 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:13:40,734 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:13:42,204 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:13:42,204 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:13:57,416 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:13:57,419 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:14:10,827 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:14:12,655 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:14:12,655 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:14:27,824 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:14:27,826 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:14:33,103 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:14:40,921 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:14:43,034 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:14:43,035 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:14:44,404 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:14:44,405 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:14:44,405 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:14:44,410 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:14:45,220 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:14:45,220 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:14:58,193 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:14:58,198 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:15:11,022 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:15:13,473 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:15:13,473 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:15:28,651 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:15:28,654 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:15:41,113 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:15:43,416 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:15:43,854 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:15:43,854 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:15:52,807 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:15:52,809 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:15:52,810 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:15:52,814 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:15:53,464 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:15:53,464 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:15:55,467 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:15:59,009 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:15:59,031 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:16:11,223 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:16:14,218 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:16:14,218 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:16:29,399 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:16:29,400 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:16:41,328 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:16:44,593 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:16:44,593 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:16:49,676 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:16:59,749 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:16:59,751 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:17:00,245 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:17:00,246 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:17:00,246 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:17:00,250 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:17:00,732 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:17:01,738 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:17:11,428 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:17:14,945 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:17:14,945 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:17:30,111 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:17:30,112 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:17:41,524 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:17:45,316 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:17:45,338 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:17:57,911 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:18:00,532 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:18:00,532 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:18:06,626 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:18:06,628 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:18:06,629 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:18:06,633 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:18:06,943 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:18:07,946 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:18:11,617 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:18:15,716 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:18:15,717 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:18:30,885 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:18:30,888 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:18:41,713 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:18:46,064 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:18:46,064 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:19:01,233 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:19:01,236 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:19:04,165 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:19:11,811 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:19:14,758 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:19:14,759 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:19:14,759 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:19:14,763 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:19:15,219 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:19:16,220 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:19:16,396 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:19:16,397 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:19:31,567 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:19:31,579 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:19:41,903 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:19:46,765 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:19:46,765 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:20:01,941 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:20:01,942 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:20:11,994 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:20:12,434 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:20:17,124 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:20:17,126 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:20:22,975 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:20:22,976 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:20:22,977 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:20:22,981 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:20:23,476 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:20:23,476 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:20:32,321 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:20:32,326 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:20:42,093 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:20:47,541 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:20:47,542 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:21:02,743 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:21:02,785 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:21:12,193 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:21:17,970 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:21:17,971 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:21:19,671 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:21:29,635 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:21:29,638 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:21:29,638 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:21:29,642 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:21:29,706 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:21:31,717 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:21:33,126 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:21:33,127 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:21:42,282 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:21:48,333 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:21:48,334 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:22:03,538 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:22:03,540 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:22:12,386 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:22:18,738 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:22:18,739 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:22:27,905 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:22:33,936 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:22:33,939 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:22:38,752 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:22:38,753 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:22:38,753 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:22:38,758 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:22:38,942 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:22:39,954 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:22:42,484 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:22:49,154 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:22:49,155 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:23:04,326 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:23:04,328 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:23:12,578 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:23:19,536 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:23:19,555 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:23:34,919 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:23:34,927 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:23:36,180 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:23:42,685 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:23:45,597 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:23:45,598 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:23:45,598 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:23:45,603 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:23:46,223 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:23:48,233 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:23:50,093 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:23:50,093 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:24:05,283 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:24:05,287 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:24:12,781 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:24:20,491 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:24:20,494 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:24:35,684 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:24:35,687 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:24:42,876 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:24:44,450 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:24:50,887 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:24:50,933 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:24:52,689 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:24:52,690 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:24:52,690 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:24:52,694 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:24:53,486 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:24:54,488 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:25:06,132 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:25:06,143 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:25:12,986 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:25:21,337 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:25:21,338 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:25:36,535 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:25:36,544 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:25:43,083 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:25:48,669 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:25:51,727 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:25:51,728 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:25:59,461 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:25:59,463 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:25:59,463 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:25:59,467 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:25:59,716 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:26:00,718 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:26:06,895 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:26:06,896 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:26:13,169 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:26:22,107 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:26:22,108 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:26:37,293 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:26:37,296 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:26:43,263 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:26:52,486 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: stop_status
+2022-12-12 16:26:52,487 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: stop_status
+2022-12-12 16:27:00,889 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:27:08,197 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: partial_history
+2022-12-12 16:27:08,199 DEBUG   SenderThread:6000 [sender.py:send():301] send: history
+2022-12-12 16:27:08,199 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:27:08,203 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:27:08,912 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:27:09,031 DEBUG   SenderThread:6000 [sender.py:send():301] send: telemetry
+2022-12-12 16:27:09,049 DEBUG   SenderThread:6000 [sender.py:send():301] send: exit
+2022-12-12 16:27:09,050 INFO    SenderThread:6000 [sender.py:send_exit():437] handling exit code: 0
+2022-12-12 16:27:09,050 INFO    SenderThread:6000 [sender.py:send_exit():439] handling runtime: 2070
+2022-12-12 16:27:09,050 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:09,054 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:27:09,055 INFO    SenderThread:6000 [sender.py:send_exit():445] send defer
+2022-12-12 16:27:09,055 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:09,056 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,056 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 0
+2022-12-12 16:27:09,056 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,056 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 0
+2022-12-12 16:27:09,057 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 1
+2022-12-12 16:27:09,057 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,057 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 1
+2022-12-12 16:27:09,144 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,144 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 1
+2022-12-12 16:27:09,144 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 2
+2022-12-12 16:27:09,144 DEBUG   SenderThread:6000 [sender.py:send():301] send: stats
+2022-12-12 16:27:09,145 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,145 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 2
+2022-12-12 16:27:09,145 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,145 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 2
+2022-12-12 16:27:09,145 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 3
+2022-12-12 16:27:09,146 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,146 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 3
+2022-12-12 16:27:09,146 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,146 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 3
+2022-12-12 16:27:09,146 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 4
+2022-12-12 16:27:09,146 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,146 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 4
+2022-12-12 16:27:09,146 DEBUG   SenderThread:6000 [sender.py:send():301] send: summary
+2022-12-12 16:27:09,150 INFO    SenderThread:6000 [sender.py:_save_file():1155] saving file wandb-summary.json with policy end
+2022-12-12 16:27:09,151 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,151 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 4
+2022-12-12 16:27:09,151 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 5
+2022-12-12 16:27:09,152 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,152 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 5
+2022-12-12 16:27:09,152 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,152 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 5
+2022-12-12 16:27:09,159 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:09,346 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 6
+2022-12-12 16:27:09,347 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:09,348 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:09,348 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 6
+2022-12-12 16:27:09,348 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:09,348 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 6
+2022-12-12 16:27:09,450 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:09,917 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:27:09,918 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/config.yaml
+2022-12-12 16:27:10,919 INFO    Thread-13 :6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:27:11,554 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 7
+2022-12-12 16:27:11,554 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:11,555 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:11,555 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 7
+2022-12-12 16:27:11,556 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:11,556 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 7
+2022-12-12 16:27:11,556 INFO    SenderThread:6000 [dir_watcher.py:finish():362] shutting down directory watcher
+2022-12-12 16:27:11,659 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:11,923 INFO    SenderThread:6000 [dir_watcher.py:_on_file_modified():292] file/dir modified: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:27:11,923 INFO    SenderThread:6000 [dir_watcher.py:finish():392] scan: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files
+2022-12-12 16:27:11,925 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/requirements.txt requirements.txt
+2022-12-12 16:27:11,926 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log output.log
+2022-12-12 16:27:11,929 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json wandb-summary.json
+2022-12-12 16:27:11,932 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-metadata.json wandb-metadata.json
+2022-12-12 16:27:11,933 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/conda-environment.yaml conda-environment.yaml
+2022-12-12 16:27:11,936 INFO    SenderThread:6000 [dir_watcher.py:finish():406] scan save: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/config.yaml config.yaml
+2022-12-12 16:27:11,940 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 8
+2022-12-12 16:27:11,941 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:11,942 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:11,944 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 8
+2022-12-12 16:27:11,945 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:11,945 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 8
+2022-12-12 16:27:11,946 INFO    SenderThread:6000 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-12 16:27:12,046 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,047 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,149 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,149 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,252 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,252 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,355 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,355 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,458 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,458 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,561 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,561 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,663 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,664 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,766 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,767 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,869 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,870 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:12,972 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:12,972 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,075 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,075 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,178 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,178 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,281 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,281 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,384 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,384 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,487 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,487 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,589 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,590 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,692 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,692 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,795 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,795 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,898 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:13,898 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:13,932 INFO    Thread-18 :6000 [upload_job.py:push():139] Uploaded file /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/requirements.txt
+2022-12-12 16:27:13,983 INFO    Thread-21 :6000 [upload_job.py:push():139] Uploaded file /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/conda-environment.yaml
+2022-12-12 16:27:14,001 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,001 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,033 INFO    Thread-20 :6000 [upload_job.py:push():139] Uploaded file /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/wandb-summary.json
+2022-12-12 16:27:14,103 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,104 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,206 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,206 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,263 INFO    Thread-22 :6000 [upload_job.py:push():139] Uploaded file /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/config.yaml
+2022-12-12 16:27:14,309 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,309 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,369 INFO    Thread-19 :6000 [upload_job.py:push():139] Uploaded file /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/files/output.log
+2022-12-12 16:27:14,412 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,412 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,515 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,515 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,570 INFO    Thread-12 :6000 [sender.py:transition_state():458] send defer: 9
+2022-12-12 16:27:14,570 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:14,570 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 9
+2022-12-12 16:27:14,571 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:14,571 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 9
+2022-12-12 16:27:14,617 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,732 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 10
+2022-12-12 16:27:14,733 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,733 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:14,734 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 10
+2022-12-12 16:27:14,734 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:14,734 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 10
+2022-12-12 16:27:14,734 INFO    SenderThread:6000 [sender.py:transition_state():458] send defer: 11
+2022-12-12 16:27:14,735 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: defer
+2022-12-12 16:27:14,735 DEBUG   SenderThread:6000 [sender.py:send():301] send: final
+2022-12-12 16:27:14,735 INFO    HandlerThread:6000 [handler.py:handle_request_defer():161] handle defer: 11
+2022-12-12 16:27:14,735 DEBUG   SenderThread:6000 [sender.py:send():301] send: footer
+2022-12-12 16:27:14,736 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: defer
+2022-12-12 16:27:14,736 INFO    SenderThread:6000 [sender.py:send_request_defer():454] handle sender defer: 11
+2022-12-12 16:27:14,836 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: poll_exit
+2022-12-12 16:27:14,837 DEBUG   SenderThread:6000 [sender.py:send_request():315] send_request: poll_exit
+2022-12-12 16:27:14,837 INFO    SenderThread:6000 [file_pusher.py:join():173] waiting for file pusher
+2022-12-12 16:27:15,309 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: sampled_history
+2022-12-12 16:27:15,312 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: get_summary
+2022-12-12 16:27:15,313 DEBUG   HandlerThread:6000 [handler.py:handle_request():138] handle_request: shutdown
+2022-12-12 16:27:15,314 INFO    HandlerThread:6000 [handler.py:finish():807] shutting down handler
+2022-12-12 16:27:15,736 INFO    WriterThread:6000 [datastore.py:close():279] close: /data/s5091217/code_ego4d/episodic-memory-main/MQ/wandb/run-20221212_155238-g5iygw58/run-g5iygw58.wandb
+2022-12-12 16:27:16,207 INFO    SenderThread:6000 [sender.py:finish():1315] shutting down sender
+2022-12-12 16:27:16,207 INFO    SenderThread:6000 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-12 16:27:16,207 INFO    SenderThread:6000 [file_pusher.py:join():173] waiting for file pusher
+2022-12-12 16:27:17,318 INFO    MainThread:6000 [internal.py:handle_exit():78] Internal process exited
