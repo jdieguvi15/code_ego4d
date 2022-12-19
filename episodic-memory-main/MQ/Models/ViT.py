@@ -129,10 +129,6 @@ class PatchEmbedding(nn.Module):
         print("Z.shape: ", Z.shape)
         return Z
         
-        
-            (self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
-                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
-                 use_bias=False, usewandb=False)
 
 class ViTFeatures(nn.Module):
     """Nueva prueba de implementación pero esta vez usando la información de dentro de cada feature"""
