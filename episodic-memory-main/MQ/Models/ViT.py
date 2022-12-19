@@ -65,6 +65,11 @@ class ViT(d2l.Classifier):
     
     input: (Cin, Lin) = (in_channels, num_hiddens)
     output: (Cout, Lin) = (out_channels, num_hiddens / 2)   in_channels = out_channels
+    
+    
+    
+    
+    !!!!!! POSIBLE PROBLEMA: que se ejecute una a una y no pueda ver las relaciones entre los features si solo ve 1 a la vez
     """
     def __init__(self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
                  dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
@@ -90,7 +95,7 @@ class ViT(d2l.Classifier):
         X = self.dropout(X + self.pos_embedding)
         for blk in self.blks:
             X = blk(X)
-        return self.head(X)
+        return self.head(X[:, 0])
     
     def training_step(self, batch):
         l = self.loss(self(*batch[:-1]), batch[-1])
@@ -108,4 +113,57 @@ class ViT(d2l.Classifier):
     #def configure_optimizers(self):
     #    return eval("torch.optim."+ self.optimizer_name + "(self.parameters(), lr=self.lr)")
     
+class PatchEmbedding(nn.Module):
+    def __init__(self, vect_size=928, patch_size=8, num_hiddens=768):
+        super().__init__()
+        self.num_patches = vect_size // patch_size
+        self.conv = nn.LazyConv1d(num_hiddens, kernel_size=patch_size,
+                                  stride=patch_size)
 
+    def forward(self, X):
+        # Output shape: (batch size, no. of patches, no. of channels)
+        print("X.shape: ", X.shape)
+        Y = self.conv(X)
+        print("Y.shape: ", Y.shape)
+        Z = Y.transpose(1, 2)
+        print("Z.shape: ", Z.shape)
+        return Z
+        
+        
+            (self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
+                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
+                 use_bias=False, usewandb=False)
+
+class ViTFeatures(nn.Module):
+    """Nueva prueba de implementación pero esta vez usando la información de dentro de cada feature"""
+    def __init__(self, vect_size, patch_size, num_hiddens, mlp_num_hiddens,
+                 num_heads, num_blks, emb_dropout, blk_dropout, lr=0.1,
+                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD"):
+        super().__init__()
+        self.save_hyperparameters()
+        self.patch_embedding = PatchEmbedding(vect_size, patch_size, num_hiddens)
+        self.cls_token = nn.Parameter(torch.zeros(1, 1, num_hiddens))
+        num_steps = self.patch_embedding.num_patches + 1  # Add the cls token
+        # Positional embeddings are learnable
+        self.pos_embedding = nn.Parameter(
+            torch.randn(1, num_steps, num_hiddens))
+        self.dropout = nn.Dropout(emb_dropout)
+        self.blks = nn.Sequential()
+        for i in range(num_blks):
+            self.blks.add_module(f"{i}", ViTBlock(
+                num_hiddens, num_hiddens, mlp_num_hiddens,
+                num_heads, blk_dropout, use_bias))
+        self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
+                                  nn.Linear(num_hiddens, num_classes))
+    
+    def forward(self, X):
+        X = self.patch_embedding(X)
+        #(batch size, no. of patches, num_hiddens)
+        X = torch.cat((self.cls_token.expand(X.shape[0], -1, -1), X), 1)
+        #(batch size, no. of patches + 1, num_hiddens)
+        X = self.dropout(X + self.pos_embedding)
+        #same
+        for blk in self.blks:
+            X = blk(X)
+        #same
+        return self.head(X[:, 0])

@@ -44,7 +44,7 @@ def Train_VSGN(opt):
         epoch_loss = test_VSGN_epoch(test_loader, model, epoch, writer, opt)
         
         if opt["not_wandb"]:
-            wandb.log({"epoch_loss": epoch_loss, "epoch": epoch + 1})
+            wandb.log({"epoch_loss": epoch_loss})
 
         print((datetime.datetime.now()))
         state = {'epoch': epoch + 1,
@@ -70,6 +70,7 @@ def train_VSGN_epoch(data_loader, model, optimizer, epoch, writer, opt, is_train
 
     epoch_losses = defaultdict(float)
     for n_iter, (input_data, gt_action, gt_start, gt_end, gt_bbox, num_gt, num_frms) in enumerate(data_loader):
+        print("num_frms=", num_frms)
         with torch.set_grad_enabled(is_train):
             losses, pred_action, pred_start, pred_end = model(input_data, num_frms, gt_action, gt_start, gt_end,  gt_bbox, num_gt)
 
@@ -133,7 +134,7 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Train_batch:" + str(opt["batch_size"]) + "_lr:" + str(opt["train_lr"])
+    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"])
     
     if opt["not_wandb"]:
         wandb.login()

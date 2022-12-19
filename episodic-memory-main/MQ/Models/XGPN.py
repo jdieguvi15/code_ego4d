@@ -15,6 +15,7 @@ class XGPN(nn.Module):
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
         self.use_ViT = opt['use_ViT']
+        self.use_ViTFeatures = opt['use_ViTFeatures']
         self.use_xGPN = opt['use_xGPN']
 
         self.conv0 = nn.Sequential(
@@ -53,6 +54,11 @@ class XGPN(nn.Module):
             print("---- Creamos un ViT ----")
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
             return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"])
+        
+        #not implemented yet
+        #if self.use_ViTFeatures:
+        #    print("---- Creamos un ViTFeatures ----")
+            #return ViTFeatures(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"])
         elif self.use_xGPN:
             return xGN(opt, in_channels=in_channels, out_channels=out_channels, stride = stride)
         else:

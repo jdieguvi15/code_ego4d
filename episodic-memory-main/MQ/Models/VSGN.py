@@ -19,6 +19,7 @@ class VSGN(nn.Module):
         self.hidden_dim_2d = 128
         self.hidden_dim_3d = 512
         self.input_feat_dim = opt['input_feat_dim']
+        self.opt = opt
 
         self.xGPN = XGPN(opt)
 
@@ -95,6 +96,10 @@ class VSGN(nn.Module):
         if self.is_train == 'true':
             loss_reg_st2 = self.bd_adjust.cal_loss(start_offsets, end_offsets, loc_dec, gt_bbox, num_gt)
             losses['loss_bd_adjust'] = loss_reg_st2
+            
+            if self.opt["not_wandb"]:
+                wandb.log({"loss_action": loss_action, "loss_start": loss_start, "loss_end": loss_end,
+                                "actionness": actionness, "startness": startness, "endness": endness})
 
             return losses, actionness, startness, endness
         else:
