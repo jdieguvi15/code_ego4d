@@ -139,7 +139,7 @@ if __name__ == '__main__':
     if opt["not_wandb"]:
         wandb.login()
         wandb.init(
-            project="Ego4d head testing",
+            project="Testing to test",
             name=name1,
             config={
                 "architecture": "VSGN",
