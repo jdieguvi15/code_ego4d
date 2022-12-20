@@ -219,6 +219,10 @@ def parse_opt():
 
     # Baselines
     parser.add_argument(
+        '--drive',
+        default=False,
+        action='store_true')
+    parser.add_argument(
         '--use_xGPN',
         default=False,
         action='store_true')

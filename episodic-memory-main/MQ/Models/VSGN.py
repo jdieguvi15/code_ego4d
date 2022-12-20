@@ -7,6 +7,7 @@ from .AnchorGenerator import AnchorGenerator
 from .Loss import Loss_loc_cls, get_loss_supplement
 from .ActionGenerator import Pred_loc_cls
 from .BoundaryAdjust import BoundaryAdjust
+import wandb
 
 class VSGN(nn.Module):
     def __init__(self, opt):
