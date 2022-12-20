@@ -5,8 +5,8 @@ import os
 ######################################################################################################
 #                     Load data
 ######################################################################################################
-annotation_path = "/content/data/ego4d_data/v1/annotations/"  # Change to your own path containing canonical annotation files
-feat_path = "/content/data/ego4d_data/v1/slowfast8x8_r101_k400/"  # Change to your own path containing features of canonical videos
+annotation_path = "/content/drive/MyDrive/Ego4d-main/ego4d_data/v1/annotations/"  # Change to your own path containing canonical annotation files
+feat_path = "/content/drive/MyDrive/Ego4d-main/ego4d_data/v1/slowfast8x8_r101_k400/"  # Change to your own path containing features of canonical videos
 info_path = annotation_path + 'ego4d.json'
 annot_path_train = annotation_path + 'moments_train.json'
 annot_path_val = annotation_path + 'moments_val.json'
