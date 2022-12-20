@@ -95,7 +95,7 @@ class ViT(d2l.Classifier):
         X = self.dropout(X + self.pos_embedding)
         for blk in self.blks:
             X = blk(X)
-        return self.head(X[:, 0])
+        return self.head(X)
     
     def training_step(self, batch):
         l = self.loss(self(*batch[:-1]), batch[-1])
