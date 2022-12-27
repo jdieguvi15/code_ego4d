@@ -52,7 +52,7 @@ class ViTBlock(nn.Module):
         return X + self.mlp(self.ln2(
             X + self.attention(X, X, X, valid_lens)))
     
-class ViT(d2l.Classifier):
+class ViT(nn.Module):
     """Vision transformer.
     Modificación para que solo aplique el positional embedding, bloques de encoder y head para dar el formato de salida.
     He tocado lo mínimo del Vit original, vamos a ver como va.
@@ -92,26 +92,15 @@ class ViT(d2l.Classifier):
         #No hace patch embedding ni añade un token para la clase
         #Hacemos positional embedding y el vit block
         #Al final le damos el formato del output con linear
+        print("X.shape:", X.shape)
+        print("X_before:", X)
         X = self.dropout(X + self.pos_embedding)
         for blk in self.blks:
             X = blk(X)
-        return self.head(X)
-    
-    def training_step(self, batch):
-        l = self.loss(self(*batch[:-1]), batch[-1])
-        #self.plot('loss', l, train=True)
-        #a = self.accuracy(self(*batch[:-1]), batch[-1])
-        #wandb.log({"train_loss": l, "train_acc": a})
-        return l
-
-    def validation_step(self, batch):
-        l = self.loss(self(*batch[:-1]), batch[-1])
-        #a = self.accuracy(self(*batch[:-1]), batch[-1])
-        #wandb.log({"val_loss": l, "val_acc": a})
-        #self.plot('loss', l, train=False)
+        X = self.head(X)
+        print("X_after:", X)
+        return X
         
-    #def configure_optimizers(self):
-    #    return eval("torch.optim."+ self.optimizer_name + "(self.parameters(), lr=self.lr)")
     
 class PatchEmbedding(nn.Module):
     def __init__(self, vect_size=928, patch_size=8, num_hiddens=768):
