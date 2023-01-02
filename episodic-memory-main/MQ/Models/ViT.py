@@ -8,6 +8,8 @@ from torch import nn
 from d2l import torch as d2l
 import torchvision
 from torchvision import transforms
+import collections
+import inspect
 
 import wandb
 
