@@ -87,6 +87,17 @@ class ViT(nn.Module):
                 num_heads, blk_dropout, use_bias))
         self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
                                   nn.Linear(num_hiddens, num_hiddens_out))
+                                  
+    def save_hyperparameters(self, ignore=[]):
+        """Save function arguments into class attributes.
+    
+        Defined in :numref:`sec_utils`"""
+        frame = inspect.currentframe().f_back
+        _, _, _, local_vars = inspect.getargvalues(frame)
+        self.hparams = {k:v for k, v in local_vars.items()
+                        if k not in set(ignore+['self']) and not k.startswith('_')}
+        for k, v in self.hparams.items():
+            setattr(self, k, v)
 
     def forward(self, X):
         #No hace patch embedding ni añade un token para la clase
