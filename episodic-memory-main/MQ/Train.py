@@ -70,7 +70,8 @@ def train_VSGN_epoch(data_loader, model, optimizer, epoch, writer, opt, is_train
 
     epoch_losses = defaultdict(float)
     for n_iter, (input_data, gt_action, gt_start, gt_end, gt_bbox, num_gt, num_frms) in enumerate(data_loader):
-        print("num_frms=", num_frms)
+        if opt["testing"]:
+            print("num_frms=", num_frms)
         with torch.set_grad_enabled(is_train):
             losses, pred_action, pred_start, pred_end = model(input_data, num_frms, gt_action, gt_start, gt_end,  gt_bbox, num_gt)
 

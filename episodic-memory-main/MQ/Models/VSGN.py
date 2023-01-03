@@ -66,8 +66,18 @@ class VSGN(nn.Module):
 
 
     def forward(self, input, num_frms, gt_action= None, gt_start= None, gt_end= None, gt_bbox = None, num_gt = None):
-        # Cross-scale graph pyramid network
+        if self.opt["testing"]:
+            print("VSGN: input.shape = ", input.shape)
+            print("VSGN: input = ", input)
+        
+        # En la clase cGPN se definirá como será el método que seguiremos
         feats_enc, feats_dec = self.xGPN(input, num_frms)
+        
+        if self.opt["testing"]:
+            print("VSGN: feats_enc.shape = ", feats_enc.shape)
+            print("VSGN: feats_enc = ", feats_enc)
+            print("VSGN: feats_dec.shape = ", feats_dec.shape)
+            print("VSGN: feats_dec = ", feats_dec)
 
         # Scoring and localization
         cls_pred_dec, reg_pred_dec = self.head_dec(feats_dec)

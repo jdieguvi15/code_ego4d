@@ -266,6 +266,10 @@ def parse_opt():
         '--not_wandb',
         default=True,
         action='store_false')
+    parser.add_argument(
+        '--testing',
+        default=False,
+        action='store_true')
         
     args = parser.parse_args()
 

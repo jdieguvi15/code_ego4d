@@ -17,6 +17,7 @@ class XGPN(nn.Module):
         self.use_ViT = opt['use_ViT']
         self.use_ViTFeatures = opt['use_ViTFeatures']
         self.use_xGPN = opt['use_xGPN']
+        self.testing = opt['testing']
 
         self.conv0 = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim,kernel_size=3,stride=1,padding=1,groups=1),
@@ -53,7 +54,7 @@ class XGPN(nn.Module):
         if self.use_ViT:
             print("---- Creamos un ViT ----")
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
-            return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"])
+            return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"], testing=self.testing)
         
         #not implemented yet
         #if self.use_ViTFeatures:
@@ -78,7 +79,7 @@ class XGPN(nn.Module):
         )
 
     def _make_levels(self, in_channels, out_channels):
-
+        #Conv1 + ReLU
         return nn.Sequential(
             nn.Conv1d(in_channels=in_channels, out_channels=out_channels,kernel_size=3,stride=1,padding=1,groups=1),
             nn.ReLU(inplace=True),
@@ -88,18 +89,31 @@ class XGPN(nn.Module):
 
         feats = []
         x = self.conv0(input)
-        #print("x0:", x.shape)
+        if self.testing:
+            print("Encoder: x0.shape=", x.shape)
+            print("Encoder: x0=", x)
         for i in range(0, self.num_levels):
             if self.use_xGPN:
                 x = self.levels_enc[i](x, num_frms)
             else:
                 x = self.levels_enc[i](x)
             feats.append(x)
-            #print("x", i, ":", x.shape)
-
+            if self.testing:
+                print("Encoder: x", i, ".shape=", x.shape)
+                print("Encoder: x", i, "=", x)
+        if self.testing:
+            print("feats_enc=", feats)
         return feats
 
     def _decoder(self, input):
+        #levels1 es num_levels * (Conv1 + ReLU)
+        #levels2 es (num_levels - 1) * (Conv1 + ReLU)
+        #el input y el output de ambas tienen la misma forma: bb_hidden_dim
+        #solo de aplica un nivel cada vez, cada nivel tiene diferentes funciones
+        #sacamos f_enc del input, f_dec de lo que hemos analizado hasta ahora y lo juntamos
+        #es literalmente lo que hace el decoder de un transformer lol
+        
+        # cambiar todo esto por el decoder de los transformers
 
         feats = []
         x = self.levels1[0](input[self.num_levels - 1])
@@ -111,8 +125,9 @@ class XGPN(nn.Module):
             feat_dec = self.levels_dec[i](x)
             x = self.levels1[i+1](feat_enc + feat_dec)
             feats.append(x)
-
-
+            if self.testing:
+                print("Decoder: x", i, ".shape=", x.shape)
+                print("Decoder: x", i, "=", x)
 
         return feats
 

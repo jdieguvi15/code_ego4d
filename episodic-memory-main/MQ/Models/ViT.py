@@ -75,7 +75,7 @@ class ViT(nn.Module):
     """
     def __init__(self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
                  dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
-                 use_bias=False, usewandb=False):
+                 use_bias=False, usewandb=False, testing=False):
         super().__init__()
         self.save_hyperparameters()
         # Positional embeddings are learnable
@@ -105,13 +105,15 @@ class ViT(nn.Module):
         #No hace patch embedding ni añade un token para la clase
         #Hacemos positional embedding y el vit block
         #Al final le damos el formato del output con linear
-        print("X.shape:", X.shape)
-        print("X_before:", X)
+        if self.testing:
+            print("ViT: X.shape:", X.shape)
+            print("ViT: X_before:", X)
         X = self.dropout(X + self.pos_embedding)
         for blk in self.blks:
             X = blk(X)
         X = self.head(X)
-        print("X_after:", X)
+        if self.testing:
+            print("ViT: X_after:", X)
         return X
         
     
@@ -124,11 +126,14 @@ class PatchEmbedding(nn.Module):
 
     def forward(self, X):
         # Output shape: (batch size, no. of patches, no. of channels)
-        print("X.shape: ", X.shape)
+        if self.testing:
+            print("X.shape: ", X.shape)
         Y = self.conv(X)
-        print("Y.shape: ", Y.shape)
+        if self.testing:
+            print("Y.shape: ", Y.shape)
         Z = Y.transpose(1, 2)
-        print("Z.shape: ", Z.shape)
+        if self.testing:
+            print("Z.shape: ", Z.shape)
         return Z
         
 
