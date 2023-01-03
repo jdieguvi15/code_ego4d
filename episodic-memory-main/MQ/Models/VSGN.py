@@ -74,9 +74,9 @@ class VSGN(nn.Module):
         feats_enc, feats_dec = self.xGPN(input, num_frms)
         
         if self.opt["testing"]:
-            print("VSGN: feats_enc.shape = ", feats_enc.shape)
+            print("VSGN: len(feats_enc) = ", len(feats_enc))
             print("VSGN: feats_enc = ", feats_enc)
-            print("VSGN: feats_dec.shape = ", feats_dec.shape)
+            print("VSGN: len(feats_dec) = ", len(feats_dec))
             print("VSGN: feats_dec = ", feats_dec)
 
         # Scoring and localization
