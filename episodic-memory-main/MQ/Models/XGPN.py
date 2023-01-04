@@ -88,7 +88,7 @@ class XGPN(nn.Module):
     def _encoder(self, input, num_frms):
 
         feats = []
-        x = self.conv0(input)
+        x = self.conv0(input) #pasa el tamaño de cada video de input_feat_dim a bb_hidden_dim = 256
         if self.testing:
             print("Encoder: x0.shape=", x.shape)
             print("Encoder: x0=", x)

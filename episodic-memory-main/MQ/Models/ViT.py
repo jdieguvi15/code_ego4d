@@ -74,7 +74,7 @@ class ViT(nn.Module):
     !!!!!! POSIBLE PROBLEMA: que se ejecute una a una y no pueda ver las relaciones entre los features si solo ve 1 a la vez
     """
     def __init__(self, in_channels, num_hiddens, num_hiddens_out, mlp_num_hiddens,
-                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
+                 dim_attention, num_heads, num_blks=2, emb_dropout=0.1, blk_dropout=0.1,
                  use_bias=False, usewandb=False, testing=False):
         super().__init__()
         self.save_hyperparameters()

@@ -270,6 +270,14 @@ def parse_opt():
         '--testing',
         default=False,
         action='store_true')
+    parser.add_argument(
+        '--project_name',
+        type=str,
+        default="new_tests")
+    parser.add_argument(
+        '--run_name',
+        type=str,
+        default="Vit with 2 blocks")
         
     args = parser.parse_args()
 

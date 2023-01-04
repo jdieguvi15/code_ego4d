@@ -49,7 +49,7 @@ if __name__ == '__main__':
             
             
     config={
-        "architecture": "VSGN_default",
+        "architecture": opt["run_name"],
         "dataset": "ego4d",
         "batch_size": opt["batch_size"],
         "optimizer_name": "Adam",

@@ -136,15 +136,15 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"])
+    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"] + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
     
     if opt["not_wandb"]:
         wandb.login()
         wandb.init(
-            project="Testing to test",
+            project=opt["project_name"],
             name=name1,
             config={
-                "architecture": "VSGN",
+                "architecture": opt["run_name"],
                 "dataset": "ego4d",
                 "batch_size": opt["batch_size"],
                 "optimizer_name": "Adam",
