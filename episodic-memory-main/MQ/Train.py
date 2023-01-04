@@ -136,7 +136,7 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"] + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
+    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"]) + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
     
     if opt["not_wandb"]:
         wandb.login()
