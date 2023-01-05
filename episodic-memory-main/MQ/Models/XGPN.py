@@ -2,7 +2,8 @@
 import torch.nn as nn
 # from Utils.Sync_batchnorm.batchnorm import SynchronizedBatchNorm1d
 from .GCNs import xGN
-from .ViT2 import ViT
+from .ViT import ViT
+from .ViT2 import ViT2
 
 
 
@@ -15,6 +16,7 @@ class XGPN(nn.Module):
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
         self.use_ViT = opt['use_ViT']
+        self.use_ViT2 = opt['use_ViT2']
         self.use_ViTFeatures = opt['use_ViTFeatures']
         self.use_xGPN = opt['use_xGPN']
         self.testing = opt['testing']
@@ -32,7 +34,7 @@ class XGPN(nn.Module):
                 stride = 1
             else:
                 stride = 2
-                num_hiddens_out = num_hiddens_out // 2
+                num_hiddens_out = num_hiddens_out // 2 # para vit 1.0
             # Añado num_hiddens para controlar como decrece
             self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens_in=num_hiddens_in, num_hiddens_out=num_hiddens_out, stride = stride))
 
@@ -54,6 +56,10 @@ class XGPN(nn.Module):
         if self.use_ViT:
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
             return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"], testing=self.testing)
+            
+        if self.use_ViT2:
+            # in_channels, num_hiddens, mlp_num_hiddens, num_heads
+            return ViT2(in_channels, num_hiddens_in, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"], testing=self.testing, stride=stride)
         
         #not implemented yet
         #if self.use_ViTFeatures:

@@ -47,9 +47,14 @@ if __name__ == '__main__':
             recall = eval_retrieval(opt)
             print("Detection evaluation finishes! \n")
             
+    architecture = "???"
+    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures"}:
+        if opt[a]:
+            architecture = a
             
     config={
-        "architecture": opt["run_name"],
+        "run_name": opt["run_name"],
+        "architecture": architecture,
         "dataset": "ego4d",
         "batch_size": opt["batch_size"],
         "optimizer_name": "Adam",

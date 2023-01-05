@@ -136,7 +136,12 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Vit-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"]) + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
+    name1 = "Vit2-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"]) + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
+    
+    architecture = "???"
+    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures"}:
+        if opt[a]:
+            architecture = a
     
     if opt["not_wandb"]:
         wandb.login()
@@ -144,14 +149,12 @@ if __name__ == '__main__':
             project=opt["project_name"],
             name=name1,
             config={
-                "architecture": opt["run_name"],
+                "architecture": architecture,
                 "dataset": "ego4d",
                 "batch_size": opt["batch_size"],
                 "optimizer_name": "Adam",
                 "learning_rate": opt["train_lr"],
                 "num_epoch": opt["num_epoch"],
-                "use_xGPN": opt["use_xGPN"],
-                "use_ViT": opt["use_ViT"],
                 "num_heads": opt["num_heads"],
                 "dim_attention": opt["dim_attention"],
             })

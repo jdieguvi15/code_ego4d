@@ -54,7 +54,7 @@ class ViTBlock(nn.Module):
         return X + self.mlp(self.ln2(
             X + self.attention(X, X, X, valid_lens)))
     
-class ViT(nn.Module):
+class ViT2(nn.Module):
     """Vision transformer.
     Modificación para que solo aplique el positional embedding, bloques de encoder y head para dar el formato de salida.
     He tocado lo mínimo del Vit original, vamos a ver como va.
@@ -73,9 +73,8 @@ class ViT(nn.Module):
     
     !!!!!! POSIBLE PROBLEMA: que se ejecute una a una y no pueda ver las relaciones entre los features si solo ve 1 a la vez
     """
-    def __init__(self, num_features, num_temp, num_hiddens_out, mlp_num_hiddens,
-                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1,
-                 use_bias=False, usewandb=False, testing=False):
+    def __init__(self, num_features, num_temp, mlp_num_hiddens,
+                 dim_attention, num_heads, num_blks=1, emb_dropout=0.1, blk_dropout=0.1, use_bias=False, usewandb=False, testing=False, stride=stride):
         super().__init__()
         self.save_hyperparameters()
         print("---- Creamos un ViT 2.0 ----")
