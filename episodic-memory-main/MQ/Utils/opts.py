@@ -277,7 +277,7 @@ def parse_opt():
     parser.add_argument(
         '--project_name',
         type=str,
-        default="new_tests")
+        default="probando_ViT2")
     parser.add_argument(
         '--run_name',
         type=str,
