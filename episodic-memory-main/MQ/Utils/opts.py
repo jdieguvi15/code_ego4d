@@ -199,7 +199,7 @@ def parse_opt():
     parser.add_argument(
         '--dim_attention',
         type=int,
-        default=768)
+        default=256)
     parser.add_argument(
         '--num_heads',
         type=int,

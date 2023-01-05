@@ -1,14 +1,17 @@
 
 import torch.nn as nn
 # from Utils.Sync_batchnorm.batchnorm import SynchronizedBatchNorm1d
-from .GCNs import xGN
-from .ViT2 import ViT
+import math
+import pandas as pd
+import torch
+from torch import nn
+from d2l import torch as d2l
 
 
 
-class XGPN(nn.Module):
+class Transformer(nn.Module):
     def __init__(self, opt):
-        super(XGPN, self).__init__()
+        super(Transformer, self).__init__()
         self.input_feat_dim = opt["input_feat_dim"]
         self.bb_hidden_dim = opt['bb_hidden_dim']
         self.batch_size = opt["batch_size"]
@@ -88,7 +91,7 @@ class XGPN(nn.Module):
     def _encoder(self, input, num_frms):
 
         feats = []
-        x = self.conv0(input) #pasa el tamaño de cada video de input_feat_dim a bb_hidden_dim = 256 (reduce el número de features que consideramos de cada video)
+        x = self.conv0(input) #pasa el tamaño de cada video de input_feat_dim a bb_hidden_dim = 256
         if self.testing:
             print("Encoder: x0.shape=", x.shape)
             print("Encoder: x0=", x)

@@ -8,7 +8,6 @@ import pandas as pd
 from joblib import Parallel, delayed
 import sys
 sys.dont_write_bytecode = True
-import torch.nn.parallel
 import os
 import Utils.opts as opts
 

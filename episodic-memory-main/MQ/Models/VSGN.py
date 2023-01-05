@@ -70,7 +70,7 @@ class VSGN(nn.Module):
             print("VSGN: input.shape = ", input.shape)
             print("VSGN: input = ", input)
         
-        # En la clase cGPN se definirá como será el método que seguiremos
+        # En la clase xGPN se definirá como será el método que seguiremos
         feats_enc, feats_dec = self.xGPN(input, num_frms)
         
         if self.opt["testing"]:
