@@ -96,7 +96,6 @@ class XGPN(nn.Module):
         x = self.conv0(input) #pasa el tamaño de cada video de input_feat_dim a bb_hidden_dim = 256 (reduce el número de features que consideramos de cada video)
         if self.testing:
             print("Encoder: x0.shape=", x.shape)
-            print("Encoder: x0=", x)
         for i in range(0, self.num_levels):
             if self.use_xGPN:
                 x = self.levels_enc[i](x, num_frms)
@@ -105,7 +104,6 @@ class XGPN(nn.Module):
             feats.append(x)
             if self.testing:
                 print("Encoder: x", i, ".shape=", x.shape)
-                print("Encoder: x", i, "=", x)
         if self.testing:
             print("Encoder: feats=", [len(e) for e in feats])
         return feats
@@ -132,7 +130,6 @@ class XGPN(nn.Module):
             feats.append(x)
             if self.testing:
                 print("Decoder: x", i, ".shape=", x.shape)
-                print("Decoder: x", i, "=", x)
 
         return feats
 

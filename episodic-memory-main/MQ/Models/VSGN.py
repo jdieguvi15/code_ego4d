@@ -68,16 +68,13 @@ class VSGN(nn.Module):
     def forward(self, input, num_frms, gt_action= None, gt_start= None, gt_end= None, gt_bbox = None, num_gt = None):
         if self.opt["testing"]:
             print("VSGN: input.shape = ", input.shape)
-            print("VSGN: input = ", input)
         
         # En la clase xGPN se definirá como será el método que seguiremos
         feats_enc, feats_dec = self.xGPN(input, num_frms)
         
         if self.opt["testing"]:
-            print("VSGN: len(feats_enc) = ", len(feats_enc))
-            print("VSGN: feats_enc = ", feats_enc)
-            print("VSGN: len(feats_dec) = ", len(feats_dec))
-            print("VSGN: feats_dec = ", feats_dec)
+            print("VSGN: feats_enc.shape = ", [f.shape for f in feats_enc])
+            print("VSGN: feats_dec.shape = ", [f.shape for f in feats_dec])
 
         # Scoring and localization
         cls_pred_dec, reg_pred_dec = self.head_dec(feats_dec)
