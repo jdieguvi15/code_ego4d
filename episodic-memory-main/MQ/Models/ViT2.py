@@ -84,7 +84,7 @@ class ViT2(nn.Module):
         self.blks = nn.Sequential()
         for i in range(num_blks):
             self.blks.add_module(f"{i}", ViTBlock(
-                dim_attention, num_temp, num_temp, mlp_num_hiddens,
+                dim_attention, num_features, num_features, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
         #self.head = nn.Sequential(nn.LayerNorm(num_temp), nn.Linear(num_temp, num_hiddens_out))
                                   
@@ -104,21 +104,20 @@ class ViT2(nn.Module):
             setattr(self, k, v)
 
     def forward(self, X):
-        #No hace patch embedding ni añade un token para la clase
-        #Hacemos positional embedding y el vit block
-        #Al final le damos el formato del output con linear
         if self.testing:
             print("ViT: X.shape:", X.shape)
         X = X.transpose(1, 2)
         if self.testing:
             print("ViT: X.shape transposed:", X.shape)
-            #print("ViT: X_before:", X)
+        #Positional embedding
         X = self.dropout(X + self.pos_embedding)
+        #Bloques de atención
         for blk in self.blks:
             X = blk(X)
         if self.testing:
             print("ViT: X.shape_after:", X.shape)
         X = X.transpose(1, 2)
+        #Reducimos el tamaño para la siguiente iteración
         X = self.head(X)
         if self.testing:
             print("ViT: X.shape_after_head:", X.shape)
