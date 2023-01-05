@@ -52,7 +52,6 @@ class XGPN(nn.Module):
 
     def _make_levels_enc(self, opt, in_channels, out_channels, num_hiddens_in, num_hiddens_out, stride = 2):
         if self.use_ViT:
-            print("---- Creamos un ViT ----")
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
             return ViT(in_channels, num_hiddens_in, num_hiddens_out, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"], testing=self.testing)
         

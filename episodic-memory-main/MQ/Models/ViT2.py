@@ -78,6 +78,7 @@ class ViT(nn.Module):
                  use_bias=False, usewandb=False, testing=False):
         super().__init__()
         self.save_hyperparameters()
+        print("---- Creamos un ViT 2.0 ----")
         # Positional embeddings are learnable
         self.pos_embedding = nn.Parameter(
             torch.randn(1, num_temp, num_features))
