@@ -234,7 +234,7 @@ def parse_opt():
         '--use_ViT2',
         default=False,
         action='store_true')
-        parser.add_argument(
+    parser.add_argument(
         '--use_ViTFeatures',
         default=False,
         action='store_true')
