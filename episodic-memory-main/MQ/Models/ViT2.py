@@ -91,7 +91,7 @@ class ViT(nn.Module):
         #self.head = nn.Sequential(nn.LayerNorm(num_temp), nn.Linear(num_temp, num_hiddens_out))
                                   
         self.head = nn.Sequential(
-            nn.Conv1d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.Conv1d(in_channels=num_features, out_channels=num_features, kernel_size=3, stride=stride, padding=1, groups=1),
             nn.ReLU(inplace=True))
                                   
     def save_hyperparameters(self, ignore=[]):
