@@ -59,7 +59,7 @@ class XGPN(nn.Module):
             
         if self.use_ViT2:
             # in_channels, num_hiddens, mlp_num_hiddens, num_heads
-            return ViT2(in_channels, num_hiddens_in, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], num_blks=opt["num_blks"], testing=self.testing, stride=stride)
+            return ViT2(in_channels, num_hiddens_in, opt["mlp_num_hiddens"], opt["dim_attention"], opt["num_heads"], stride=stride, num_blks=opt["num_blks"], testing=self.testing)
         
         #not implemented yet
         #if self.use_ViTFeatures:
