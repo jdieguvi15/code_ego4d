@@ -105,7 +105,7 @@ class XGPN(nn.Module):
             if self.testing:
                 print("Encoder: x", i, ".shape=", x.shape)
         if self.testing:
-            print("Encoder: feats=", [len(e) for e in feats])
+            print("Encoder: feats=", [e.shape for e in feats])
         return feats
 
     def _decoder(self, input):
