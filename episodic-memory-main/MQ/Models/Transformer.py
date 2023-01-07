@@ -63,7 +63,8 @@ class TransformerEncoder(d2l.Encoder):
         # Since positional encoding values are between -1 and 1, the embedding
         # values are multiplied by the square root of the embedding dimension
         # to rescale before they are summed up
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        X = self.pos_encoding(X)
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
@@ -134,7 +135,8 @@ class TransformerDecoder(d2l.AttentionDecoder):
         return [enc_outputs, enc_valid_lens, [None] * self.num_blks]
 
     def forward(self, X, state):
-        X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        X = self.pos_encoding(X)
         self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
         for i, blk in enumerate(self.blks):
             X, state = blk(X, state)
