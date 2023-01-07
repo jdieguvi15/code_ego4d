@@ -168,11 +168,11 @@ class Transformer(nn.Module):
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
-        self.num_hiddens = 928   #máximo de frames que puede tener el vídeo
-        self.num_blks = opt['num_levels']    #cada bloque hará la función de un level
-        self.dropout = 0.2   #lo recomendado en el libro
-        self.ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
-        self.num_heads = opt["num_heads"]
+        num_hiddens = 928   #máximo de frames que puede tener el vídeo
+        num_blks = opt['num_levels']    #cada bloque hará la función de un level
+        dropout = 0.2   #lo recomendado en el libro
+        ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
+        num_heads = opt["num_heads"]
         
         #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
         
