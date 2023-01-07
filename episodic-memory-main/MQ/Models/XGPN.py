@@ -116,7 +116,7 @@ class XGPN(nn.Module):
         #sacamos f_enc del input, f_dec de lo que hemos analizado hasta ahora y lo juntamos
         #es literalmente lo que hace el decoder de un transformer lol
         
-        # cambiar todo esto por el decoder de los transformers
+        # es lo del decoder de los transformers pero en lugar de coger como input cada palabra coge el output de un nivel del encoder
 
         feats = []
         x = self.levels1[0](input[self.num_levels - 1])

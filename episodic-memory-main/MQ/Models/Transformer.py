@@ -128,6 +128,9 @@ class TransformerDecoderBlock(nn.Module):
         return self.addnorm3(Z, self.ffn(Z)), state
         
 class TransformerDecoder(d2l.AttentionDecoder):
+    """
+    Esta basado en el Decoder de los transformers de palabras pero cada iteración se aplica a un output del encoder, no cada "palabra"
+    """
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads,
                  num_blks, dropout, vocab_size=0, testing=False):
         super().__init__()
@@ -207,7 +210,7 @@ class Transformer(nn.Module):
     
         feats_enc = self.encoder(X, None, *args)
         
-        dec_state = self.decoder.init_state(feats_enc,*args)
+        dec_state = self.decoder.init_state(feats_enc, None, *args)
         feats_dec = self.decoder(feats_enc, dec_state)[0]
         
         return feats_enc, feats_dec
