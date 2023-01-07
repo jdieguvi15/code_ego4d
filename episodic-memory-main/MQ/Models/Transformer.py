@@ -49,7 +49,7 @@ class TransformerEncoderBlock(nn.Module):
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
     def __init__(self, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_blks, dropout, use_bias=False, vocab_size=0):
+                 num_heads, num_blks, dropout, use_bias=False, vocab_size=0, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         #embeeding es como un feature extracton pero ya trabajamos con features
@@ -128,7 +128,7 @@ class TransformerDecoderBlock(nn.Module):
         
 class TransformerDecoder(d2l.AttentionDecoder):
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_blks, dropout, vocab_size=0):
+                 num_blks, dropout, vocab_size=0, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.num_blks = num_blks
@@ -190,8 +190,8 @@ class Transformer(nn.Module):
         #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
         
         
-        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
-        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
+        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout, testing=self.testing)
+        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout, testing=self.testing)
         
     def forward(self, input, *args):
     
