@@ -64,6 +64,9 @@ if __name__ == '__main__':
         "use_ViT": opt["use_ViT"],
         "num_heads": opt["num_heads"],
         "dim_attention": opt["dim_attention"],
+        "num_levels": opt["num_levels"],
+        "bb_hidden_dim": opt["bb_hidden_dim"],
+        "mlp_num_hiddens": opt["mlp_num_hiddens"],
         "average_mAP": average_mAP,
         "recall": recall
     }

@@ -142,38 +142,3 @@ class PatchEmbedding(nn.Module):
         if self.testing:
             print("Z.shape: ", Z.shape)
         return Z
-        
-
-class ViTFeatures(nn.Module):
-    """Nueva prueba de implementación pero esta vez usando la información de dentro de cada feature"""
-    def __init__(self, vect_size, patch_size, num_hiddens, mlp_num_hiddens,
-                 num_heads, num_blks, emb_dropout, blk_dropout, lr=0.1,
-                 use_bias=False, num_classes=10, usewandb=False, optimizer_name="SGD"):
-        super().__init__()
-        self.save_hyperparameters()
-        self.patch_embedding = PatchEmbedding(vect_size, patch_size, num_hiddens)
-        self.cls_token = nn.Parameter(torch.zeros(1, 1, num_hiddens))
-        num_steps = self.patch_embedding.num_patches + 1  # Add the cls token
-        # Positional embeddings are learnable
-        self.pos_embedding = nn.Parameter(
-            torch.randn(1, num_steps, num_hiddens))
-        self.dropout = nn.Dropout(emb_dropout)
-        self.blks = nn.Sequential()
-        for i in range(num_blks):
-            self.blks.add_module(f"{i}", ViTBlock(
-                num_hiddens, num_hiddens, mlp_num_hiddens,
-                num_heads, blk_dropout, use_bias))
-        self.head = nn.Sequential(nn.LayerNorm(num_hiddens),
-                                  nn.Linear(num_hiddens, num_classes))
-    
-    def forward(self, X):
-        X = self.patch_embedding(X)
-        #(batch size, no. of patches, num_hiddens)
-        X = torch.cat((self.cls_token.expand(X.shape[0], -1, -1), X), 1)
-        #(batch size, no. of patches + 1, num_hiddens)
-        X = self.dropout(X + self.pos_embedding)
-        #same
-        for blk in self.blks:
-            X = blk(X)
-        #same
-        return self.head(X[:, 0])

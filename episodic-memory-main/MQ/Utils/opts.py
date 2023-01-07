@@ -281,7 +281,7 @@ def parse_opt():
     parser.add_argument(
         '--run_name',
         type=str,
-        default="Vit with 2 blocks")
+        default="Vit 2.0")
         
     args = parser.parse_args()
 
