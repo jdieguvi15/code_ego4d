@@ -180,7 +180,7 @@ class Transformer(nn.Module):
         self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
         self.decoder = TransformerDecoder(len(data.tgt_vocab), num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
         
-    def forward(self, input, num_frms, *args):
+    def forward(self, input, *args):
     
         X = self.conv0(input)
         X = X.transpose(1, 2)

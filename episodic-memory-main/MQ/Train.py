@@ -138,7 +138,7 @@ if __name__ == '__main__':
     name1 = "Vit2-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"]) + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
     
     architecture = "???"
-    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures"}:
+    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer"}:
         if opt[a]:
             architecture = a
     

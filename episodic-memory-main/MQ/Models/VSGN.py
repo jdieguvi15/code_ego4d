@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import torch.nn as nn
 from .XGPN import XGPN
+from .Transformer import Transformer
 import torch.nn.functional as F
 from .Head import Head
 from .AnchorGenerator import AnchorGenerator
@@ -21,8 +22,11 @@ class VSGN(nn.Module):
         self.hidden_dim_3d = 512
         self.input_feat_dim = opt['input_feat_dim']
         self.opt = opt
-
-        self.xGPN = XGPN(opt)
+        
+        if opt["use_Transformer"]:
+            self.trans = Transformer(opt)
+        else:
+            self.xGPN = XGPN(opt)
 
         # self.head_enc = Head(opt)
         self.head_dec = Head(opt)
@@ -69,8 +73,11 @@ class VSGN(nn.Module):
         if self.opt["testing"]:
             print("VSGN: input.shape = ", input.shape)
         
-        # En la clase xGPN se definirá como será el método que seguiremos
-        feats_enc, feats_dec = self.xGPN(input, num_frms)
+        if opt["use_Transformer"]:
+            feats_enc, feats_dec = self.trans(input)
+        else:
+            # En la clase xGPN se definirá como será el método que seguiremos
+            feats_enc, feats_dec = self.xGPN(input, num_frms)
         
         if self.opt["testing"]:
             print("VSGN: feats_enc.shape = ", [f.shape for f in feats_enc])
