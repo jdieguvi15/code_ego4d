@@ -196,7 +196,7 @@ class Transformer(nn.Module):
     def forward(self, input, *args):
     
         if self.testing:
-            print("Transformer: X.shape:", X.shape)
+            print("Transformer: input.shape:", input.shape)
     
         X = self.conv0(input)
         X = X.transpose(1, 2)
