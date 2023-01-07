@@ -185,9 +185,9 @@ class Transformer(nn.Module):
         X = self.conv0(input)
         X = X.transpose(1, 2)
     
-        feats_enc = self.encoder(input, *args)
+        feats_enc = self.encoder(input, None, *args)
         
-        dec_state = self.decoder.init_state(feats_enc, None, *args)
+        dec_state = self.decoder.init_state(feats_enc,*args)
         feats_dec = self.decoder(feats_enc, dec_state)[0]
         
         return feats_enc, feats_dec
