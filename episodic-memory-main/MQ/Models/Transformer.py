@@ -180,14 +180,14 @@ class Transformer(nn.Module):
         self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
         self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
         
-    def forward(self, input, valid_lens=None, *args):
+    def forward(self, input *args):
     
         X = self.conv0(input)
         X = X.transpose(1, 2)
     
         feats_enc = self.encoder(input, *args)
         
-        dec_state = self.decoder.init_state(feats_enc, *args)
+        dec_state = self.decoder.init_state(feats_enc, None, *args)
         feats_dec = self.decoder(feats_enc, dec_state)[0]
         
         return feats_enc, feats_dec
