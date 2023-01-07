@@ -52,6 +52,7 @@ class TransformerEncoder(d2l.Encoder):
                  num_heads, num_blks, dropout, use_bias=False, vocab_size=0, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
+        self.testing = testing
         #embeeding es como un feature extracton pero ya trabajamos con features
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
@@ -132,6 +133,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.num_blks = num_blks
+        self.testing = testing
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
