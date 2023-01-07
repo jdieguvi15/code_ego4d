@@ -178,7 +178,7 @@ class Transformer(nn.Module):
         
         
         self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
-        self.decoder = TransformerDecoder(len(data.tgt_vocab), num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
+        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout)
         
     def forward(self, input, *args):
     
