@@ -67,10 +67,10 @@ class TransformerEncoder(d2l.Encoder):
         # to rescale before they are summed up
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         if self.testing:
-            print("Encoder: x0=", x.shape)
+            print("Encoder: x0=", X.shape)
         X = self.pos_encoding(X)
         if self.testing:
-            print("Encoder: x0 with pos encoding=", x.shape)
+            print("Encoder: x0 with pos encoding=", X.shape)
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
@@ -78,7 +78,7 @@ class TransformerEncoder(d2l.Encoder):
             self.attention_weights[i] = blk.attention.attention.attention_weights
             feats.append(x)
             if self.testing:
-                print("Encoder: x", i, "=", x.shape)
+                print("Encoder: x", i, "=", X.shape)
             #TODO reducir el tamaño a cada iteración
         if self.testing:
             print("Encoder: feats=", [e.shape for e in feats])
@@ -158,7 +158,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
             self._attention_weights[1][
                 i] = blk.attention2.attention.attention_weights
             if self.testing:
-                print("Decoder: x", i, "=", x.shape)
+                print("Decoder: x", i, "=", X.shape)
         return self.dense(X), state
 
     @property
