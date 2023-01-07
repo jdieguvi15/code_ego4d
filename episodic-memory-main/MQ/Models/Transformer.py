@@ -52,6 +52,7 @@ class TransformerEncoder(d2l.Encoder):
                  num_heads, num_blks, dropout, use_bias=False, vocab_size=0):
         super().__init__()
         self.num_hiddens = num_hiddens
+        #embeeding es como un feature extracton pero ya trabajamos con features
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
@@ -64,14 +65,22 @@ class TransformerEncoder(d2l.Encoder):
         # values are multiplied by the square root of the embedding dimension
         # to rescale before they are summed up
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
+        if self.testing:
+            print("Encoder: x0=", x.shape)
         X = self.pos_encoding(X)
+        if self.testing:
+            print("Encoder: x0 with pos encoding=", x.shape)
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
             self.attention_weights[i] = blk.attention.attention.attention_weights
             feats.append(x)
+            if self.testing:
+                print("Encoder: x", i, "=", x.shape)
             #TODO reducir el tamaño a cada iteración
+        if self.testing:
+            print("Encoder: feats=", [e.shape for e in feats])
         return feats
         
 class TransformerDecoderBlock(nn.Module):
@@ -146,6 +155,8 @@ class TransformerDecoder(d2l.AttentionDecoder):
             # Encoder-decoder attention weights
             self._attention_weights[1][
                 i] = blk.attention2.attention.attention_weights
+            if self.testing:
+                print("Decoder: x", i, "=", x.shape)
         return self.dense(X), state
 
     @property
@@ -184,8 +195,13 @@ class Transformer(nn.Module):
         
     def forward(self, input, *args):
     
+        if self.testing:
+            print("Transformer: X.shape:", X.shape)
+    
         X = self.conv0(input)
         X = X.transpose(1, 2)
+        if self.testing:
+            print("ViT: X.shape ready:", X.shape)
     
         feats_enc = self.encoder(input, None, *args)
         
