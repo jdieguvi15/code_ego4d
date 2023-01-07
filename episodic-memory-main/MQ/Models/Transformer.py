@@ -76,9 +76,9 @@ class TransformerEncoder(d2l.Encoder):
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
             self.attention_weights[i] = blk.attention.attention.attention_weights
-            feats.append(x)
+            feats.append(X)
             if self.testing:
-                print("Encoder: x", i, "=", X.shape)
+                print("Encoder: X", i, "=", X.shape)
             #TODO reducir el tamaño a cada iteración
         if self.testing:
             print("Encoder: feats=", [e.shape for e in feats])
@@ -158,7 +158,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
             self._attention_weights[1][
                 i] = blk.attention2.attention.attention_weights
             if self.testing:
-                print("Decoder: x", i, "=", X.shape)
+                print("Decoder: X", i, "=", X.shape)
         return self.dense(X), state
 
     @property
