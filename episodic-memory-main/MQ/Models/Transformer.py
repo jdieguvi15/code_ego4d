@@ -201,7 +201,7 @@ class Transformer(nn.Module):
             print("Transformer: input.shape:", input.shape)
     
         X = self.conv0(input)
-        X = X.transpose(1, 2)
+        #X = X.transpose(1, 2)
         if self.testing:
             print("ViT: X.shape ready:", X.shape)
     
