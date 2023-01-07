@@ -73,7 +73,7 @@ class VSGN(nn.Module):
         if self.opt["testing"]:
             print("VSGN: input.shape = ", input.shape)
         
-        if opt["use_Transformer"]:
+        if self.opt["use_Transformer"]:
             feats_enc, feats_dec = self.trans(input)
         else:
             # En la clase xGPN se definirá como será el método que seguiremos
