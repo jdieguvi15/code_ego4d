@@ -205,7 +205,7 @@ class Transformer(nn.Module):
         if self.testing:
             print("ViT: X.shape ready:", X.shape)
     
-        feats_enc = self.encoder(input, None, *args)
+        feats_enc = self.encoder(X, None, *args)
         
         dec_state = self.decoder.init_state(feats_enc,*args)
         feats_dec = self.decoder(feats_enc, dec_state)[0]
