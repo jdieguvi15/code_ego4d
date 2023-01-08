@@ -47,13 +47,13 @@ class TransformerEncoderLevel(nn.Module):
             nn.ReLU(inplace=True))
 
     def forward(self, X, valid_lens):
-        self.head(X)
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
         Z = self.addnorm2(Y, self.ffn(Y))
         if self.testing:
             print("Encoder Block: Z=", Z.shape)
             print("Encoder Block: Z=", Z)
-        return self.head(Z)
+        #return self.head(Z)
+        return Z
         
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
