@@ -189,6 +189,8 @@ class TransformerDecoder(d2l.AttentionDecoder):
         
         feats = [feats_dec]
         for i, blk in enumerate(self.blks):
+            ii = self.num_levels - i - 2
+            feats_enc = input[ii]
             feats_dec = blk(feats_enc, feats_dec)
             # Decoder attention1 weights
             self._attention_weights[0][i] = blk.attention1.attention.attention_weights
