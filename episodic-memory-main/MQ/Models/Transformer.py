@@ -83,8 +83,6 @@ class TransformerEncoder(d2l.Encoder):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         if self.testing:
             print("Encoder: x0=", X.shape)
-        self.head(X) #TODO BORRAR
-        print("superado 1")
         X = self.pos_encoding(X)
         self.head(X) #TODO BORRAR
         print("superado 2")
@@ -93,6 +91,8 @@ class TransformerEncoder(d2l.Encoder):
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
+            self.head(X) #TODO BORRAR
+            print("superado", str(i))
             X = blk(X, valid_lens)
             self.attention_weights[i] = blk.attention.attention.attention_weights
             feats.append(X)
