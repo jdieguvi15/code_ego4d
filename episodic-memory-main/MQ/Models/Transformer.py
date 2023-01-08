@@ -171,6 +171,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #para el primer bloque
         self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
         self.addnorm = AddNorm(num_hiddens, dropout)
+        #self.ffn = PositionWiseFFN(ffn_num_hiddens, )
         
         self.blks = nn.Sequential()
         for i in range(num_levels):
@@ -187,10 +188,15 @@ class TransformerDecoder(d2l.AttentionDecoder):
         X = self.attention(feats_enc, feats_enc, feats_enc, None)
         feats_dec = self.addnorm(X, feats_enc)
         
-        feats = [feats_dec]
+        feats = [feats_dec]  #TODO revisar
         for i, blk in enumerate(self.blks):
-            ii = self.num_levels - i - 2
-            feats_enc = input[ii]
+            if i = 0:
+                print("primera iteración del decoder")
+                feats_enc = input[-1]
+                feats_dec = input[-1]
+            else:
+                ii = self.num_levels - i - 2
+                feats_enc = input[ii]
             feats_dec = blk(feats_enc, feats_dec)
             # Decoder attention1 weights
             self._attention_weights[0][i] = blk.attention1.attention.attention_weights
