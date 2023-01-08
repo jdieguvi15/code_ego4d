@@ -157,9 +157,6 @@ class TransformerDecoder(d2l.AttentionDecoder):
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, i))
         self.dense = nn.LazyLinear(vocab_size) #TODO!!!
 
-    def init_state(self, enc_outputs, enc_valid_lens):
-        return [enc_outputs, enc_valid_lens, [None] * self.num_levels]
-
     def forward(self, input):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
@@ -226,9 +223,7 @@ class Transformer(nn.Module):
             print("ViT: X.shape ready:", X.shape)
     
         feats_enc = self.encoder(X, None, *args)
-        
-        dec_state = self.decoder.init_state(feats_enc, None, *args)
-        feats_dec = self.decoder(feats_enc, dec_state)[0]
+        feats_dec = self.decoder(feats_enc)
         
         return feats_enc, feats_dec
 
