@@ -33,7 +33,7 @@ class AddNorm(nn.Module):
 
 class TransformerEncoderLevel(nn.Module):
     """Transformer encoder Level."""
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, stride, testing=False, use_bias=False):
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, testing=False, use_bias=False):
         super().__init__()
         self.testing=testing
         self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads,
@@ -69,7 +69,7 @@ class TransformerEncoder(d2l.Encoder):
             else:
                 stride = 2
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride, testing))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, testing))
                 
             self.convs.append(nn.Sequential(
             nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=stride, padding=1, groups=1),
@@ -147,7 +147,7 @@ class TransformerDecoderLevel(nn.Module):
         X2 = self.addnorm1(X, feats_enc)
         Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
         Y2 = self.addnorm2(Y, feats_dec)
-        Z = torch.cat((X2, Y2))
+        Z = torch.cat((X2, Y2), 1) #los concatenamos por los ejes temporales
         return self.addnorm3(Z, self.ffn(Z))
         
 class TransformerDecoder(d2l.AttentionDecoder):
