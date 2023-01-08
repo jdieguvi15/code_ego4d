@@ -41,10 +41,6 @@ class TransformerEncoderLevel(nn.Module):
         self.addnorm1 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm2 = AddNorm(num_hiddens, dropout)
-        
-        self.head = nn.Sequential(
-            nn.Conv1d(in_channels=928, out_channels=928, kernel_size=3, stride=stride, padding=1, groups=1),
-            nn.ReLU(inplace=True))
 
     def forward(self, X, valid_lens):
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
@@ -52,7 +48,6 @@ class TransformerEncoderLevel(nn.Module):
         if self.testing:
             print("Encoder Block: Z=", Z.shape)
             print("Encoder Block: Z=", Z)
-        #return self.head(Z)
         return Z
         
 class TransformerEncoder(d2l.Encoder):
@@ -85,21 +80,19 @@ class TransformerEncoder(d2l.Encoder):
         if self.testing:
             print("Encoder: x0=", X.shape)
         X = self.pos_encoding(X)
-        self.head(X) #TODO BORRAR
-        print("superado 2")
         if self.testing:
             print("Encoder: x0 with pos encoding=", X.shape)
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
-            self.head(X) #TODO BORRAR
-            print("superado", str(i))
             self.attention_weights[i] = blk.attention.attention.attention_weights
             feats.append(X)
             if self.testing:
                 print("Encoder: X", i, "=", X.shape)
             #TODO reducir el tamaño a cada iteración
+            X = self.head(X) #TODO BORRAR
+            print("superado", str(i))
         if self.testing:
             print("Encoder: feats=", [e.shape for e in feats])
         return feats
