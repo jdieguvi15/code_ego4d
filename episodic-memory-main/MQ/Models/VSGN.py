@@ -21,6 +21,7 @@ class VSGN(nn.Module):
         self.hidden_dim_2d = 128
         self.hidden_dim_3d = 512
         self.input_feat_dim = opt['input_feat_dim']
+        self.testing = opt["testing"]
         self.opt = opt
         
         if opt["use_Transformer"]:
@@ -70,23 +71,20 @@ class VSGN(nn.Module):
 
 
     def forward(self, input, num_frms, gt_action= None, gt_start= None, gt_end= None, gt_bbox = None, num_gt = None):
-        if self.opt["testing"]:
+        if self.testing:
             print("VSGN: input.shape = ", input.shape)
         
         if self.opt["use_Transformer"]:
             feats_enc, feats_dec = self.trans(input)
-            if self.opt["testing"]:
-                print("VSGN: shape feats_enc before =", feats_enc.shape)
-                print("VSGN: shape feats_dec before =", feats_dec.shape)
+            if self.testing:
+                print("VSGN: shape feats_enc before =", [f.shape for f in feats_enc])
+                print("VSGN: shape feats_dec before =", [f.shape for f in feats_dec])
             feats_enc, feats_dec = feats_enc.transpose(2,3), feats_dec.transpose(2,3)
-            if self.opt["testing"]:
-                print("VSGN: shape feats_enc after =", feats_enc.shape)
-                print("VSGN: shape feats_dec after =", feats_dec.shape)
         else:
             # En la clase xGPN se definirá como será el método que seguiremos
             feats_enc, feats_dec = self.xGPN(input, num_frms)
         
-        if self.opt["testing"]:
+        if self.testing:
             print("VSGN: feats_enc.shape = ", [f.shape for f in feats_enc])
             print("VSGN: feats_dec.shape = ", [f.shape for f in feats_dec])
 
