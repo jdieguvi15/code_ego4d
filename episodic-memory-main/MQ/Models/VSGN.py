@@ -77,7 +77,7 @@ class VSGN(nn.Module):
         
         if self.opt["use_Transformer"]:
             feats_enc, feats_dec = self.trans(input)
-            feats_enc, feats_dec = torch.Tensor(feats_enc), torch.Tensor(feats_dec)
+            feats_enc, feats_dec = torch.stack(feats_enc), torch.stack(feats_dec)
             if self.testing:
                 print("VSGN: shape feats_enc before =", feats_enc.shape)
                 print("VSGN: shape feats_dec before =", feats_dec.shape)
