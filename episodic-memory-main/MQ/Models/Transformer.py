@@ -149,6 +149,8 @@ class TransformerDecoderLevel(nn.Module):
         Y2 = self.addnorm2(Y, feats_dec)
         
         if self.testing:
+            print("Decoder block: X=", X.shape)
+            print("Decoder block: Y=", Y.shape)
             print("Decoder block: X2=", X2.shape)
             print("Decoder block: Y2=", Y2.shape)
         Z = torch.cat((X2, Y2), 1) #los concatenamos por los ejes temporales
