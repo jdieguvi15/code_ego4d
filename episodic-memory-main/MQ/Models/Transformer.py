@@ -43,10 +43,11 @@ class TransformerEncoderLevel(nn.Module):
         self.addnorm2 = AddNorm(num_hiddens, dropout)
         
         self.head = nn.Sequential(
-            nn.Conv1d(in_channels=256, out_channels=256, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.Conv1d(in_channels=928, out_channels=928, kernel_size=3, stride=stride, padding=1, groups=1),
             nn.ReLU(inplace=True))
 
     def forward(self, X, valid_lens):
+        self.head(X)
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
         Z = self.addnorm2(Y, self.ffn(Y))
         if self.testing:
@@ -91,9 +92,9 @@ class TransformerEncoder(d2l.Encoder):
         self.attention_weights = [None] * len(self.blks)
         feats = []
         for i, blk in enumerate(self.blks):
+            X = blk(X, valid_lens)
             self.head(X) #TODO BORRAR
             print("superado", str(i))
-            X = blk(X, valid_lens)
             self.attention_weights[i] = blk.attention.attention.attention_weights
             feats.append(X)
             if self.testing:
