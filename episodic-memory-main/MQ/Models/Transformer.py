@@ -166,11 +166,6 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         
-        #para el primer bloque
-        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
-        self.addnorm = AddNorm(num_hiddens, dropout)
-        #self.ffn = PositionWiseFFN(ffn_num_hiddens, )
-        
         self.blks = nn.Sequential()
         for i in range(num_levels):
             self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
@@ -182,13 +177,10 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
         
         self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
-        feats_enc = input[-1]   #se empieza por las pequeñas y vamos creciendo
-        X = self.attention(feats_enc, feats_enc, feats_enc, None)
-        feats_dec = self.addnorm(X, feats_enc)
         
-        feats = [feats_dec]  #TODO revisar
+        feats = []
         for i, blk in enumerate(self.blks):
-            if i == 0:
+            if i == 0: #el primer bloque hará self attention
                 print("primera iteración del decoder")
                 feats_enc = input[-1]
                 feats_dec = input[-1]
