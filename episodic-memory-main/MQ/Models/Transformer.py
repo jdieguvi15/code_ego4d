@@ -63,6 +63,7 @@ class TransformerEncoder(d2l.Encoder):
         #para positional encoding usamos una función basada en sinus y cosinus
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
+        self.convs = nn.ModuleList()
         for i in range(num_levels):
             if i == 0:
                 stride = 1
@@ -71,9 +72,9 @@ class TransformerEncoder(d2l.Encoder):
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride, testing))
                 
-        self.head = nn.Sequential(
-            nn.Conv1d(in_channels=928, out_channels=928, kernel_size=3, stride=stride, padding=1, groups=1),
-            nn.ReLU(inplace=True)) #TODO BORRAR
+            self.convs.append(nn.Sequential(
+            nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.ReLU(inplace=True)))
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -91,7 +92,9 @@ class TransformerEncoder(d2l.Encoder):
             if self.testing:
                 print("Encoder: X", i, "=", X.shape)
             #TODO reducir el tamaño a cada iteración
-            X = self.head(X) #TODO BORRAR
+            X = X.transpose(1, 2)
+            X = self.head(X) #no hay una forma mejor?
+            X = X.transpose(1, 2)
             print("superado", str(i))
         if self.testing:
             print("Encoder: feats=", [e.shape for e in feats])
