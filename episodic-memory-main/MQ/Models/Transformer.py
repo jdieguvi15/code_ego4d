@@ -64,15 +64,11 @@ class TransformerEncoder(d2l.Encoder):
         self.blks = nn.Sequential()
         self.convs = nn.ModuleList()
         for i in range(num_levels):
-            if i == 0:
-                stride = 1
-            else:
-                stride = 2
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, testing))
                 
             self.convs.append(nn.Sequential(
-            nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
             nn.ReLU(inplace=True)))
 
     def forward(self, X, valid_lens):
