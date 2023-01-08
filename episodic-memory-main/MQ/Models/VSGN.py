@@ -75,11 +75,11 @@ class VSGN(nn.Module):
         
         if self.opt["use_Transformer"]:
             feats_enc, feats_dec = self.trans(input)
-            if self.testing:
+            if self.opt["testing"]:
                 print("VSGN: shape feats_enc before =", feats_enc.shape)
                 print("VSGN: shape feats_dec before =", feats_dec.shape)
             feats_enc, feats_dec = feats_enc.transpose(2,3), feats_dec.transpose(2,3)
-            if self.testing:
+            if self.opt["testing"]:
                 print("VSGN: shape feats_enc after =", feats_enc.shape)
                 print("VSGN: shape feats_dec after =", feats_dec.shape)
         else:
