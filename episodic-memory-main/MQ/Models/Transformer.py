@@ -47,7 +47,6 @@ class TransformerEncoderLevel(nn.Module):
         Z = self.addnorm2(Y, self.ffn(Y))
         if self.testing:
             print("Encoder Block: Z=", Z.shape)
-            print("Encoder Block: Z=", Z)
         return Z
         
 class TransformerEncoder(d2l.Encoder):
@@ -148,7 +147,7 @@ class TransformerDecoderLevel(nn.Module):
         X2 = self.addnorm1(X, feats_enc)
         Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
         Y2 = self.addnorm2(Y, feats_dec)
-        Z = X2 + Y2
+        Z = torch.cat((X2, Y2))
         return self.addnorm3(Z, self.ffn(Z))
         
 class TransformerDecoder(d2l.AttentionDecoder):
