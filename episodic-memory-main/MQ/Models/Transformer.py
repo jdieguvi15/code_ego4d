@@ -212,7 +212,7 @@ class Transformer(nn.Module):
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
-        num_hiddens = bb_hidden_dim   #numero de elementos de cada feature
+        num_hiddens = self.bb_hidden_dim   #numero de elementos de cada feature
         num_blks = opt['num_blks']    #de momento solo 1 blk
         dropout = 0.2   #lo recomendado en el libro
         ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
