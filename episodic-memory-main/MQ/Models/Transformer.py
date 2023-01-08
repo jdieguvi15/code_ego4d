@@ -149,8 +149,8 @@ class TransformerDecoderLevel(nn.Module):
             print("Decoder block: feats_dec=", feats_dec.shape)
             print("Decoder block: X2=", X2.shape)
             print("Decoder block: Y2=", Y2.shape)
-        #Z = torch.cat((X2, Y2), 1) #los concatenamos por los ejes temporales
-        Z = X2 + Y2     #Así tiene la misma forma que en el baseline
+        Z = torch.cat((X2, Y2), 1) #los concatenamos por los ejes temporales
+        #Z = X2 + Y2     #Así tiene la misma forma que en el baseline
         return self.addnorm3(Z, self.ffn(Z))
         
 class TransformerDecoder(d2l.AttentionDecoder):
