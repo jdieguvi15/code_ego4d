@@ -88,16 +88,14 @@ class TransformerDecoderLevel(nn.Module):
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, i):
         super().__init__()
         self.i = i
-        self.attention1 = d2l.MultiHeadAttention(num_hiddens, num_heads,
-                                                 dropout)
+        self.attention1 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
-        self.attention2 = d2l.MultiHeadAttention(num_hiddens, num_heads,
-                                                 dropout)
+        self.attention2 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
         self.addnorm2 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm3 = AddNorm(num_hiddens, dropout)
 
-    def forward(self, X):
+    def forward(self, feats_enc, feats_dec):
         """enc_outputs, enc_valid_lens = state[0], state[1]
         # During training, all the tokens of any output sequence are processed
         # at the same time, so state[2][self.i] is None as initialized. When
@@ -117,14 +115,23 @@ class TransformerDecoderLevel(nn.Module):
                 1, num_steps + 1, device=X.device).repeat(batch_size, 1)
         else:
             dec_valid_lens = None"""
-        # Self-attention
+        
+        """# Self-attention
         X2 = self.attention1(X, key_values, key_values, dec_valid_lens)
         Y = self.addnorm1(X, X2)
         # Encoder-decoder attention. Shape of enc_outputs:
         # (batch_size, num_steps, num_hiddens)
         Y2 = self.attention2(Y, enc_outputs, enc_outputs, enc_valid_lens)
         Z = self.addnorm2(Y, Y2)
-        return self.addnorm3(Z, self.ffn(Z)), state
+        return self.addnorm3(Z, self.ffn(Z)), state"""
+        
+        #Mix entre los dos métodos, buscamos relaciones en cada conjunto con respecto del otro y lo concatenamos
+        X = self.attention1(feats_enc, feats_dec, feats_dec, None)
+        X2 = self.addnorm1(X, feats_enc)
+        Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
+        Y2 = self.addnorm2(Y, feats_dec)
+        Z = X2 + Y2
+        return self.addnorm3(Z, self.ffn(Z))
         
 class TransformerDecoder(d2l.AttentionDecoder):
     """
@@ -138,7 +145,12 @@ class TransformerDecoder(d2l.AttentionDecoder):
         self.num_levels = num_levels
         self.testing = testing
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+        #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
+        
+        #para el primer bloque
+        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
+        self.addnorm = AddNorm(num_hiddens, dropout)
+        
         self.blks = nn.Sequential()
         for i in range(num_levels):
             self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
@@ -148,21 +160,26 @@ class TransformerDecoder(d2l.AttentionDecoder):
     def init_state(self, enc_outputs, enc_valid_lens):
         return [enc_outputs, enc_valid_lens, [None] * self.num_levels]
 
-    def forward(self, X, state):
+    def forward(self, input):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
-        X = self.pos_encoding(X)
-        self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
+        #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
+        
+        self._attention_weights = [[None] * len(self.levels) for _ in range (2)]
+        feats_enc = input[-1]   #se empieza por las pequeñas y vamos creciendo
+        X = self.attention(feats_enc, feats_enc, feats_enc, None)
+        feats_dec = self.addnorm(X, feats_enc)
+        
+        feats = [feats_dec]
         for i, blk in enumerate(self.blks):
-            X, state = blk(X, state)
-            # Decoder self-attention weights
-            self._attention_weights[0][
-                i] = blk.attention1.attention.attention_weights
-            # Encoder-decoder attention weights
-            self._attention_weights[1][
-                i] = blk.attention2.attention.attention_weights
+            feats_dec = blk(feats_enc, feats_dec)
+            # Decoder attention1 weights
+            self._attention_weights[0][i] = blk.attention1.attention.attention_weights
+            # Decoder attention2 weights
+            self._attention_weights[1][i] = blk.attention2.attention.attention_weights
+            feats.append(feats_dec)
             if self.testing:
-                print("Decoder: X", i, "=", X.shape)
-        return self.dense(X), state
+                print("Decoder: feats_dec", i, "=", feats_dec.shape)
+        return feats
 
     @property
     def attention_weights(self):
@@ -180,7 +197,7 @@ class Transformer(nn.Module):
 
         #Reducimos el espacio de Features de 2304 a 256 - TODO buscar otro método mejor
         self.conv0 = nn.Sequential(
-            nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim,kernel_size=3,stride=1,padding=1,groups=1),
+            nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
             nn.ReLU(inplace=True),
         )
         
@@ -217,10 +234,10 @@ class Transformer(nn.Module):
 
 """
 Falta por hacer:
-- OJO que el encoder da como output un monton de features y el decoder requiere otr input creo, cuadrar eso
-- entender como funcionan los states del decoder y qué está devolviendo
-- hacer que el encoder y el decoder vayan append los feats de cada iteración
-- Comprovar parecidos con ViT2 y con xGPN y comprovar que se hacen todos los prints
+- OJO que el encoder da como output un monton de features y el decoder requiere otr input creo, cuadrar eso -done
+- entender como funcionan los states del decoder y qué está devolviendo -done
+- hacer que el encoder y el decoder vayan append los feats de cada iteración -done
+- Comprovar parecidos con ViT2 y con xGPN y comprovar que se hacen todos los prints -done
 - Ajustar que el input que recibe el transformer y el output que da sean correctos
 - Hacer que se reduzca la dimensión para cada bloque (o no)
 - Revisar los comentarios de todo y poner comentarios explicativos
