@@ -86,7 +86,7 @@ class TransformerEncoder(d2l.Encoder):
             feats.append(X)
             if self.testing:
                 print("Encoder: X", i, "=", X.shape)
-            #TODO reducir el tamaño a cada iteración
+            #Reducimos el tamaño a cada iteración
             X = X.transpose(1, 2)
             X = self.convs[i](X) #no hay una forma mejor?
             X = X.transpose(1, 2)
@@ -167,8 +167,12 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         
+        #Para el primer paso:
+        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
+        self.addnorm = AddNorm(num_hiddens, dropout)
+        
         self.blks = nn.Sequential()
-        for i in range(num_levels):
+        for i in range(num_levels - 1):
             self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, i, testing))
         self.dense = nn.LazyLinear(vocab_size) #TODO!!!
@@ -177,17 +181,17 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
         
+        X = input[-1]
+        X2 = self.attention1(X, X, X, None)
+        feats_dec = self.addnorm1(X, X2)
+        
+        #TODO meter la atención para el primer bloque aquí
         self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
         
-        feats = []
+        feats = [feats_dec]
         for i, blk in enumerate(self.blks):
-            if i == 0: #el primer bloque hará self attention
-                print("primera iteración del decoder")
-                feats_enc = input[-1]
-                feats_dec = input[-1]
-            else:
-                ii = self.num_levels - i - 1
-                feats_enc = input[ii]
+            ii = self.num_levels - i - 2
+            feats_enc = input[ii]
             feats_dec = blk(feats_enc, feats_dec)
             # Decoder attention1 weights
             self._attention_weights[0][i] = blk.attention1.attention.attention_weights
