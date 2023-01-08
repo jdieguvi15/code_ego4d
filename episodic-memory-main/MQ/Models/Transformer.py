@@ -33,7 +33,7 @@ class AddNorm(nn.Module):
 
 class TransformerEncoderLevel(nn.Module):
     """Transformer encoder Level."""
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout,
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, stride,
                  use_bias=False):
         super().__init__()
         self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads,
@@ -41,10 +41,15 @@ class TransformerEncoderLevel(nn.Module):
         self.addnorm1 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm2 = AddNorm(num_hiddens, dropout)
+        
+        self.head = nn.Sequential(
+            nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.ReLU(inplace=True))
 
     def forward(self, X, valid_lens):
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
-        return self.addnorm2(Y, self.ffn(Y))
+        Z = self.addnorm2(Y, self.ffn(Y))
+        return head(Z)
         
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
@@ -60,8 +65,12 @@ class TransformerEncoder(d2l.Encoder):
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_levels):
+            if i == 0:
+                stride = 1
+            else:
+                stride = 2
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride))
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
