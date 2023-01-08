@@ -93,7 +93,7 @@ class TransformerEncoder(d2l.Encoder):
                 print("Encoder: X", i, "=", X.shape)
             #TODO reducir el tamaño a cada iteración
             X = X.transpose(1, 2)
-            X = self.head(X) #no hay una forma mejor?
+            X = self.convs[i](X) #no hay una forma mejor?
             X = X.transpose(1, 2)
             print("superado", str(i))
         if self.testing:
