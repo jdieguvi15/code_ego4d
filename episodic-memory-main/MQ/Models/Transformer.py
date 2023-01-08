@@ -49,7 +49,7 @@ class TransformerEncoderLevel(nn.Module):
     def forward(self, X, valid_lens):
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
         Z = self.addnorm2(Y, self.ffn(Y))
-        return head(Z)
+        return self.head(Z)
         
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
