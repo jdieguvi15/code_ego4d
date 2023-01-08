@@ -31,8 +31,8 @@ class AddNorm(nn.Module):
     def forward(self, X, Y):
         return self.ln(self.dropout(Y) + X)
 
-class TransformerEncoderBlock(nn.Module):
-    """Transformer encoder block."""
+class TransformerEncoderLevel(nn.Module):
+    """Transformer encoder Level."""
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout,
                  use_bias=False):
         super().__init__()
@@ -49,22 +49,21 @@ class TransformerEncoderBlock(nn.Module):
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
     def __init__(self, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_blks, dropout, use_bias=False, vocab_size=0, testing=False):
+                 num_heads, num_blks, num_levels, dropout, use_bias=False, vocab_size=0, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.testing = testing
         #embeeding es como un feature extracton pero ya trabajamos con features
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
+        
+        #para positional encoding usamos una función basada en sinus y cosinus
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
-        for i in range(num_blks):
-            self.blks.add_module("block"+str(i), TransformerEncoderBlock(
+        for i in range(num_levels):
+            self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias))
 
     def forward(self, X, valid_lens):
-        # Since positional encoding values are between -1 and 1, the embedding
-        # values are multiplied by the square root of the embedding dimension
-        # to rescale before they are summed up
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         if self.testing:
             print("Encoder: x0=", X.shape)
@@ -84,8 +83,8 @@ class TransformerEncoder(d2l.Encoder):
             print("Encoder: feats=", [e.shape for e in feats])
         return feats
         
-class TransformerDecoderBlock(nn.Module):
-    # The i-th block in the transformer decoder
+class TransformerDecoderLevel(nn.Module):
+    # The i-th Level in the transformer decoder
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, i):
         super().__init__()
         self.i = i
@@ -98,13 +97,13 @@ class TransformerDecoderBlock(nn.Module):
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm3 = AddNorm(num_hiddens, dropout)
 
-    def forward(self, X, state):
-        enc_outputs, enc_valid_lens = state[0], state[1]
+    def forward(self, X):
+        """enc_outputs, enc_valid_lens = state[0], state[1]
         # During training, all the tokens of any output sequence are processed
         # at the same time, so state[2][self.i] is None as initialized. When
         # decoding any output sequence token by token during prediction,
         # state[2][self.i] contains representations of the decoded output at
-        # the i-th block up to the current time step
+        # the i-th Level up to the current time step
         if state[2][self.i] is None:
             key_values = X
         else:
@@ -117,7 +116,7 @@ class TransformerDecoderBlock(nn.Module):
             dec_valid_lens = torch.arange(
                 1, num_steps + 1, device=X.device).repeat(batch_size, 1)
         else:
-            dec_valid_lens = None
+            dec_valid_lens = None"""
         # Self-attention
         X2 = self.attention1(X, key_values, key_values, dec_valid_lens)
         Y = self.addnorm1(X, X2)
@@ -132,21 +131,22 @@ class TransformerDecoder(d2l.AttentionDecoder):
     Esta basado en el Decoder de los transformers de palabras pero cada iteración se aplica a un output del encoder, no cada "palabra"
     """
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_blks, dropout, vocab_size=0, testing=False):
+                 num_blks, num_levels, dropout, vocab_size=0, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.num_blks = num_blks
+        self.num_levels = num_levels
         self.testing = testing
         #self.embedding = nn.Embedding(vocab_size, num_hiddens) #creo que no hace falta
         self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
-        for i in range(num_blks):
-            self.blks.add_module("block"+str(i), TransformerDecoderBlock(
+        for i in range(num_levels):
+            self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, i))
         self.dense = nn.LazyLinear(vocab_size) #TODO!!!
 
     def init_state(self, enc_outputs, enc_valid_lens):
-        return [enc_outputs, enc_valid_lens, [None] * self.num_blks]
+        return [enc_outputs, enc_valid_lens, [None] * self.num_levels]
 
     def forward(self, X, state):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -187,7 +187,7 @@ class Transformer(nn.Module):
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
         num_hiddens = 928   #máximo de frames que puede tener el vídeo
-        num_blks = opt['num_levels']    #cada bloque hará la función de un level
+        num_blks = opt['num_blks']    #de momento solo 1 blk
         dropout = 0.2   #lo recomendado en el libro
         ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
         num_heads = opt["num_heads"]
@@ -195,8 +195,8 @@ class Transformer(nn.Module):
         #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
         
         
-        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout, testing=self.testing)
-        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, dropout, testing=self.testing)
+        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, num_levels, dropout, testing=self.testing)
+        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, num_levels, dropout, testing=self.testing)
         
     def forward(self, input, *args):
     

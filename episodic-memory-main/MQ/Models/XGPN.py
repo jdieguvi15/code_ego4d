@@ -126,6 +126,8 @@ class XGPN(nn.Module):
             ii = self.num_levels - i - 2
             feat_enc = self.levels2[i](input[ii])
             feat_dec = self.levels_dec[i](x)
+            if self.testing:
+                print("Decoder: feat_enc + feat_dec", i, "=", (feat_enc + feat_dec).shape)
             x = self.levels1[i+1](feat_enc + feat_dec)
             feats.append(x)
             if self.testing:
