@@ -77,11 +77,12 @@ class VSGN(nn.Module):
         
         if self.opt["use_Transformer"]:
             feats_enc, feats_dec = self.trans(input)
-            feats_enc, feats_dec = torch.stack(feats_enc), torch.stack(feats_dec)
             if self.testing:
-                print("VSGN: shape feats_enc before =", feats_enc.shape)
-                print("VSGN: shape feats_dec before =", feats_dec.shape)
-            feats_enc, feats_dec = feats_enc.transpose(2,3), feats_dec.transpose(2,3)
+                print("VSGN: feats_enc.shape before = ", [f.shape for f in feats_enc])
+                print("VSGN: feats_dec.shape before = ", [f.shape for f in feats_dec])
+            #le tenemos que dar la forma para que lo entiendan las nn del final
+            feats_enc = [f.transpose(1,2) for f in feats_enc]
+            feats_dec = [f.transpose(1,2) for f in feats_dec]
         else:
             # En la clase xGPN se definirá como será el método que seguiremos
             feats_enc, feats_dec = self.xGPN(input, num_frms)
