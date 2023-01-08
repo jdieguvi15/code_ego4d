@@ -197,7 +197,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
                 feats_enc = input[-1]
                 feats_dec = input[-1]
             else:
-                ii = self.num_levels - i - 2
+                ii = self.num_levels - i - 1
                 feats_enc = input[ii]
             feats_dec = blk(feats_enc, feats_dec)
             # Decoder attention1 weights
