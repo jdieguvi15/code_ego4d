@@ -33,9 +33,9 @@ class AddNorm(nn.Module):
 
 class TransformerEncoderLevel(nn.Module):
     """Transformer encoder Level."""
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, stride,
-                 use_bias=False):
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, stride, testing=False, use_bias=False):
         super().__init__()
+        self.testing=testing
         self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads,
                                                 dropout, use_bias)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
@@ -49,6 +49,8 @@ class TransformerEncoderLevel(nn.Module):
     def forward(self, X, valid_lens):
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
         Z = self.addnorm2(Y, self.ffn(Y))
+        if self.testing:
+            print("Encoder Block: Z=", Z.shape)
         return self.head(Z)
         
 class TransformerEncoder(d2l.Encoder):
@@ -70,7 +72,7 @@ class TransformerEncoder(d2l.Encoder):
             else:
                 stride = 2
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride, testing))
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -94,9 +96,10 @@ class TransformerEncoder(d2l.Encoder):
         
 class TransformerDecoderLevel(nn.Module):
     # The i-th Level in the transformer decoder
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, i):
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, i, testing=False):
         super().__init__()
         self.i = i
+        self.testing=testing
         self.attention1 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
         self.attention2 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
@@ -163,7 +166,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         self.blks = nn.Sequential()
         for i in range(num_levels):
             self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, i))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, i, testing))
         self.dense = nn.LazyLinear(vocab_size) #TODO!!!
 
     def forward(self, input):
@@ -209,7 +212,7 @@ class Transformer(nn.Module):
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
-        num_hiddens = 256   #máximo de frames que puede tener el vídeo
+        num_hiddens = bb_hidden_dim   #numero de elementos de cada feature
         num_blks = opt['num_blks']    #de momento solo 1 blk
         dropout = 0.2   #lo recomendado en el libro
         ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
