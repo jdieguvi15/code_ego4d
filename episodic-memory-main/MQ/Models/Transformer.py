@@ -108,7 +108,7 @@ class TransformerDecoderLevel(nn.Module):
         self.addnorm3 = AddNorm(num_hiddens, dropout)
         
         self.deconv = nn.Sequential(
-            nn.ConvTranspose1d(in_channels=in_channels, out_channels=out_channels,kernel_size=3,stride=2,padding=1, output_padding=output_padding, groups=1),
+            nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=2,padding=1, output_padding=output_padding, groups=1),
             nn.ReLU(inplace=True),
         )
 
