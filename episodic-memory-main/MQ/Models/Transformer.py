@@ -161,7 +161,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
         
-        self._attention_weights = [[None] * len(self.levels) for _ in range (2)]
+        self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
         feats_enc = input[-1]   #se empieza por las pequeñas y vamos creciendo
         X = self.attention(feats_enc, feats_enc, feats_enc, None)
         feats_dec = self.addnorm(X, feats_enc)
