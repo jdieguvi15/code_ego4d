@@ -47,8 +47,6 @@ class TransformerEncoderLevel(nn.Module):
             nn.ReLU(inplace=True))
 
     def forward(self, X, valid_lens):
-        if self.testing:
-            self.head(X)
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens))
         Z = self.addnorm2(Y, self.ffn(Y))
         if self.testing:
@@ -76,12 +74,20 @@ class TransformerEncoder(d2l.Encoder):
                 stride = 2
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride, testing))
+                
+        self.head = nn.Sequential(
+            nn.Conv1d(in_channels=256, out_channels=256, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.ReLU(inplace=True)) #TODO BORRAR
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         if self.testing:
             print("Encoder: x0=", X.shape)
+        self.head(X) #TODO BORRAR
+        print("superado 1")
         X = self.pos_encoding(X)
+        self.head(X) #TODO BORRAR
+        print("superado 2")
         if self.testing:
             print("Encoder: x0 with pos encoding=", X.shape)
         self.attention_weights = [None] * len(self.blks)
