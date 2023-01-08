@@ -90,7 +90,6 @@ class TransformerEncoder(d2l.Encoder):
             X = X.transpose(1, 2)
             X = self.convs[i](X) #no hay una forma mejor?
             X = X.transpose(1, 2)
-            print("superado", str(i))
         if self.testing:
             print("Encoder: feats=", [e.shape for e in feats])
         return feats
@@ -107,6 +106,11 @@ class TransformerDecoderLevel(nn.Module):
         self.addnorm2 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm3 = AddNorm(num_hiddens, dropout)
+        
+        self.deconv = nn.Sequential(
+            nn.ConvTranspose1d(in_channels=in_channels, out_channels=out_channels,kernel_size=3,stride=2,padding=1, output_padding=output_padding, groups=1),
+            nn.ReLU(inplace=True),
+        )
 
     def forward(self, feats_enc, feats_dec):
         """enc_outputs, enc_valid_lens = state[0], state[1]
@@ -137,6 +141,8 @@ class TransformerDecoderLevel(nn.Module):
         Y2 = self.attention2(Y, enc_outputs, enc_outputs, enc_valid_lens)
         Z = self.addnorm2(Y, Y2)
         return self.addnorm3(Z, self.ffn(Z)), state"""
+        
+        feats_dec = self.deconv(feats_dec.transpose(1,2)).transpose(1,2)
         
         #Mix entre los dos métodos, buscamos relaciones en cada conjunto con respecto del otro y lo concatenamos
         X = self.attention1(feats_enc, feats_dec, feats_dec, None)
@@ -181,9 +187,10 @@ class TransformerDecoder(d2l.AttentionDecoder):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         #estamos tratando con features que ya han pasado un positional encoding, repetimos? creo que no
         
+        #La primera iteración la hacemos por separado
         X = input[-1]
-        X2 = self.attention1(X, X, X, None)
-        feats_dec = self.addnorm1(X, X2)
+        X2 = self.attention(X, X, X, None)
+        feats_dec = self.addnorm(X, X2)
         
         #TODO meter la atención para el primer bloque aquí
         self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
