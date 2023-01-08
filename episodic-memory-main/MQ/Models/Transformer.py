@@ -76,7 +76,7 @@ class TransformerEncoder(d2l.Encoder):
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, use_bias, stride, testing))
                 
         self.head = nn.Sequential(
-            nn.Conv1d(in_channels=256, out_channels=256, kernel_size=3, stride=stride, padding=1, groups=1),
+            nn.Conv1d(in_channels=928, out_channels=928, kernel_size=3, stride=stride, padding=1, groups=1),
             nn.ReLU(inplace=True)) #TODO BORRAR
 
     def forward(self, X, valid_lens):
