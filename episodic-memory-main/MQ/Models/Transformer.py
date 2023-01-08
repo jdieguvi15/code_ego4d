@@ -190,7 +190,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         
         feats = [feats_dec]  #TODO revisar
         for i, blk in enumerate(self.blks):
-            if i = 0:
+            if i == 0:
                 print("primera iteración del decoder")
                 feats_enc = input[-1]
                 feats_dec = input[-1]
