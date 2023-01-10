@@ -135,7 +135,7 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Vit2-heads:" + str(opt["num_heads"]) + "-dim_attention:" + str(opt["dim_attention"]) + "-bb_hidden_dim:" + str(opt["bb_hidden_dim"])
+    name1 = "Vit2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-bb_hid_dim:" + str(opt["bb_hidden_dim"]) + "-lvls:" + str(opt["num_levels"])
     
     architecture = "???"
     for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer"}:
@@ -159,6 +159,7 @@ if __name__ == '__main__':
                 "num_levels": opt["num_levels"],
                 "bb_hidden_dim": opt["bb_hidden_dim"],
                 "mlp_num_hiddens": opt["mlp_num_hiddens"],
+                "num_levels": opt["num_levels"],
             })
 
     

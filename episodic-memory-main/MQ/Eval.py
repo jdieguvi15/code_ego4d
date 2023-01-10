@@ -67,6 +67,7 @@ if __name__ == '__main__':
         "num_levels": opt["num_levels"],
         "bb_hidden_dim": opt["bb_hidden_dim"],
         "mlp_num_hiddens": opt["mlp_num_hiddens"],
+        "num_levels": opt["num_levels"],
         "average_mAP": average_mAP,
         "recall": recall
     }
