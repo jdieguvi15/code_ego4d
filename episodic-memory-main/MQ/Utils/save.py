@@ -26,15 +26,15 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "mask_size": opt["mask_size"]
     }
     if best_epoch != None:
-        config["best_epoch"]: best_epoch
+        config["best_epoch"]= best_epoch
     if recall != None:
-        config["best_time"]: best_time
+        config["best_time"]= best_time
     if n_params != None:
-        config["n_params"]: n_params
+        config["n_params"]= n_params
     if average_mAP != None:
-        config["average_mAP"]: average_mAP
+        config["average_mAP"]= average_mAP
     if recall != None:
-        config["recall"]: recall
+        config["recall"]= recall
     
     
     history_path = opt["history_path"]
