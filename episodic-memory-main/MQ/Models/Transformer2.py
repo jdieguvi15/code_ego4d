@@ -18,7 +18,7 @@ class PositionWiseFFN(nn.Module):
         #self.dropout2 = nn.Dropout(dropout)
 
     def forward(self, X):
-        return self.dense2(self.GELU(self.dense1(X)))
+        return self.dense2(self.gelu(self.dense1(X)))
         #return self.dropout2(self.dense2(self.dropout1(self.gelu(self.dense1(x)))))
 
 class AddNorm(nn.Module):
