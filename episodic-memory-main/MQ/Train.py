@@ -64,7 +64,12 @@ def Train_VSGN(opt):
 
         scheduler.step()
     writer.close()
-    save_results(opt, best_epoch=best_epoch, best_time=best_time)
+    
+    #Contamos el número de parámetros
+    model_parameters = filter(lambda p: p.requires_grad, model.parameters())
+    params = sum([np.prod(p.size()) for p in model_parameters])
+    
+    save_results(opt, best_epoch=best_epoch, best_time=best_time, n_params=params)
 
 
 def train_VSGN_epoch(data_loader, model, optimizer, epoch, writer, opt, is_train=True):
