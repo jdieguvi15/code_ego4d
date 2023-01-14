@@ -47,7 +47,7 @@ class TransformerEncoderLevel(nn.Module):
     def forward(self, X, valid_lens):
         #Hacemos uns máscara para estudiar atención local
         nqk = X.shape[1]
-        mask = torch.full((1, self.num_heads, nqk, nqk), float(-'inf'))
+        mask = torch.full((1, self.num_heads, nqk, nqk), float('-inf'))
         i = 0
         while(nqk > 0):
             mask[:,:,i*self.mask_size:(i+1)*self.mask_size,i*self.mask_size:(i+1)*self.mask_size] = 0
