@@ -66,8 +66,7 @@ def Train_VSGN(opt):
     writer.close()
     
     #Contamos el número de parámetros
-    model_parameters = filter(lambda p: p.requires_grad, model.parameters())
-    params = sum([np.prod(p.size()) for p in model_parameters])
+    params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     
     save_results(opt, best_epoch=best_epoch, best_time=best_time, n_params=params)
 
