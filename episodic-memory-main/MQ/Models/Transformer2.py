@@ -247,7 +247,7 @@ class Transformer2(nn.Module):
         #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
         
         
-        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, mask_size, testing=self.testing)
+        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.mask_size, testing=self.testing)
         self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, testing=self.testing)
         
     def forward(self, input, *args):
