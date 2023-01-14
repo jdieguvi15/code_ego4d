@@ -56,7 +56,8 @@ class TransformerEncoderLevel(nn.Module):
         mask[:,:,i*self.mask_size:,i*self.mask_size:] = 0
         if(self.testing):
             print("mask=", mask)
-        mask.to('cuda')
+        mask.to('cuda:0')
+        print("devide mask:", mask.get_device())
         
         Y = self.addnorm1(X, self.attention(X, X, X, valid_lens, window_mask=mask))
         Z = self.addnorm2(Y, self.ffn(Y))
