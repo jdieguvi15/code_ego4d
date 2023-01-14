@@ -2,7 +2,7 @@ import os
 import json
 import os.path
 
-def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mAP=None, recall=None)
+def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mAP=None, recall=None):
     #Save results in the history file
     architecture = "???"
     for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer", "use_Transformer2"}:
