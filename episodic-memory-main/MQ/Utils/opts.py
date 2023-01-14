@@ -289,11 +289,11 @@ def parse_opt():
     parser.add_argument(
         '--project_name',
         type=str,
-        default="probando_ViT2")
+        default="final_tests")
     parser.add_argument(
         '--run_name',
         type=str,
-        default="Vit 2.0")
+        default="test")
         
     args = parser.parse_args()
 
