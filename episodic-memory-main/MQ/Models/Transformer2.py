@@ -222,7 +222,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
 class Transformer2(nn.Module):
     """La clase base para construir el transformer"""
     def __init__(self, opt):
-        super(Transformer, self).__init__()
+        super(Transformer2, self).__init__()
         self.input_feat_dim = opt["input_feat_dim"]
         self.bb_hidden_dim = opt['bb_hidden_dim']
         self.tem_best_loss = 10000000
