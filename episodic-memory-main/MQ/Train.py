@@ -10,8 +10,10 @@ from tensorboardX import SummaryWriter
 import Utils.opts as opts
 from Utils.dataset import VideoDataSet
 from Models.VSGN import VSGN
+import time
 import datetime
 from collections import defaultdict
+from Utils.save import save_results
 
 torch.manual_seed(21)
 
@@ -37,7 +39,9 @@ def Train_VSGN(opt):
                                               **kwargs)
 
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=opt["step_size"], gamma=opt["step_gamma"])
-
+    
+    start_time = time.time()
+    best_epoch, best_time = 0, 0
     for epoch in range(start_epoch, opt["num_epoch"]):
 
         train_VSGN_epoch(train_loader, model, optimizer, epoch, writer, opt)
@@ -52,6 +56,7 @@ def Train_VSGN(opt):
                  'optimizer': optimizer.state_dict()}
         torch.save(state, opt["checkpoint_path"] + "/checkpoint.pth.tar")
         if epoch_loss < model.module.tem_best_loss:
+            best_epoch, best_time = epoch, time.time() - start_time
             print((datetime.datetime.now()))
             print('The best model up to now is from Epoch {}'.format(epoch))
             model.module.tem_best_loss = np.mean(epoch_loss)
@@ -59,6 +64,7 @@ def Train_VSGN(opt):
 
         scheduler.step()
     writer.close()
+    save_results(opt, best_epoch=best_epoch, best_time=best_time)
 
 
 def train_VSGN_epoch(data_loader, model, optimizer, epoch, writer, opt, is_train=True):
@@ -135,7 +141,7 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "T2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-bb_hid_dim:" + str(opt["bb_hidden_dim"]) + "-lvls:" + str(opt["num_levels"])
+    name1 = "T2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-mask:" + str(opt["mask_size"]) + "-lvls:" + str(opt["num_levels"])
     
     architecture = "???"
     for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer", "use_Transformer2"}:
@@ -160,6 +166,7 @@ if __name__ == '__main__':
                 "bb_hidden_dim": opt["bb_hidden_dim"],
                 "mlp_num_hiddens": opt["mlp_num_hiddens"],
                 "num_levels": opt["num_levels"],
+                "mask_size": opt["mask_size"],
             })
 
     

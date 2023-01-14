@@ -230,7 +230,7 @@ class Transformer2(nn.Module):
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
         self.testing = opt['testing']
-        self.mask_size = 32 #TODO cambiar esto
+        self.mask_size = opt['mask_size']
 
         #Reducimos el espacio de Features de 2304 a 256 - TODO buscar otro método mejor
         self.emb = nn.Sequential(

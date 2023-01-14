@@ -191,7 +191,7 @@ def parse_opt():
         type=float,
         default=0.38)
         
-    # ViT hyper-parameters
+    # Transformer hyper-parameters
     parser.add_argument(
         '--mlp_num_hiddens',
         type=int,
@@ -216,6 +216,10 @@ def parse_opt():
         '--blk_dropout',
         type=float,
         default=0.1)
+    parser.add_argument(
+        '--mask_size',
+        type=int,
+        default=32)
 
     # Baselines
     parser.add_argument(
