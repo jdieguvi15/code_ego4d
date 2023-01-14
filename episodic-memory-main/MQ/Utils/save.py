@@ -27,7 +27,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
     }
     if best_epoch != None:
         config["best_epoch"]= best_epoch
-    if recall != None:
+    if best_time != None:
         config["best_time"]= best_time
     if n_params != None:
         config["n_params"]= n_params
