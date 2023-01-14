@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from .XGPN import XGPN
 from .Transformer import Transformer
+from .Transformer2 import Transformer2
 import torch.nn.functional as F
 from .Head import Head
 from .AnchorGenerator import AnchorGenerator
@@ -27,6 +28,8 @@ class VSGN(nn.Module):
         
         if opt["use_Transformer"]:
             self.trans = Transformer(opt)
+        elif opt["use_Transformer2"]:
+            self.trans = Transformer2(opt)
         else:
             self.xGPN = XGPN(opt)
 

@@ -48,7 +48,7 @@ if __name__ == '__main__':
             print("Detection evaluation finishes! \n")
             
     architecture = "???"
-    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer"}:
+    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer", "use_Transformer2"}:
         if opt[a]:
             architecture = a
             

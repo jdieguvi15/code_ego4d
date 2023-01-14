@@ -135,10 +135,10 @@ if __name__ == '__main__':
     print("Training starts!")
     print("---------------------------------------------------------------------------------------------")
     
-    name1 = "Vit2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-bb_hid_dim:" + str(opt["bb_hidden_dim"]) + "-lvls:" + str(opt["num_levels"])
+    name1 = "T2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-bb_hid_dim:" + str(opt["bb_hidden_dim"]) + "-lvls:" + str(opt["num_levels"])
     
     architecture = "???"
-    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer"}:
+    for a in {"use_xGPN", "use_ViT", "use_ViT2", "use_ViTFeatures", "use_Transformer", "use_Transformer2"}:
         if opt[a]:
             architecture = a
     
