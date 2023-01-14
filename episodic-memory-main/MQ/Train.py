@@ -65,6 +65,7 @@ def Train_VSGN(opt):
         scheduler.step()
     writer.close()
     
+    print("best_epoch y time:", best_epoch, best_time)
     #Contamos el número de parámetros
     params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     

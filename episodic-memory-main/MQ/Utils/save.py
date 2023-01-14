@@ -17,8 +17,6 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "optimizer_name": "Adam",
         "learning_rate": opt["train_lr"],
         "num_epoch": opt["num_epoch"],
-        "use_xGPN": opt["use_xGPN"],
-        "use_ViT": opt["use_ViT"],
         "num_heads": opt["num_heads"],
         "dim_attention": opt["dim_attention"],
         "num_levels": opt["num_levels"],
