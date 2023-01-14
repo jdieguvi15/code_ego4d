@@ -81,7 +81,7 @@ class TransformerEncoder(d2l.Encoder):
                 
             self.convs.append(nn.Sequential(
             nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
-            nn.GELU(inplace=True)))
+            nn.GELU()))
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -118,7 +118,7 @@ class TransformerDecoderLevel(nn.Module):
         
         self.deconv = nn.Sequential(
             nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=2,padding=1, output_padding=1, groups=1),
-            nn.GELU(inplace=True),
+            nn.GELU(),
         )
 
     def forward(self, feats_enc, feats_dec):
@@ -233,7 +233,7 @@ class Transformer2(nn.Module):
         #Reducimos el espacio de Features de 2304 a 256 - TODO buscar otro método mejor
         self.emb = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
-            nn.GELU(inplace=True),
+            nn.GELU(),
         )
         
         #PARÁMETROS:
