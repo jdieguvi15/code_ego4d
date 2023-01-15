@@ -130,13 +130,16 @@ class TransformerDecoderLevel(nn.Module):
                 nn.GELU())
 
     def forward(self, feats_enc, feats_dec):
-        feats_dec = self.deconv(feats_dec.transpose(1,2)).transpose(1,2)
+        #feats_dec = self.deconv(feats_dec.transpose(1,2)).transpose(1,2)
         
         #Mix entre los dos métodos, buscamos relaciones en cada conjunto con respecto del otro y lo concatenamos
-        X = self.attention1(feats_enc, feats_dec, feats_dec, None)
-        X2 = self.addnorm1(X, feats_enc)
-        Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
-        Y2 = self.addnorm2(Y, feats_dec)
+        #X = self.attention1(feats_enc, feats_dec, feats_dec, None)
+        #X2 = self.addnorm1(X, feats_enc)
+        #Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
+        #Y2 = self.addnorm2(Y, feats_dec)
+        
+        X2 = self.attention1(feats_dec, feats_enc, feats_end, None)
+        Y2 = feats_enc
         
         if self.testing:
             print("Decoder block: feats_enc=", feats_enc.shape)
