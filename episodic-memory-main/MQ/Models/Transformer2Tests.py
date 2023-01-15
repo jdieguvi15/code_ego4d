@@ -82,8 +82,8 @@ class TransformerEncoder(d2l.Encoder):
                     nn.GELU()))
             else:
                 self.convs.append(nn.Sequential(
-                    #nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
-                    nn.MaxPool1d(kernel_size=2, stride=2),
+                    nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
+                    #nn.MaxPool1d(kernel_size=2, stride=2),
                     nn.GELU()))
 
     def forward(self, X, valid_lens):
@@ -178,7 +178,8 @@ class TransformerDecoder(d2l.AttentionDecoder):
         feats_dec = self.addnorm(X, X2)
         
         #TODO meter la atención para el primer bloque aquí
-        self._attention_weights = [[None] * len(self.blks) for _ in range (2)]
+        self._attention_weights = [self.attention.attention_weights]
+        self._attention_weights.extend([[None] * len(self.blks) for _ in range (2)])
         
         feats = [feats_dec]
         for i, blk in enumerate(self.blks):
@@ -186,9 +187,9 @@ class TransformerDecoder(d2l.AttentionDecoder):
             feats_enc = input[ii]
             feats_dec = blk(feats_enc, feats_dec)
             # Decoder attention1 weights
-            self._attention_weights[0][i] = blk.attention1.attention.attention_weights
+            self._attention_weights[1][i] = blk.attention1.attention.attention_weights
             # Decoder attention2 weights
-            self._attention_weights[1][i] = blk.attention2.attention.attention_weights
+            self._attention_weights[2][i] = blk.attention2.attention.attention_weights
             feats.append(feats_dec)
             if self.testing:
                 print("Decoder: feats_dec", i, "=", feats_dec.shape)
