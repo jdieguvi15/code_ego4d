@@ -202,18 +202,24 @@ class Transformer2Tests(nn.Module):
     """La clase base para construir el transformer"""
     def __init__(self, opt):
         super(Transformer2Tests, self).__init__()
-        self.input_feat_dim = opt["input_feat_dim"]
+        self.input_feat_dim = opt['input_feat_dim']
         self.bb_hidden_dim = opt['bb_hidden_dim']
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
         self.testing = opt['testing']
         self.mask_size = opt['mask_size']
+        self.mlp_num_hiddens = opt['mlp_num_hiddens']
 
-        #Reducimos el espacio de Features de 2304 a 256 - TODO buscar otro método mejor
-        self.emb = nn.Sequential(
+        #Reducimos el espacio de Features de input_feat_dim a bb_hidden_dim
+        self.embC = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
-            nn.ReLU(),
-        )
+            nn.ReLU(),)
+        #segunda opción
+        self.emb = nn.Sequential(
+            nn.LazyLinear(self.mlp_num_hiddens),
+            nn.GELU(),
+            nn.LazyLinear(bb_hidden_dim),
+            nn.GELU(),)
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
@@ -234,8 +240,9 @@ class Transformer2Tests(nn.Module):
         if self.testing:
             print("Transformer: input.shape:", input.shape)
     
-        X = self.emb(input)
+        #X = self.embC(input)
         X = X.transpose(1, 2)
+        X = self.emb(input)
     
         feats_enc = self.encoder(X, None, *args)
         feats_dec = self.decoder(feats_enc)
