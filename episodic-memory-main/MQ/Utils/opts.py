@@ -231,15 +231,7 @@ def parse_opt():
         default=False,
         action='store_true')
     parser.add_argument(
-        '--use_ViT',
-        default=False,
-        action='store_true')
-    parser.add_argument(
         '--use_ViT2',
-        default=False,
-        action='store_true')
-    parser.add_argument(
-        '--use_ViTFeatures',
         default=False,
         action='store_true')
     parser.add_argument(
@@ -248,6 +240,10 @@ def parse_opt():
         action='store_true')
     parser.add_argument(
         '--use_Transformer2',
+        default=False,
+        action='store_true')
+    parser.add_argument(
+        '--use_Transformer2Tests',
         default=False,
         action='store_true')
     parser.add_argument(

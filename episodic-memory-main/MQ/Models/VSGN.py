@@ -4,6 +4,7 @@ import torch.nn as nn
 from .XGPN import XGPN
 from .Transformer import Transformer
 from .Transformer2 import Transformer2
+from .Transformer2Tests import Transformer2Tests
 import torch.nn.functional as F
 from .Head import Head
 from .AnchorGenerator import AnchorGenerator
@@ -29,6 +30,8 @@ class VSGN(nn.Module):
         if opt["use_Transformer"]:
             self.trans = Transformer(opt)
         elif opt["use_Transformer2"]:
+            self.trans = Transformer2(opt)
+        elif opt["use_Transformer2Tests"]:
             self.trans = Transformer2(opt)
         else:
             self.xGPN = XGPN(opt)
@@ -78,7 +81,7 @@ class VSGN(nn.Module):
         if self.testing:
             print("VSGN: input.shape = ", input.shape)
         
-        if self.opt["use_Transformer"] or self.opt["use_Transformer2"]:
+        if self.opt["use_Transformer"] or self.opt["use_Transformer2"] or self.opt["use_Transformer2Tests"]:
             feats_enc, feats_dec = self.trans(input)
             if self.testing:
                 print("VSGN: feats_enc.shape before = ", [f.shape for f in feats_enc])
