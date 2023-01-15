@@ -217,9 +217,9 @@ class Transformer2Tests(nn.Module):
         #segunda opción
         self.emb = nn.Sequential(
             nn.LazyLinear(self.mlp_num_hiddens),
-            nn.GELU(),
+            nn.ReLU(),
             nn.LazyLinear(bb_hidden_dim),
-            nn.GELU(),)
+            nn.ReLU(),)
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
