@@ -57,7 +57,7 @@ class ViTBlock(nn.Module):
 class ViT2(nn.Module):
     """Model inspired in the Vision Treansformer.
     Modification to apply only positional embedding, encoder blocks and head to give the output format.
-    Patch embedding, [class] token,
+    Patch embedding y [class] token eliminados. Head modificado.
     
     (mlp_num_hiddens dice las neuronas que tendrán los mlp en la capa intermedia)
     (num_hiddens dice cuantos valores tiene cada feature) -> podria modificarlo para calcular con más valores
@@ -82,7 +82,6 @@ class ViT2(nn.Module):
             self.blks.add_module(f"{i}", ViTBlock(
                 dim_attention, num_features, num_features, mlp_num_hiddens,
                 num_heads, blk_dropout, use_bias))
-        #self.head = nn.Sequential(nn.LayerNorm(num_temp), nn.Linear(num_temp, num_hiddens_out))
                                   
         self.head = nn.Sequential(
             nn.Conv1d(in_channels=num_features, out_channels=num_features, kernel_size=3, stride=stride, padding=1, groups=1),
@@ -102,7 +101,7 @@ class ViT2(nn.Module):
     def forward(self, X):
         if self.testing:
             print("ViT: X.shape:", X.shape)
-        X = X.transpose(1, 2)
+        X = X.transpose(1, 2) #to apply attention over the features
         #Positional embedding
         X = self.dropout(X + self.pos_embedding)
         #Attention Blocks
