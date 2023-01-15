@@ -68,7 +68,7 @@ def parse_opt():
     parser.add_argument(
         '--batch_size',
         type=int,
-        default=32)
+        default=11)
     parser.add_argument(
         '--train_lr',
         type=float,
