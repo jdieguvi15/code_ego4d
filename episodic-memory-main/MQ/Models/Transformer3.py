@@ -3,7 +3,6 @@ import torch.nn as nn
 import math
 import pandas as pd
 import torch
-from torch import nn
 from d2l import torch as d2l
 
 class MultiHeadAttention2(d2l.MultiHeadAttention):
@@ -90,8 +89,8 @@ class TransformerEncoder(d2l.Encoder):
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, mask_size, testing, use_bias))
             
             self.convs.append(nn.Sequential(
-                nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
-                #nn.MaxPool1d(kernel_size=2, stride=2),
+                #nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
+                nn.MaxPool1d(kernel_size=2, stride=2),
                 nn.GELU()))
 
     def forward(self, X, valid_lens):
