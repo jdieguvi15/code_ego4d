@@ -47,7 +47,7 @@ class TransformerEncoderLevel(nn.Module):
         nqk = X.shape[1]
         mask = torch.full((1, self.num_heads, nqk, nqk), float('-inf'))
         i = 0
-        while(nqk > 0):
+        while(nqk > self.mask_size):
             mask[:,:,i*self.mask_size:(i+1)*self.mask_size,i*self.mask_size:(i+1)*self.mask_size] = 0
             i += 1
             nqk -= self.mask_size
@@ -206,6 +206,7 @@ class Transformer2Tests(nn.Module):
     """La clase base para construir el transformer"""
     def __init__(self, opt):
         super(Transformer2Tests, self).__init__()
+        print("Creando un Transformer Definitivo")
         self.input_feat_dim = opt['input_feat_dim']
         self.bb_hidden_dim = opt['bb_hidden_dim']
         self.tem_best_loss = 10000000
