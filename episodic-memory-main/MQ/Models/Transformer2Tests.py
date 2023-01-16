@@ -6,6 +6,18 @@ import torch
 from torch import nn
 from d2l import torch as d2l
 
+class MultiHeadAttention2(d2l.MultiHeadAttention):
+    """Modificación en el Multi-head attention para permitir proyectar la atención en un espacio más grande"""
+    def __init__(self, dim_attention, num_hiddens, num_heads, dropout, bias=False, **kwargs):
+        super().__init__(num_hiddens, num_heads, dropout, bias, **kwargs)
+        #self.num_heads = num_heads
+        #self.attention = d2l.DotProductAttention(dropout, num_heads)
+        self.W_q = nn.LazyLinear(dim_attention, bias=bias)
+        self.W_k = nn.LazyLinear(dim_attention, bias=bias)
+        self.W_v = nn.LazyLinear(dim_attention, bias=bias)
+        #self.W_o = nn.LazyLinear(num_hiddens, bias=bias) #se definen en el super
+        if(dim_attention % num_heads != 0): print("Error: dim_attention no es divisible por num_heads")
+
 class PositionWiseFFN(nn.Module):
     """Red neuronal densa que aplicaremos al final de cada paso para obtener nueva info"""
     def __init__(self, ffn_num_hiddens, ffn_num_outputs):
@@ -31,12 +43,13 @@ class AddNorm(nn.Module):
 
 class TransformerEncoderLevel(nn.Module):
     """Transformer encoder Level."""
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, mask_size, testing=False, use_bias=False):
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, mask_size, testing=False, use_bias=False):
         super().__init__()
         self.num_heads = num_heads
         self.mask_size = mask_size
         self.testing=testing
-        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads,
+        self.dim_attention = dim_attention
+        self.attention = MultiHeadAttention2(dim_attention, num_hiddens, num_heads,
                                                 dropout, use_bias)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
@@ -63,7 +76,7 @@ class TransformerEncoderLevel(nn.Module):
 class TransformerEncoder(d2l.Encoder):
     """Transformer encoder."""
     def __init__(self, num_hiddens, ffn_num_hiddens,
-                 num_heads, num_blks, num_levels, dropout, mask_size, use_bias=False, testing=False):
+                 num_heads, num_blks, num_levels, dropout, dim_attention, mask_size, use_bias=False, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.testing = testing
@@ -74,7 +87,7 @@ class TransformerEncoder(d2l.Encoder):
         self.convs = nn.ModuleList()
         for i in range(num_levels):
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, mask_size, testing, use_bias))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, mask_size, testing, use_bias))
             
             if i == 0:
                 self.convs.append(nn.Sequential(
@@ -108,17 +121,18 @@ class TransformerEncoder(d2l.Encoder):
         
 class TransformerDecoderLevel(nn.Module):
     # The i-th Level in the transformer decoder
-    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, i, num_levels, testing=False):
+    def __init__(self, num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, i, num_levels, testing=False):
         super().__init__()
         self.i = i
         self.num_levels = num_levels
         self.testing=testing
-        self.attention1 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
+        self.attention1 = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
         self.addnorm1 = AddNorm(num_hiddens, dropout)
-        self.attention2 = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
+        self.attention2 = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
         self.addnorm2 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm3 = AddNorm(num_hiddens, dropout)
+        self.dim_attention = dim_attention
         
         if i == num_levels -2:
             self.deconv = nn.Sequential(
@@ -155,21 +169,22 @@ class TransformerDecoder(d2l.AttentionDecoder):
     Está basado en el Decoder de los transformers de palabras pero cada iteración se aplica a un output del encoder, no cada "palabra"
     """
     def __init__(self, num_hiddens, ffn_num_hiddens, num_heads,
-                 num_blks, num_levels, dropout, testing=False):
+                 num_blks, num_levels, dropout, dim_attention, testing=False):
         super().__init__()
         self.num_hiddens = num_hiddens
         self.num_blks = num_blks
         self.num_levels = num_levels
         self.testing = testing
+        self.dim_attention = dim_attention
         
         #Para el primer paso:
-        self.attention = d2l.MultiHeadAttention(num_hiddens, num_heads, dropout)
+        self.attention = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
         self.addnorm = AddNorm(num_hiddens, dropout)
         
         self.blks = nn.Sequential()
         for i in range(num_levels - 1):
             self.blks.add_module("Level"+str(i), TransformerDecoderLevel(
-                num_hiddens, ffn_num_hiddens, num_heads, dropout, i, num_levels, testing))
+                num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, i, num_levels, testing))
 
     def forward(self, input):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -214,6 +229,7 @@ class Transformer2Tests(nn.Module):
         self.testing = opt['testing']
         self.mask_size = opt['mask_size']
         self.mlp_num_hiddens = opt['mlp_num_hiddens']
+        self.dim_attention = opt['dim_attention']
 
         #Reducimos el espacio de Features de input_feat_dim a bb_hidden_dim
         self.embC = nn.Sequential(
@@ -237,8 +253,8 @@ class Transformer2Tests(nn.Module):
         #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
         
         
-        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.mask_size, testing=self.testing)
-        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, testing=self.testing)
+        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, self.mask_size, testing=self.testing)
+        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, testing=self.testing)
         
     def forward(self, input, *args):
     
