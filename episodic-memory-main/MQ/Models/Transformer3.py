@@ -24,9 +24,9 @@ class PositionWiseFFN(nn.Module):
         super().__init__()
         self.dense1 = nn.LazyLinear(ffn_num_hiddens)
         self.af = nn.GELU()
-        self.dropout1 = nn.Dropout(dropout)
+        self.dropout1 = nn.Dropout(0.1)
         self.dense2 = nn.LazyLinear(ffn_num_outputs)
-        self.dropout2 = nn.Dropout(dropout)
+        self.dropout2 = nn.Dropout(0.1)
 
     def forward(self, X):
         return self.dropout2(self.dense2(self.dropout1(self.af(self.dense1(x)))))
