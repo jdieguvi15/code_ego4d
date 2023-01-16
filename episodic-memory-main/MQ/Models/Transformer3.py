@@ -207,7 +207,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
             # Decoder attention1 weights
             self._attention_weights[1][i] = blk.attention1.attention.attention_weights
             # Decoder attention2 weights
-            self._attention_weights[2][i] = blk.attention2.attention.attention_weights
+            #self._attention_weights[2][i] = blk.attention2.attention.attention_weights
             feats.append(feats_dec)
             if self.testing:
                 print("Decoder: feats_dec", i, "=", feats_dec.shape)
