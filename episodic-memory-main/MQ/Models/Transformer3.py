@@ -89,15 +89,10 @@ class TransformerEncoder(d2l.Encoder):
             self.blks.add_module("Level"+str(i), TransformerEncoderLevel(
                 num_hiddens, ffn_num_hiddens, num_heads, dropout, dim_attention, mask_size, testing, use_bias))
             
-            if i == 0:
-                self.convs.append(nn.Sequential(
-                    nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=1, padding=1, groups=1),
-                    nn.GELU()))
-            else:
-                self.convs.append(nn.Sequential(
-                    nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
-                    #nn.MaxPool1d(kernel_size=2, stride=2),
-                    nn.GELU()))
+            self.convs.append(nn.Sequential(
+                nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
+                #nn.MaxPool1d(kernel_size=2, stride=2),
+                nn.GELU()))
 
     def forward(self, X, valid_lens):
         #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
@@ -134,14 +129,9 @@ class TransformerDecoderLevel(nn.Module):
         self.addnorm3 = AddNorm(num_hiddens, dropout)
         self.dim_attention = dim_attention
         
-        if i == num_levels -2:
-            self.deconv = nn.Sequential(
-                nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1, output_padding=1, groups=1),
-                nn.GELU())
-        else:
-            self.deconv = nn.Sequential(
-                nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=2,padding=1, output_padding=1, groups=1),
-                nn.GELU())
+        self.deconv = nn.Sequential(
+            nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=2,padding=1, output_padding=1, groups=1),
+            nn.GELU())
 
     def forward(self, feats_enc, feats_dec):
         #feats_dec = self.deconv(feats_dec.transpose(1,2)).transpose(1,2)
