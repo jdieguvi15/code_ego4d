@@ -239,7 +239,7 @@ class Transformer3(nn.Module):
         self.emb = nn.Sequential(
             nn.LazyLinear(self.mlp_num_hiddens),
             nn.GELU(),
-            nn.LazyLinear(bb_hidden_dim),
+            nn.LazyLinear(self.bb_hidden_dim),
             nn.GELU(),)
         
         #PARÁMETROS:
