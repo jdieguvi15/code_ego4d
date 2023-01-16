@@ -196,7 +196,7 @@ class TransformerDecoder(d2l.AttentionDecoder):
         feats_dec = self.addnorm(X, X2)
         
         #TODO meter la atención para el primer bloque aquí
-        self._attention_weights = [self.attention.attention_weights]
+        self._attention_weights = [self.attention.attention.attention_weights]
         self._attention_weights.extend([[None] * len(self.blks) for _ in range (2)])
         
         feats = [feats_dec]
