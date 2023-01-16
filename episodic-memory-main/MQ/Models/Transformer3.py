@@ -226,11 +226,11 @@ class Transformer3(nn.Module):
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
             nn.GELU(),)
         #segunda opción
-        self.emb = nn.Sequential(
-            nn.LazyLinear(self.mlp_num_hiddens),
-            nn.GELU(),
-            nn.LazyLinear(self.bb_hidden_dim),
-            nn.GELU(),)
+        #self.emb = nn.Sequential(
+        #    nn.LazyLinear(self.mlp_num_hiddens),
+        #   nn.GELU(),
+        #    nn.LazyLinear(self.bb_hidden_dim),
+        #    nn.GELU(),)
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
