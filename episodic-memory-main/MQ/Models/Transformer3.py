@@ -217,10 +217,10 @@ class TransformerDecoder(d2l.AttentionDecoder):
     def attention_weights(self):
         return self._attention_weights
 
-class Transformer2Tests(nn.Module):
+class Transformer3(nn.Module):
     """La clase base para construir el transformer"""
     def __init__(self, opt):
-        super(Transformer2Tests, self).__init__()
+        super(Transformer3, self).__init__()
         print("Creando un Transformer Definitivo")
         self.input_feat_dim = opt['input_feat_dim']
         self.bb_hidden_dim = opt['bb_hidden_dim']

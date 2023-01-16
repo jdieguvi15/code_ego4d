@@ -243,7 +243,7 @@ def parse_opt():
         default=False,
         action='store_true')
     parser.add_argument(
-        '--use_Transformer2Tests',
+        '--use_Transformer3',
         default=False,
         action='store_true')
     parser.add_argument(
