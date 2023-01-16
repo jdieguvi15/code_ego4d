@@ -122,9 +122,9 @@ class TransformerDecoderLevel(nn.Module):
         self.num_levels = num_levels
         self.testing=testing
         self.attention1 = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
-        self.addnorm1 = AddNorm(num_hiddens, dropout)
-        self.attention2 = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
-        self.addnorm2 = AddNorm(num_hiddens, dropout)
+        #self.addnorm1 = AddNorm(num_hiddens, dropout)
+        #self.attention2 = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout)
+        #self.addnorm2 = AddNorm(num_hiddens, dropout)
         self.ffn = PositionWiseFFN(ffn_num_hiddens, num_hiddens)
         self.addnorm3 = AddNorm(num_hiddens, dropout)
         self.dim_attention = dim_attention
