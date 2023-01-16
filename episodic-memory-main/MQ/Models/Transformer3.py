@@ -152,7 +152,7 @@ class TransformerDecoderLevel(nn.Module):
         #Y = self.attention2(feats_dec, feats_enc, feats_enc, None)
         #Y2 = self.addnorm2(Y, feats_dec)
         
-        X2 = self.attention1(feats_dec, feats_enc, feats_enc, None)
+        X2 = self.attention1(feats_enc, feats_dec, feats_dec, None)
         Y2 = feats_enc
         
         if self.testing:
