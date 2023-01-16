@@ -29,7 +29,7 @@ class PositionWiseFFN(nn.Module):
         self.dropout2 = nn.Dropout(0.1)
 
     def forward(self, X):
-        return self.dropout2(self.dense2(self.dropout1(self.af(self.dense1(x)))))
+        return self.dropout2(self.dense2(self.dropout1(self.af(self.dense1(X)))))
 
 class AddNorm(nn.Module):
     """Suma y normaliza"""
