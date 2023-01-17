@@ -22,7 +22,7 @@ class PositionWiseFFN(nn.Module):
     def __init__(self, ffn_num_hiddens, ffn_num_outputs):
         super().__init__()
         self.dense1 = nn.LazyLinear(ffn_num_hiddens)
-        self.af = nn.ReLU()
+        self.af = nn.GELU()
         self.dropout1 = nn.Dropout(0.1)
         self.dense2 = nn.LazyLinear(ffn_num_outputs)
         self.dropout2 = nn.Dropout(0.1)
@@ -80,8 +80,6 @@ class TransformerEncoder(d2l.Encoder):
         self.num_hiddens = num_hiddens
         self.testing = testing
         
-        #quitamos el pos encoding
-        #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
         self.convs = nn.ModuleList()
         for i in range(num_levels):
@@ -91,10 +89,9 @@ class TransformerEncoder(d2l.Encoder):
             self.convs.append(nn.Sequential(
                 nn.Conv1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3, stride=2, padding=1, groups=1),
                 #nn.MaxPool1d(kernel_size=2, stride=2),
-                nn.ReLU()))
+                nn.GELU()))
 
     def forward(self, X, valid_lens):
-        #X = self.pos_encoding(self.embedding(X) * math.sqrt(self.num_hiddens))
         if self.testing:
             print("Encoder: x0=", X.shape)
         self.attention_weights = [None] * len(self.blks)
@@ -130,7 +127,7 @@ class TransformerDecoderLevel(nn.Module):
         
         self.deconv = nn.Sequential(
             nn.ConvTranspose1d(in_channels=num_hiddens, out_channels=num_hiddens, kernel_size=3,stride=2,padding=1, output_padding=1, groups=1),
-            nn.ReLU())
+            nn.GELU())
 
     def forward(self, feats_enc, feats_dec):
         feats_dec = self.deconv(feats_dec.transpose(1,2)).transpose(1,2)
@@ -224,13 +221,15 @@ class Transformer3(nn.Module):
         #Reducimos el espacio de Features de input_feat_dim a bb_hidden_dim
         self.embC = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
-            nn.ReLU(),)
+            nn.GELU(),)
         #segunda opción
         #self.emb = nn.Sequential(
         #    nn.LazyLinear(self.mlp_num_hiddens),
-        #   nn.ReLU(),
+        #   nn.GELU(),
         #    nn.LazyLinear(self.bb_hidden_dim),
-        #    nn.ReLU(),)
+        #    nn.GELU(),)
+        
+        
         
         #PARÁMETROS:
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
@@ -240,7 +239,8 @@ class Transformer3(nn.Module):
         ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
         num_heads = opt["num_heads"]
         
-        #el parámetro tgt_pad se ha eliminado porque se usa para la loss y este modelo no llega a classificar, solo Data Augmentation
+        #Pos enc can be removed
+        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, 0.1)
         
         
         self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, self.mask_size, testing=self.testing)
@@ -252,6 +252,7 @@ class Transformer3(nn.Module):
             print("Transformer: input.shape:", input.shape)
     
         X = self.embC(input)
+        X = X + self.pos_encoding
         X = X.transpose(1, 2)
         #X = self.emb(input)
     
