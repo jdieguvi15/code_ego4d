@@ -240,7 +240,8 @@ class Transformer3(nn.Module):
         num_heads = opt["num_heads"]
         
         #Pos enc can be removed
-        self.pos_encoding = d2l.PositionalEncoding(num_hiddens, 0.1)
+        self.pos_embedding = nn.Parameter(torch.randn(1, bb_hidden_dim, num_hiddens))
+        #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, 0.1)
         
         
         self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, self.mask_size, testing=self.testing)
