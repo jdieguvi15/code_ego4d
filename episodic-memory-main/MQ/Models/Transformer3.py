@@ -252,9 +252,9 @@ class Transformer3(nn.Module):
             print("Transformer: input.shape:", input.shape)
     
         X = self.embC(input)
-        X = self.pos_encoding(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
+        X = self.pos_encoding(X)
     
         feats_enc = self.encoder(X, None, *args)
         feats_dec = self.decoder(feats_enc)
