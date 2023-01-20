@@ -235,7 +235,7 @@ class Transformer3(nn.Module):
         #num_hiddens es la dimensión con la que representaremos los datos, en este caso es la largada del vector de features (temporal steps, se irá reduciendo)
         num_hiddens = self.bb_hidden_dim   #numero de elementos de cada feature
         num_blks = opt['num_blks']    #de momento solo 1 blk
-        dropout = 0.2   #lo recomendado en el libro
+        self.dropout = 0.2   #lo recomendado en el libro
         ffn_num_hiddens = opt["mlp_num_hiddens"]    #es lo mismo
         num_heads = opt["num_heads"]
         
@@ -244,8 +244,8 @@ class Transformer3(nn.Module):
         #self.pos_encoding = d2l.PositionalEncoding(num_hiddens, 0.1)
         
         
-        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, self.mask_size, testing=self.testing)
-        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, dropout, self.dim_attention, testing=self.testing)
+        self.encoder = TransformerEncoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, self.dropout, self.dim_attention, self.mask_size, testing=self.testing)
+        self.decoder = TransformerDecoder(num_hiddens, ffn_num_hiddens, num_heads, num_blks, self.num_levels, self.dropout, self.dim_attention, testing=self.testing)
         
     def forward(self, input, *args):
     
@@ -255,7 +255,7 @@ class Transformer3(nn.Module):
         X = self.embC(input)
         X = X.transpose(1, 2)
         #X = self.emb(input)
-        X = self.pos_encoding(X)
+        X = self.dropout(X + self.pos_embedding)
     
         feats_enc = self.encoder(X, None, *args)
         feats_dec = self.decoder(feats_enc)
