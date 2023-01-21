@@ -154,4 +154,4 @@ def evaluation_retrieval(opt):
 
     print(eval_result)
     
-    return eval_result[1][0]
+    return eval_result[1][0], eval_result

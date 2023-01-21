@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
         if 'val' in opt['infer_datasplit']:
             print("b. Evaluate the detection results!")
-            average_mAP = eval_det_ego4d(opt)
+            mAPs, average_mAP = eval_det_ego4d(opt)
             print("Detection evaluation finishes! \n")
             
 
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
         if 'val' in opt['infer_datasplit']:
             print("b. Evaluate the retrieval results!")
-            recall = eval_retrieval(opt)
+            recall, eval_result = eval_retrieval(opt)
             print("Detection evaluation finishes! \n")
             
-    save_results(opt, average_mAP=average_mAP, recall=recall)
+    save_results(opt, average_mAP=average_mAP, mAPs=mAPs, recall=recall, eval_result=eval_result)

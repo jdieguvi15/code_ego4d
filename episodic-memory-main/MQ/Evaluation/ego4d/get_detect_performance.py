@@ -14,7 +14,7 @@ def run_evaluation(ground_truth_filename, prediction_filename,
     for (tiou, mAP) in zip(tiou_thresholds, mAPs):
         print("mAP at tIoU {} is {}".format(tiou, mAP))
         
-    return average_mAP
+    return mAPs, average_mAP
 
 
 
