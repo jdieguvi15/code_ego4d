@@ -35,6 +35,10 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         config["average_mAP"]= average_mAP
     if recall != None:
         config["recall"]= recall
+    if mAPs != None:
+        config["mAPs"]= mAPs
+    if eval_result != None:
+        config["eval_result"]= eval_result
     
     
     history_path = opt["history_path"]
