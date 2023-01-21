@@ -33,9 +33,9 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         config["n_params"]= n_params
     if average_mAP != None:
         config["average_mAP"]= average_mAP
-        config["mAPs"]= mAPs
+        config["mAPs"]= mAPs.tolist()
     if recall != None:
-        config["recall"]= recall.tolist()
+        config["recall"]= recall
         config["eval_result"]= eval_result.tolist()
     
     
@@ -46,7 +46,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
             json.dump(data, f)
     else:
         with open(history_path, "r") as f:
-            data = json.load(data.decode("utf-8")f)
+            data = json.load(f)
         data[len(data)] = config
         with open(history_path, "w") as f:
             json.dump(data, f)
