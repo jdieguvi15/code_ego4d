@@ -46,7 +46,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
             json.dump(data, f)
     else:
         with open(history_path, "r") as f:
-            data = json.load(f)
+            data = json.load(data.decode("utf-8")f)
         data[len(data)] = config
         with open(history_path, "w") as f:
             json.dump(data, f)
