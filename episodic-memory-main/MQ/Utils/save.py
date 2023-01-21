@@ -35,8 +35,8 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         config["average_mAP"]= average_mAP
         config["mAPs"]= mAPs
     if recall != None:
-        config["recall"]= recall
-        config["eval_result"]= eval_result
+        config["recall"]= recall.tolist()
+        config["eval_result"]= eval_result.tolist()
     
     
     history_path = opt["history_path"]
