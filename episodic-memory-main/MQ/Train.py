@@ -157,7 +157,7 @@ if __name__ == '__main__':
         wandb.login()
         wandb.init(
             project=opt["project_name"],
-            name=name1,
+            name=opt["run_name"],
             config={
                 "architecture": architecture,
                 "dataset": "ego4d",
