@@ -126,9 +126,9 @@ class VSGN(nn.Module):
             loss_reg_st2 = self.bd_adjust.cal_loss(start_offsets, end_offsets, loc_dec, gt_bbox, num_gt)
             losses['loss_bd_adjust'] = loss_reg_st2
             
-            if self.opt["not_wandb"]:
-                wandb.log({"loss_action": loss_action, "loss_start": loss_start, "loss_end": loss_end,
-                                "actionness": actionness, "startness": startness, "endness": endness})
+            #if self.opt["not_wandb"]:
+            #    wandb.log({"loss_action": loss_action, "loss_start": loss_start, "loss_end": loss_end,
+            #                    "actionness": actionness, "startness": startness, "endness": endness})
 
             return losses, actionness, startness, endness
         else:
