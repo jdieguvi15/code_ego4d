@@ -16,18 +16,20 @@ import wandb
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class MultiHeadAttention2(d2l.MultiHeadAttention):
-    """Modificación en el Multi-head attention para permitir proyectar la atención en un espacio más grande"""
+    """Modification in the Multi-head attention to allow to project the
+    attention in a larger space."""
     def __init__(self, dim_attention, num_hiddens, num_heads, dropout, bias=False, **kwargs):
         super().__init__(num_hiddens, num_heads, dropout, bias, **kwargs)
-        #self.num_heads = num_heads
-        #self.attention = d2l.DotProductAttention(dropout, num_heads)
         self.W_q = nn.LazyLinear(dim_attention, bias=bias)
         self.W_k = nn.LazyLinear(dim_attention, bias=bias)
         self.W_v = nn.LazyLinear(dim_attention, bias=bias)
-        #self.W_o = nn.LazyLinear(num_hiddens, bias=bias) #se definen en el super
-        if(dim_attention % num_heads != 0): print("Error: dim_attention no es divisible por num_heads")
+        #self.W_o = nn.LazyLinear(num_hiddens, bias=bias) #defined in super class
+        if(dim_attention % num_heads != 0):
+            print("Error: dim_attention no es divisible por num_heads")
     
 class ViTMLP(nn.Module):
+    """Multi-layer perceptron constituting the feed-forward network at
+    the end of each encoder block."""
     def __init__(self, mlp_num_hiddens, mlp_num_outputs, dropout=0.5):
         super().__init__()
         self.dense1 = nn.LazyLinear(mlp_num_hiddens)
@@ -41,33 +43,31 @@ class ViTMLP(nn.Module):
             self.dense1(x)))))
     
 class ViTBlock(nn.Module):
+    """ViT Encoder Block"""
     def __init__(self, dim_attention, num_hiddens, norm_shape, mlp_num_hiddens,
                  num_heads, dropout, use_bias=False):
         super().__init__()
         self.ln1 = nn.LayerNorm(norm_shape)
         self.attention = MultiHeadAttention2(dim_attention, num_hiddens, num_heads, dropout, use_bias)
         self.ln2 = nn.LayerNorm(norm_shape)
-        self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout) #alomejor esto es redundante si solo hay 1 bloque
+        self.mlp = ViTMLP(mlp_num_hiddens, num_hiddens, dropout)
 
     def forward(self, X, valid_lens=None):
-        X = self.ln1(X)                                         # se puede probar a quitar
+        X = self.ln1(X)
         return X + self.mlp(self.ln2(
             X + self.attention(X, X, X, valid_lens)))
     
 class ViT2(nn.Module):
     """Model inspired in the Vision Treansformer.
-    Modification to apply only positional embedding, encoder blocks and head to give the output format.
-    Patch embedding y [class] token eliminados. Head modificado.
+    Modification to apply only positional embedding, encoder blocks
+     and head to give the output format.
+    Patch embedding and [class] were removed and the head modified.
     
-    (mlp_num_hiddens dice las neuronas que tendrán los mlp en la capa intermedia)
-    (num_hiddens dice cuantos valores tiene cada feature) -> podria modificarlo para calcular con más valores
-    Además, por como está codificado el código del libro, num_heads ha de ser divisor de num_hiddens -> demasiado rígido
-    Problema: divisores de 58: 2 y 29
-    (num_hiddens = largada del vector features de momento, lo más simple)
+    (mlp_num_hiddens = the number of neurons in the mlp's in the hidden layer)
+    (num_hiddens = length of the features vector)
     
     input: (Cin, Lin) = (num_features, num_hiddens)
-    output: (Cout, Lin) = (out_channels, num_hiddens / 2)   num_features = out_channels
-    
+    output: (Cout, Lin) = (out_channels, num_hiddens / 2)
     """
     def __init__(self, num_features, num_temp, mlp_num_hiddens, dim_attention, num_heads, stride, num_blks=1, emb_dropout=0.1, blk_dropout=0.1, use_bias=False, usewandb=False, testing=False):
         super().__init__()
@@ -88,9 +88,7 @@ class ViT2(nn.Module):
             nn.ReLU(inplace=True))
                                   
     def save_hyperparameters(self, ignore=[]):
-        """Save function arguments into class attributes.
-    
-        Defined in :numref:`sec_utils`"""
+        """Save function arguments into class attributes."""
         frame = inspect.currentframe().f_back
         _, _, _, local_vars = inspect.getargvalues(frame)
         self.hparams = {k:v for k, v in local_vars.items()

@@ -2,9 +2,7 @@
 import torch
 import torch.nn as nn
 from .XGPN import XGPN
-from .Transformer import Transformer
-from .Transformer2 import Transformer2
-from .Transformer3 import Transformer3
+from .TPN import TPN
 import torch.nn.functional as F
 from .Head import Head
 from .AnchorGenerator import AnchorGenerator
@@ -14,6 +12,8 @@ from .BoundaryAdjust import BoundaryAdjust
 import wandb
 
 class VSGN(nn.Module):
+    """VSGN is the main class.
+    From here we will select the data augmentation method and then we will call the final modules."""
     def __init__(self, opt):
         super(VSGN, self).__init__()
 
@@ -27,12 +27,9 @@ class VSGN(nn.Module):
         self.testing = opt["testing"]
         self.opt = opt
         
-        if opt["use_Transformer"]:
-            self.trans = Transformer(opt)
-        elif opt["use_Transformer2"]:
-            self.trans = Transformer2(opt)
-        elif opt["use_Transformer3"]:
-            self.trans = Transformer3(opt)
+        # Choose the algorithm
+        if opt["use_TPN"]:
+            self.trans = TPN(opt)
         else:
             self.xGPN = XGPN(opt)
 
@@ -49,21 +46,18 @@ class VSGN(nn.Module):
         # Generate action/start/end scores
         self.head_actionness = nn.Sequential(
             nn.Conv1d(self.bb_hidden_dim, self.bb_hidden_dim, kernel_size=3, padding=1, groups=1),
-            # nn.GroupNorm(32, self.bb_hidden_dim),
             nn.ReLU(inplace=True),
             nn.Conv1d(self.bb_hidden_dim, 1, kernel_size=1),
             nn.Sigmoid()
         )
         self.head_startness = nn.Sequential(
             nn.Conv1d(self.bb_hidden_dim, self.bb_hidden_dim, kernel_size=3, padding=1, groups=1),
-            # nn.GroupNorm(32, self.bb_hidden_dim),
             nn.ReLU(inplace=True),
             nn.Conv1d(self.bb_hidden_dim, 1, kernel_size=1),
             nn.Sigmoid()
         )
         self.head_endness = nn.Sequential(
             nn.Conv1d(self.bb_hidden_dim, self.bb_hidden_dim, kernel_size=3, padding=1, groups=1),
-            # nn.GroupNorm(32, self.bb_hidden_dim),
             nn.ReLU(inplace=True),
             nn.Conv1d(self.bb_hidden_dim, 1, kernel_size=1),
             nn.Sigmoid()
@@ -81,16 +75,17 @@ class VSGN(nn.Module):
         if self.testing:
             print("VSGN: input.shape = ", input.shape)
         
-        if self.opt["use_Transformer"] or self.opt["use_Transformer2"] or self.opt["use_Transformer3"]:
+        if self.opt["use_TPN"]:
             feats_enc, feats_dec = self.trans(input)
             if self.testing:
                 print("VSGN: feats_enc.shape before = ", [f.shape for f in feats_enc])
                 print("VSGN: feats_dec.shape before = ", [f.shape for f in feats_dec])
-            #le tenemos que dar la forma para que lo entiendan las nn del final
+                
+            # we have to give it the form so that the nns at the end understand it
             feats_enc = [f.transpose(1,2) for f in feats_enc]
             feats_dec = [f.transpose(1,2) for f in feats_dec]
         else:
-            # En la clase xGPN se definirá como será el método que seguiremos
+            # In the xGPN class we will define the method we will follow
             feats_enc, feats_dec = self.xGPN(input, num_frms)
         
         if self.testing:

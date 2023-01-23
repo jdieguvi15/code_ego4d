@@ -3,9 +3,14 @@ import json
 import os.path
 
 def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mAP=None, mAPs=None, recall=None, eval_result=None):
-    #Save results in the history file
+    """
+    This function saves all the results of a run in the document history.py.
+    It can be called from Train with the training information or from Eval
+    to save the evaluation of the results.
+    """
+    
     architecture = "default"
-    for a in {"use_xGPN", "use_ViT2", "use_Transformer", "use_Transformer2", "use_Transformer3"}:
+    for a in {"use_xGPN", "use_ViT2", "use_TPN"}:
         if opt[a]:
             architecture = a
             

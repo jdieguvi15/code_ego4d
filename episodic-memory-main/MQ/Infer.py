@@ -18,6 +18,7 @@ torch.manual_seed(21)
 
 
 # Infer all data
+# Infer will make the predictions based on the weights resulting from the training
 def Infer_SegTAD(opt):
     model = VSGN(opt)
     model = torch.nn.DataParallel(model).cuda()
@@ -25,11 +26,9 @@ def Infer_SegTAD(opt):
         print("There is no checkpoint. Please train first!!!")
     else:
         checkpoint = torch.load(opt["checkpoint_path"] + "/best.pth.tar")
-        checkpoint2 = torch.load(opt["checkpoint_path"] + "/moments.pth.tar")
+        #checkpoint2 = torch.load(opt["checkpoint_path"] + "/moments.pth.tar")
         print("Infer with checkpoint from best.pth.tar")
         model.load_state_dict(checkpoint['state_dict'])
-    #print(checkpoint)
-    #print(checkpoint2)
     model.eval()
 
     proposal_path = os.path.join(opt["output_path"], opt["prop_path"])
@@ -137,7 +136,6 @@ def nms(dets, thresh=0.4):
     x2 = dets[:, 1]
     scores = dets[:, 2]
     lengths = x2 - x1
-    #print("lengths 0: " + str(sum(lengths == 0)) + " / " + str(lengths.size))
     order = scores.argsort()[::-1]
     keep = []
     while order.size > 0:
@@ -146,8 +144,6 @@ def nms(dets, thresh=0.4):
         xx1 = np.maximum(x1[i], x1[order[1:]])
         xx2 = np.minimum(x2[i], x2[order[1:]])
         inter = np.maximum(0.0, xx2 - xx1)
-        #if((lengths[i] + lengths[order[1:]] - inter) == 0).any():
-            #print("i=" + str(i) + "inter="  + ", lengths[i]=" + str(lengths[i]) + ", x1[i]="+ str(x1[i])+ ", x2[i]="+ str(x2[i]))
         ovr = inter / (lengths[i] + lengths[order[1:]] - inter)
         inds = np.where(ovr <= thresh)[0]
         order = order[inds + 1]

@@ -7,6 +7,7 @@ from .ViT2 import ViT2
 
 
 class XGPN(nn.Module):
+    """Pyramid Network, it can be Graph or Transformer based."""
     def __init__(self, opt):
         super(XGPN, self).__init__()
         self.input_feat_dim = opt["input_feat_dim"]
@@ -17,6 +18,7 @@ class XGPN(nn.Module):
         self.use_ViT2 = opt['use_ViT2']
         self.use_xGPN = opt['use_xGPN']
         self.testing = opt['testing']
+        self.temporal_scale = opt['temporal scale']
 
         self.conv0 = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim,kernel_size=3,stride=1,padding=1,groups=1),
@@ -24,15 +26,14 @@ class XGPN(nn.Module):
         )
 
         self.levels_enc = nn.ModuleList()
-        num_hiddens_in, num_hiddens_out = 928, 928 # viene determinado por la forma de los features de SlowFast
+        num_hiddens_in, num_hiddens_out = temporal_scale, temporal_scale
         for i in range(self.num_levels):
             num_hiddens_in = num_hiddens_out
             if i == 0:
                 stride = 1
             else:
                 stride = 2
-                num_hiddens_out = num_hiddens_out // 2 # para ViT 1.0
-            # Añado num_hiddens para controlar como decrece
+                num_hiddens_out = num_hiddens_out // 2
             self.levels_enc.append(self._make_levels_enc(opt, in_channels=self.bb_hidden_dim, out_channels=self.bb_hidden_dim, num_hiddens_in=num_hiddens_in, num_hiddens_out=num_hiddens_out, stride = stride))
 
         self.levels_dec = nn.ModuleList()
