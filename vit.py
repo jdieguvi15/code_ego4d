@@ -1,4 +1,5 @@
-# codigo separado en funciones
+# Code to run the ViT Transformer on CIFAR10
+# all together in one document to make it more convenient for Peregrine.
 
 import numpy as np
 import json
@@ -16,17 +17,16 @@ import wandb
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class MultiHeadAttention2(d2l.MultiHeadAttention):
-    """Modificación en el Multi-head attention, no lo estoy usando aún aquí"""
+    """Modification in the Multi-head attention to allow to project the attention
+    into a larger space."""
     def __init__(self, dim_attention, num_hiddens, num_heads, dropout, bias=False, **kwargs):
         super().__init__(num_hiddens, num_heads, dropout, bias, **kwargs)
-        #self.num_heads = num_heads
-        #self.attention = d2l.DotProductAttention(dropout, num_heads)
         self.W_q = nn.LazyLinear(dim_attention, bias=bias)
         self.W_k = nn.LazyLinear(dim_attention, bias=bias)
         self.W_v = nn.LazyLinear(dim_attention, bias=bias)
-        #self.W_o = nn.LazyLinear(num_hiddens, bias=bias)
 
 class PatchEmbedding(nn.Module):
+    """Class in charge of splitting the image into patches and embedding."""
     def __init__(self, img_size=96, patch_size=16, num_hiddens=512):
         super().__init__()
         def _make_tuple(x):
@@ -44,6 +44,7 @@ class PatchEmbedding(nn.Module):
         return self.conv(X).flatten(2).transpose(1, 2)
     
 class ViTMLP(nn.Module):
+    """Class in charge of applying the FFN layer at the end of each block."""
     def __init__(self, mlp_num_hiddens, mlp_num_outputs, dropout=0.5):
         super().__init__()
         self.dense1 = nn.LazyLinear(mlp_num_hiddens)
@@ -57,6 +58,7 @@ class ViTMLP(nn.Module):
             self.dense1(x)))))
     
 class ViTBlock(nn.Module):
+    """Encoder block: applies attention and MLP."""
     def __init__(self, num_hiddens, norm_shape, mlp_num_hiddens,
                  num_heads, dropout, use_bias=False):
         super().__init__()
@@ -100,13 +102,14 @@ class ViT(d2l.Classifier):
         X = torch.cat((self.cls_token.expand(X.shape[0], -1, -1), X), 1)
         #(batch size, no. of patches + 1, num_hiddens)
         X = self.dropout(X + self.pos_embedding)
-        #same
+        #same structure
         for blk in self.blks:
             X = blk(X)
-        #same
+        #same structure
         return self.head(X[:, 0])
     
     def vis_attention(self, X):
+        # Function to visualize the attention weights
         X = self.patch_embedding(X)
         X = torch.cat((self.cls_token.expand(X.shape[0], -1, -1), X), 1)
         X = self.dropout(X + self.pos_embedding)
@@ -128,12 +131,14 @@ class ViT(d2l.Classifier):
         #self.plot('loss', l, train=False)
         
     def configure_optimizers(self):
+        """Extremely dangerous function if used maliciously.
+        Its purpose is to allow to change the optimizer easily."""
+        
         return eval("torch.optim."+ self.optimizer_name + "(self.parameters(), lr=self.lr)")
     
 def evaluate_loss_gpu(net, data_iter, device=None):
     """Compute the loss for a model on a dataset using a GPU.
-
-    Defined in :numref:`sec_utils`"""
+    I think this function is not used in the final product."""
     if isinstance(net, nn.Module):
         net.eval()  # Set the model to evaluation mode
         if not device:
@@ -144,7 +149,6 @@ def evaluate_loss_gpu(net, data_iter, device=None):
     with torch.no_grad():
         for X, y in data_iter:
             if isinstance(X, list):
-                # Required for BERT Fine-tuning (to be covered later)
                 X = [x.to(device) for x in X]
             else:
                 X = X.to(device)
@@ -153,6 +157,8 @@ def evaluate_loss_gpu(net, data_iter, device=None):
     return metric[0] / metric[1]
         
 class Trainer2(d2l.Trainer):
+    """Trainer to train the model. It is adapted from the Dive 2 Deep Learning one
+    but I have made some modifications."""
     def __init__(self, max_epochs, num_gpus=0, gradient_clip_val=0, early_stop=3):
         super().__init__(max_epochs, num_gpus, gradient_clip_val)
         self.save_hyperparameters()
@@ -186,15 +192,12 @@ class Trainer2(d2l.Trainer):
         return loss
 
 
-class CIFAR10(d2l.DataModule):  #@save
+class CIFAR10(d2l.DataModule):
+    """Envelope class to obtain the Dataloaders for CIFAR10 with some pretreatment"""
     def __init__(self, batch_size=64, resize=(28, 28)):
         super().__init__()
         self.save_hyperparameters()
-        #lo pongo a gris?
-        trans = torchvision.transforms.Compose([transforms.Resize(resize),
-                                                transforms.Grayscale(),
-                                                transforms.ToTensor()])
-        
+
         # Image augmentation
         transform_train = transforms.Compose([
             transforms.Resize(40),
@@ -210,7 +213,8 @@ class CIFAR10(d2l.DataModule):  #@save
             transforms.ToTensor(),
             transforms.Normalize([0.4914, 0.4822, 0.4465],
                                  [0.2023, 0.1994, 0.2010])])
-
+        
+        #To choose depending on where you execute this.
         #self.train = torchvision.datasets.CIFAR10(root="/Users/joeldvd/Documents/uni/tfg", train=True, transform=transform_train, download=False)
         #self.val = torchvision.datasets.CIFAR10(root="/Users/joeldvd/Documents/uni/tfg", train=False, transform=transform_test, download=False)
         self.train = torchvision.datasets.CIFAR10(root="/data/s5091217", train=True, transform=transform_train, download=False)
@@ -237,15 +241,16 @@ class CIFAR10(d2l.DataModule):  #@save
         
         
 class CIFAR10_KFOLD(CIFAR10):
+    """Modificaction of the previous class to allow for kfold over the train data"""
     def __init__(self, batch_size=64, resize=(28, 28), k=5, shuffle=True):
         super().__init__(batch_size, resize)
         self.save_hyperparameters()
         
-        # Para el kfold:  k = 5
+        # Normally  k = 5
         self.k = k
         if k != 1:
             kf = KFold(n_splits=k)
-            self.data = self.train #solo con los datos de train de momento
+            self.data = self.train # we use the train data
             self.g = kf.split(self.data)
             self.train_sampler, self.valid_sampler = next(self.g)
             np.random.shuffle(self.train_sampler)
@@ -270,8 +275,8 @@ class CIFAR10_KFOLD(CIFAR10):
             return torch.utils.data.DataLoader(data, self.batch_size, shuffle=train,
                                        num_workers=self.num_workers)
     
-        
     def next(self):
+        # Advance to the next k split
         if self.k != 1:
             self.train_sampler, self.valid_sampler = next(self.g)
                 
@@ -287,14 +292,14 @@ class Measures():
         
         self.totals = [0] * len(self.object_names)  # the number of occurrences for each object type
 
-        # Split in 10 categories:
+        # Split in 10 categories, one for each class:
         self.tp = torch.zeros(len(self.object_names))  # true positives
         self.fp = torch.zeros(len(self.object_names))  # false positives
         self.tn = torch.zeros(len(self.object_names))  # true negatives
         self.fn = torch.zeros(len(self.object_names))  # false negatives
         
         test_data = data.get_dataloader(False)
-        #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
         for batch in test_data:
             Y_hat = torch.Tensor(batch[0]).to(device)
@@ -307,7 +312,7 @@ class Measures():
             for pred, real in zip(predictions, ground_truths):
                 self.totals[real] += 1
                 
-                # de momento las comparaciones se hacen con el maximo pero lo podria hacer a partir de porcentages
+                # manually counting each instance
                 if pred == real:
                     self.tp[real] += 1
                     self.tn[real] -= 1
@@ -386,9 +391,7 @@ class Measures():
 def training(name="Vit_scratch", k=1, batch_size=128, optimizer_name="SGD", lr=0.1, maxEpochs=20,
              img_size=32, patch_size=4, num_hiddens=512, mlp_num_hiddens=2048,
              num_heads=8, num_blks=2, emb_dropout=0.1, blk_dropout=0.1, usewandb=True, project_name="Testing"):
-                
-    #model = ViT(img_size, patch_size, num_hiddens, mlp_num_hiddens, num_heads,
-    #            num_blks, emb_dropout, blk_dropout, lr, usewandb=usewandb, optimizer_name=optimizer_name)
+    """Function that creates a module, trains it and saves the results in the history file"""
 
     trainer = Trainer2(max_epochs=maxEpochs, num_gpus=1)
 
@@ -403,7 +406,7 @@ def training(name="Vit_scratch", k=1, batch_size=128, optimizer_name="SGD", lr=0
             wandb.init(
                 # Set the project where this run will be logged
                 project=project_name, 
-                # We pass a run name (otherwise it’ll be randomly assigned, like sunshine-lollypop-10)
+                # We pass a run name
                 name=name, 
                 # Track hyperparameters and run metadata
                 config={
@@ -443,7 +446,7 @@ def training(name="Vit_scratch", k=1, batch_size=128, optimizer_name="SGD", lr=0
     
 
 
-    # Guardar resultados en un json
+    # Save the results in a JSON
     history_path = '/data/s5091217/code_ego4d/history2.json'
     
     m = Measures(model, data)
@@ -459,7 +462,7 @@ def training(name="Vit_scratch", k=1, batch_size=128, optimizer_name="SGD", lr=0
         "optimizer_name": optimizer_name,
         "learning_rate": lr,
         "maxEpoch": maxEpochs,
-        "epochs": epochs, # será del último del kfold
+        "epochs": epochs, # it will be from the last iteration of the kfold
         "img_size": img_size,
         "patch_size": patch_size,
         "num_hiddens": num_hiddens,
@@ -493,6 +496,7 @@ def training(name="Vit_scratch", k=1, batch_size=128, optimizer_name="SGD", lr=0
     return (model, accuracy)
 
 
+#EXECUTION
 for i in {4, 5, 6}:
     name1= "ViT-Base_blocks=" + str(i)
     name2= "ViT-Large_blocks=" + str(i)

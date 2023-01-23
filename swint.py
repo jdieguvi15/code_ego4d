@@ -153,7 +153,6 @@ class ShiftedWindowAttention(nn.Module):
         return rel_pos_enc
     
     
-    # For explanation of mask regions see Figure 4 in the article
     @staticmethod
     def generate_mask(shape, window_size, shift_size):
         region_mask = torch.zeros(1, *shape, 1)
@@ -464,8 +463,6 @@ def log_validation_results(engine):
     print("{}/{} - train: loss {:.3f}; val: loss {:.7f} accuracy {:.7f}".format(
         epoch, max_epochs, train_loss, val_loss, val_acc))
     wandb.log({"accuracy": val_acc, "loss": val_loss})
-    print("recall=", val_rec.mean())
-    print("prec=", val_prec.mean())
 
 #TRAIN
 
@@ -503,24 +500,24 @@ history_path = '/data/s5091217/code_ego4d/history2.json'
 name = "SWIN"
 
 results = {
-"name":name,
-"architecture": "SWINscratch",
-"dataset": "CIFAR-10",
-"kfold":1,
-"batch_size": BATCH_SIZE,
-"optimizer_name": "ADAMW",
-"learning_rate": LEARNING_RATE,
-"maxEpoch": EPOCHS,
-#"epochs": EPOCHS, # será del último del kfold
-"img_size": IMAGE_SIZE,
-"num_blocks_list": num_blocks_list,
-"dims": dims,
-"head_dim": head_dim,
-"patch_size": patch_size,
-"window_size": window_size,
-"accuracy": history['val acc'][-1],
-"recall": str(history['val rec'][-1]),
-"precision": str(history['val prec'][-1])
+    "name":name,
+    "architecture": "SWINscratch",
+    "dataset": "CIFAR-10",
+    "kfold":1,
+    "batch_size": BATCH_SIZE,
+    "optimizer_name": "ADAMW",
+    "learning_rate": LEARNING_RATE,
+    "maxEpoch": EPOCHS,
+    #"epochs": EPOCHS, # será del último del kfold
+    "img_size": IMAGE_SIZE,
+    "num_blocks_list": num_blocks_list,
+    "dims": dims,
+    "head_dim": head_dim,
+    "patch_size": patch_size,
+    "window_size": window_size,
+    "accuracy": history['val acc'][-1],
+    "recall": str(history['val rec'][-1]),
+    "precision": str(history['val prec'][-1])
 }
 
 if not os.path.exists(history_path):

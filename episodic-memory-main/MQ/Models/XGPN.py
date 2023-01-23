@@ -18,7 +18,7 @@ class XGPN(nn.Module):
         self.use_ViT2 = opt['use_ViT2']
         self.use_xGPN = opt['use_xGPN']
         self.testing = opt['testing']
-        self.temporal_scale = opt['temporal scale']
+        self.temporal_scale = opt['temporal_scale']
 
         self.conv0 = nn.Sequential(
             nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim,kernel_size=3,stride=1,padding=1,groups=1),
