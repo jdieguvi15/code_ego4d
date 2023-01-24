@@ -58,7 +58,9 @@ class ViTBlock(nn.Module):
             X + self.attention(X, X, X, valid_lens)))
     
 class ViT2(nn.Module):
-    """Model inspired in the Vision Treansformer.
+    """
+    ViT+ model.
+    Model inspired in the Vision Treansformer.
     Modification to apply only positional embedding, encoder blocks
      and head to give the output format.
     Patch embedding and [class] were removed and the head modified.

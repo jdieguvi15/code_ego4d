@@ -149,7 +149,7 @@ if __name__ == '__main__':
     name1 = "T2-h:" + str(opt["num_heads"]) + "-dim_att:" + str(opt["dim_attention"]) + "-mask:" + str(opt["mask_size"]) + "-lvls:" + str(opt["num_levels"])
     
     architecture = "default"
-    for a in {"use_xGPN", "use_ViT2", "use_TPN"}:
+    for a in {"use_xGPN", "use_ViT2", "use_ReMoT"}:
         if opt[a]:
             architecture = a
     

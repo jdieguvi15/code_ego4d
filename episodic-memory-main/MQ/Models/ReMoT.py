@@ -203,10 +203,10 @@ class TransformerDecoder(d2l.AttentionDecoder):
     def attention_weights(self):
         return self._attention_weights
 
-class TPN(nn.Module):
+class ReMoT(nn.Module):
     """The base class to construct the Transformer"""
     def __init__(self, opt):
-        super(TPN, self).__init__()
+        super(ReMoT, self).__init__()
         print("Creating the Transformer Pyramid")
         self.input_feat_dim = opt['input_feat_dim']
         self.bb_hidden_dim = opt['bb_hidden_dim']
