@@ -26,7 +26,7 @@ class XGPN(nn.Module):
         )
 
         self.levels_enc = nn.ModuleList()
-        num_hiddens_in, num_hiddens_out = temporal_scale, temporal_scale
+        num_hiddens_in, num_hiddens_out = self.temporal_scale, self.temporal_scale
         for i in range(self.num_levels):
             num_hiddens_in = num_hiddens_out
             if i == 0:
