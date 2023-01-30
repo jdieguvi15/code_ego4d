@@ -40,7 +40,7 @@ class BoundaryAdjust(nn.Module):
         starts_left = torch.clamp(((loc_box[:,:,0] - boundary_length) / self.base_stride).to(dtype=torch.long), min=0, max=(self.tscale / self.base_stride)-1).long()
         starts_right = torch.clamp(((loc_box[:,:,0] + boundary_length) / self.base_stride).to(dtype=torch.long), min=0, max=(self.tscale / self.base_stride)-1).long()
 
-        start_feats_center = torch.stack([feat_frmlvl[i, :, starts_left[i, :]] for i in range(bs)]).permute(0, 2, 1).reshape(-1, C)
+        start_feats_center = torch.stack([feat_frmlvl[i, :, starts[i, :]] for i in range(bs)]).permute(0, 2, 1).reshape(-1, C)
         start_feats_left = torch.stack([feat_frmlvl[i, :, starts_left[i, :]] for i in range(bs)]).permute(0, 2, 1).reshape(-1, C)
         start_feats_right = torch.stack([feat_frmlvl[i, :, starts_right[i, :]] for i in range(bs)]).permute(0, 2, 1).reshape(-1, C)
 
