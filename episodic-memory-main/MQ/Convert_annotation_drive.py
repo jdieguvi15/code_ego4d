@@ -94,7 +94,7 @@ for k, v in clip_annot_1.items():
 print(f"Number of clips in training: {cnt_train}")
 print(f"Number of clips in validation: {cnt_val}")
 
-with open("/content/code_ego4d/episodic-memory-main/MQ/Evaluation/ego4d/annot/clip_annotations_drive.json", "w") as fp:
+with open("/content/drive/MyDrive/Ego4D_01_0932/annot/clip_annotations_drive.json", "w") as fp:
     json.dump(clip_annot_1, fp)
 
 
