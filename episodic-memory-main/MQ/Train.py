@@ -25,7 +25,7 @@ def Train_VSGN(opt):
     model = torch.nn.DataParallel(model)
     model.to(device)
 
-    optimizer = optim.Adam(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
+    optimizer = optim.AdamW(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
 
     start_epoch = 0
     kwargs = {'num_workers': 12, 'pin_memory': True, 'drop_last': True}
