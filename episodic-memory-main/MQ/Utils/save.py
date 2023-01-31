@@ -19,7 +19,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "architecture": architecture,
         "dataset": "ego4d",
         "batch_size": opt["batch_size"],
-        "optimizer_name": "Adam",
+        "optimizer_name": "AdamW",
         "learning_rate": opt["train_lr"],
         "num_epoch": opt["num_epoch"],
         "num_heads": opt["num_heads"],
