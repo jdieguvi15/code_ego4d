@@ -5,8 +5,8 @@ import os
 ######################################################################################################
 #                     Load data
 ######################################################################################################
-annotation_path = "/content/drive/MyDrive/Ego4d-main/ego4d_data/v1/annotations/"  # Change to your own path containing canonical annotation files
-feat_path = "/content/drive/MyDrive/Ego4d-main/ego4d_data/v1/slowfast8x8_r101_k400/"  # Change to your own path containing features of canonical videos
+annotation_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/annotations/"  # Change to your own path containing canonical annotation files
+feat_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/slowfast8x8_r101_k400/"  # Change to your own path containing features of canonical videos
 info_path = annotation_path + 'ego4d.json'
 annot_path_train = annotation_path + 'moments_train.json'
 annot_path_val = annotation_path + 'moments_val.json'
@@ -91,7 +91,7 @@ for k, v in clip_annot_1.items():
 print(f"Number of clips in training: {cnt_train}")
 print(f"Number of clips in validation: {cnt_val}")
 
-with open("Evaluation/ego4d/annot/clip_annotations_drive.json", "w") as fp:
+with open("/content/code_ego4d/episodic-memory-main/MQ/Evaluation/ego4d/annot/clip_annotations_drive.json", "w") as fp:
     json.dump(clip_annot_1, fp)
 
 
