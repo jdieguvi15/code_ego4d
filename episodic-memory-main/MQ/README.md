@@ -1,6 +1,14 @@
+This is the folder dedicated to the Moment Queries challenge. 
 
-## Environment Installation
-Create a conda environment and install required packages from scratch following the steps below
+###Take a look at the files:
+- In this folder we find the files to run, such as Train.py, Eval.py, ... and history.json to store the results.
+- Inside Evaluation there is the information about the annotations and the functions of the evaluation metrics.
+- In Models, there are the classes of all the models executable by the program and their classes, including ViT2 (which executes the algorithm called ViT+ in memory) and ReMoT.
+- In Utils there are complementary functions, such as the definition of the opts, which determines the parameters with which we can execute the code, or save.py that is used to save the results.
+
+
+### Environment Installation
+To run all the files you will need to have the following packages installed:
 ```
     conda create -n pytorch160 python=3.7 
     conda activate pytorch160   
@@ -12,42 +20,46 @@ Create a conda environment and install required packages from scratch following 
     conda install -c anaconda joblib    
     conda install -c conda-forge matplotlib 
     conda install -c conda-forge urllib3
+    pip install d2l==1.0.0b0
+    pip install wandb
 ```
+### Data required
+To run the code you need the Ego4D videos or features and the relevant annotations. Go to https://ego4d-data.org/ for more information.
+
+
 ### Annotation conversion 
-If you use the canonical annotation files, you need to first convert them by removing unused 
-categories and video clips
+First of all, the video annotations have to be converted. To do this, use the following instruction.
 ```
     python Convert_annotation.py
 ```
 
+!!! You have to change all the paths of the documents and instructions to those of your own machine, now they are all set to those used by the author for the execution in Peregrine.
+
+
+The following instructions can be used for training, prediction and evaluation.
+
 ### Training
 ```    
-     python Train.py --use_xGPN --is_train true --dataset ego4d --feature_path {DATA_PATH} --checkpoint_path {CHECKPOINT_PATH} --batch_size 32 --train_lr 0.0001
+     python Train.py --use_ReMoT --is_train true --dataset ego4d --feature_path {DATA_PATH} --checkpoint_path {CHECKPOINT_PATH} --batch_size 32 --train_lr 0.0001
 ```
 ### Inference
 ```
-     python Infer.py  --use_xGPN --is_train false --dataset ego4d --feature_path {DATA_PATH} --checkpoint_path {CHECKPOINT_PATH}  --output_path {OUTPUT_PATH}   
+     python Infer.py --use_ReMoT --is_train false --dataset ego4d --feature_path {DATA_PATH} --checkpoint_path {CHECKPOINT_PATH}  --output_path {OUTPUT_PATH}   
 ```
 ### Evaluation
 ```
      python Eval.py --dataset ego4d --output_path {OUTPUT_PATH} --out_prop_map {OUT_PMAP} --eval_stage all
 ```
-### Generate a submission file for the Ego4D Moment Queries challenge
-```
-    python Merge_detection_retrieval.py
-```
+
+It is important that all 3 instructions use the same parameters to save the results of the correct execution.
+
+Use the --testing option to see the shapes of the data at all moments, great to debug the code.
+
+In the scripts.sh document there is an example of instructions we used to run tests in Peregrine.
+
+
 
 ## Acknowledgements
 
-This codebase is built on  [VSGN](https://github.com/coolbay/VSGN).
+This codebase is built on  [Ego4D](https://github.com/EGO4D/episodic-memory/tree/main/MQ).
 
-Please also consider citing [VSGN](https://openaccess.thecvf.com/content/ICCV2021/papers/Zhao_Video_Self-Stitching_Graph_Network_for_Temporal_Action_Localization_ICCV_2021_paper.pdf) if you use this codebase.
-```
-@inproceedings{zhao2021video,
-  title={Video self-stitching graph network for temporal action localization},
-  author={Zhao, Chen and Thabet, Ali K and Ghanem, Bernard},
-  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
-  pages={13658--13667},
-  year={2021}
-}
-```

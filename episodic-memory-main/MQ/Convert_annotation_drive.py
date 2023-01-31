@@ -37,7 +37,10 @@ v_annot['videos'] = v_annot_train['videos'] + v_annot_val['videos'] + v_annot_te
 #                     Convert video annotations to clip annotations: clip_annot_1
 ######################################################################################################
 clip_annot_1 = {}
+i = 0
 for video in v_annot['videos']:
+    print("video", i)
+    i += 1
     vid = video['video_uid']
     clips = video['clips']
     v_duration = v_all_duration[vid] #feat_info[feat_info.video_uid == vid].canonical_video_duration_sec.values[0]
