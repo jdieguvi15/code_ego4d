@@ -53,10 +53,10 @@ for video in v_annot['videos']:
         print("omnivore shape:", feats2.shape)
         print("egovlp shape:", feats3.shape)
     except:
-        print(f'{vid} frames from the features do not exist!')
+        print(f'{vid} features do not exist!')
         continue
     if feats.shape[0] != feats2.shape[0] or feats.shape[0] != feats3.shape[0]:
-        print(f'{vid} frames do not match!')
+        print(f'{vid} feature frames do not match!')
         continue
     fps = feats.shape[0] / v_duration
     for clip in clips:
