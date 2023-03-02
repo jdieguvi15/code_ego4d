@@ -7,7 +7,7 @@ import os
 ######################################################################################################
 #                     Load data
 ######################################################################################################
-annotation_path = "/data/s5091217/Ego4d-main/ego4d_data/v1/annotations/"  # Change to your own path containing canonical annotation files
+annotation_path = "/data/s5091217/Ego4d-main/ego4d_data/v2/annotations/"  # Change to your own path containing canonical annotation files
 slowfast_path = "/data/s5091217/Ego4d-main/ego4d_data/v1/slowfast8x8_r101_k400"  # path for slowfast
 omnivore_path = "/data/s5091217/Ego4d-main/ego4d_data/v1/omnivore_video_swinl"  # path for omnivore
 egovlp_path = "/data/s5091217/Ego4d-main/ego4d_data/v1/egovlp_egonce"  # path for EgoVLP  (creo que solo tenemos train y val)
@@ -47,6 +47,7 @@ for video in v_annot['videos']:
     v_duration = v_all_duration[vid] #feat_info[feat_info.video_uid == vid].canonical_video_duration_sec.values[0]
     try:
         feats = torch.load(os.path.join(slowfast_path, vid + '.pt'))
+        print("slowfast shape:", feats.shape)
     except:
         print(f'{vid} slowfast features do not exist!')
         continue
