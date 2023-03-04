@@ -47,13 +47,13 @@ for video in v_annot['videos']:
     v_duration = v_all_duration[vid] #feat_info[feat_info.video_uid == vid].canonical_video_duration_sec.values[0]
     try:
         feats = torch.load(os.path.join(slowfast_path, vid + '.pt'))
-        print("slowfast shape:", feats.shape)
+        #print("slowfast shape:", feats.shape)
     except:
         print(f'{vid} slowfast features do not exist!')
         continue
     try:
         feats2 = torch.load(os.path.join(omnivore_path, vid + '.pt'))
-        print("omnivore shape:", feats2.shape)
+        #print("omnivore shape:", feats2.shape)
     except:
         print(f'{vid} omnivore features do not exist!')
         continue

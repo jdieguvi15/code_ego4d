@@ -26,6 +26,18 @@ def parse_opt():
         type=str,
         default="/mnt/sdb1/Datasets/Ego4d/action_feature_canonical")
     parser.add_argument(
+        '--slowfast_path',
+        type=str,
+        default="/data/s5091217/Ego4d-main/ego4d_data/v1/slowfast8x8_r101_k400")
+    parser.add_argument(
+        '--omnivore_path',
+        type=str,
+        default="/data/s5091217/Ego4d-main/ego4d_data/v1/omnivore_video_swinl")
+    parser.add_argument(
+        '--egovlp_path',
+        type=str,
+        default="/data/s5091217/Ego4d-main/ego4d_data/v1/egovlp_egonce")
+    parser.add_argument(
         '--clip_anno',
         type=str,
         default="Evaluation/ego4d/annot/clip_annotations.json")
@@ -62,7 +74,7 @@ def parse_opt():
     parser.add_argument(
         '--history_path',
         type=str,
-        default="./history.json")
+        default="./new_history.json")
         
     # Training hyper-parameters
     parser.add_argument(
@@ -114,9 +126,15 @@ def parse_opt():
         type=int,
         default=928)
     parser.add_argument(
+        '--features',
+        default='s',
+        type=str,
+        choices=['s', 'o', 'so'])
+    parser.add_argument(
         '--input_feat_dim',
         type=int,
-        default=2304)
+        default=2304) # for SlowFast
+                      # 1536 for Omnivore
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,

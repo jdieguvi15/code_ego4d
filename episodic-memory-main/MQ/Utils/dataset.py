@@ -25,7 +25,10 @@ class VideoDataSet(data.Dataset):
         self.temporal_gap = 1. / self.temporal_scale
         self.subset = subset
         self.mode = mode
-        self.feature_path = opt["feature_path"]
+        #self.feature_path = opt["feature_path"]
+        self.slowfast_path = opt["slowfast_path"]
+        self.omnivore_path = opt["omnivore_path"]
+        self.egovlp_path = opt["egovlp_path"]
         self.gap = opt['stitch_gap']
         self.clip_anno = opt['clip_anno']
         self.moment_classes = opt["moment_classes"]
@@ -86,8 +89,27 @@ class VideoDataSet(data.Dataset):
         video_name = clip_info['video_id']
 
         # Get video features
-        v_data = torch.load(os.path.join(self.feature_path, video_name + '.pt'))
-        v_data = torch.transpose(v_data, 0, 1)
+        #extraer las features de omnivore y slowfast juntarlas
+        #hacer switch dependiendo de las opciones
+        #hacer codigo juntar con ego4d
+        #v_data = torch.load(os.path.join(self.feature_path, video_name + '.pt'))
+        v_data_s = torch.load(os.path.join(self.slowfast_path, video_name + '.pt'))
+        v_data_o = torch.load(os.path.join(self.omnivore_path, video_name + '.pt'))
+        
+        #v_data = torch.transpose(v_data, 0, 1)
+        v_data_s = torch.transpose(v_data_s, 0, 1)
+        v_data_o = torch.transpose(v_data_o, 0, 1)
+        
+        if opt["features"] == 's' or opt["features"] == 'se':
+            v_data = v_data_s
+            print("Using Slowfast Features")
+        elif opt["features"] == 'o' or opt["features"] == 'oe':
+            v_data = v_data_o
+            print("Using Omnivore Features")
+        else:
+            v_data = torch.cat((v_data_s, v_data_o))
+            print("Using Slowfast and Omnivore Features")
+        
         num_frms_v = v_data.shape[-1]
         fps_v = clip_info['fps']
 

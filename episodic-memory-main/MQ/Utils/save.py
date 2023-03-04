@@ -13,11 +13,13 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
     for a in {"use_xGPN", "use_ViT2", "use_ReMoT"}:
         if opt[a]:
             architecture = a
-            
+                        
     config={
         "run_name": opt["run_name"],
         "architecture": architecture,
         "dataset": "ego4d",
+        "features": opt["features"],
+        "version": "v2" if opt["clip_anno"].endswith("v2.json") else "v1",
         "batch_size": opt["batch_size"],
         "optimizer_name": "AdamW",
         "learning_rate": opt["train_lr"],
@@ -38,10 +40,10 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         config["n_params"]= n_params
     if average_mAP != None:
         config["average_mAP"]= average_mAP
-        config["mAPs"]= mAPs.tolist()
+        #config["mAPs"]= mAPs.tolist()
     if recall != None:
         config["recall"]= recall
-        config["eval_result"]= eval_result.tolist()
+        #config["eval_result"]= eval_result.tolist()
     
     
     history_path = opt["history_path"]
