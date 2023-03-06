@@ -7,7 +7,7 @@ import os
 ######################################################################################################
 #                     Load data
 ######################################################################################################
-annotation_path = "/content/drive/MyDrive/Ego4D_01_0932/annot/"  # Change to your own path containing canonical annotation files
+annotation_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/annotations"  # Change to your own path containing canonical annotation files
 slowfast_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/slowfast8x8_r101_k400"  # path for slowfast
 omnivore_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/omnivore_video_swinl"  # path for omnivore
 egovlp_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/apdcephfs/private_qinghonglin/video_dataset/ego4d/benchmark_splits/mq/nips/egovlp_egonce"  # path for EgoVLP  (creo que solo tenemos train y val)
