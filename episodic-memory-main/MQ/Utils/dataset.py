@@ -25,6 +25,7 @@ class VideoDataSet(data.Dataset):
         self.temporal_gap = 1. / self.temporal_scale
         self.subset = subset
         self.mode = mode
+        self.features = opt["features"]
         #self.feature_path = opt["feature_path"]
         self.slowfast_path = opt["slowfast_path"]
         self.omnivore_path = opt["omnivore_path"]
@@ -100,10 +101,10 @@ class VideoDataSet(data.Dataset):
         v_data_s = torch.transpose(v_data_s, 0, 1)
         v_data_o = torch.transpose(v_data_o, 0, 1)
         
-        if opt["features"] == 's' or opt["features"] == 'se':
+        if self.features == 's' or self.features == 'se':
             v_data = v_data_s
             print("Using Slowfast Features")
-        elif opt["features"] == 'o' or opt["features"] == 'oe':
+        elif self.features == 'o' or self.features == 'oe':
             v_data = v_data_o
             print("Using Omnivore Features")
         else:
