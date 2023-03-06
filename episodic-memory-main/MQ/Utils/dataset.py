@@ -119,6 +119,13 @@ class VideoDataSet(data.Dataset):
 
         video_data = torch.zeros(self.input_feat_dim, self.temporal_scale)
         win_data = v_data[:, clip_start: clip_end+1]
+        
+        #unir con egovlp
+        c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
+        c_data_e = torch.transpose(c_data_e, 0, 1)
+        if self.features == 'se' or self.features == 'oe' or self.features == 'soe':
+            win_data = torch.cat(win_data, c_data_e)
+        
         num_frms = min(win_data.shape[-1], self.temporal_scale)
         video_data[:, :num_frms] = win_data[:, :num_frms]
         if self.mode == 'train':

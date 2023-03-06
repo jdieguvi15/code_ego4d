@@ -2,11 +2,15 @@ import json
 import torch
 import os
 
+# COMBINATION OF THE THREE FEATURES
+
 ######################################################################################################
 #                     Load data
 ######################################################################################################
-annotation_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/annotations/"  # Change to your own path containing canonical annotation files
-feat_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/slowfast8x8_r101_k400/"  # Change to your own path containing features of canonical videos
+annotation_path = "/content/drive/MyDrive/Ego4D_01_0932/annot/"  # Change to your own path containing canonical annotation files
+slowfast_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/slowfast8x8_r101_k400"  # path for slowfast
+omnivore_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/omnivore_video_swinl"  # path for omnivore
+egovlp_path = "/content/drive/MyDrive/Ego4D_01_0932/data/v1/apdcephfs/private_qinghonglin/video_dataset/ego4d/benchmark_splits/mq/nips/egovlp_egonce"  # path for EgoVLP  (creo que solo tenemos train y val)
 info_path = annotation_path + 'ego4d.json'
 annot_path_train = annotation_path + 'moments_train.json'
 annot_path_val = annotation_path + 'moments_val.json'
@@ -37,17 +41,30 @@ v_annot['videos'] = v_annot_train['videos'] + v_annot_val['videos'] + v_annot_te
 #                     Convert video annotations to clip annotations: clip_annot_1
 ######################################################################################################
 clip_annot_1 = {}
-i = 0
 for video in v_annot['videos']:
-    print("video", i)
-    i += 1
     vid = video['video_uid']
     clips = video['clips']
     v_duration = v_all_duration[vid] #feat_info[feat_info.video_uid == vid].canonical_video_duration_sec.values[0]
     try:
-        feats = torch.load(os.path.join(feat_path, vid + '.pt'))
+        feats = torch.load(os.path.join(slowfast_path, vid + '.pt'))
+        #print("slowfast shape:", feats.shape)
     except:
-        print(f'{vid} features do not exist!')
+        print(f'{vid} slowfast features do not exist!')
+        continue
+    try:
+        feats2 = torch.load(os.path.join(omnivore_path, vid + '.pt'))
+        #print("omnivore shape:", feats2.shape)
+    except:
+        print(f'{vid} omnivore features do not exist!')
+        continue
+    """try:
+        feats3 = torch.load(os.path.join(egovlp_path, vid + '.pt'))
+        print("egovlp shape:", feats3.shape)
+    except:
+        print(f'{vid} egovlp features do not exist!')
+        continue"""
+    if feats.shape[0] != feats2.shape[0]: #or feats.shape[0] != feats3.shape[0]:
+        print(f'{vid} feature frames do not match!')
         continue
     fps = feats.shape[0] / v_duration
     for clip in clips:
@@ -94,7 +111,7 @@ for k, v in clip_annot_1.items():
 print(f"Number of clips in training: {cnt_train}")
 print(f"Number of clips in validation: {cnt_val}")
 
-with open("/content/drive/MyDrive/Ego4D_01_0932/annot/clip_annotations_drive.json", "w") as fp:
+with open("Evaluation/ego4d/annot/clip_ann_v1.json", "w") as fp:
     json.dump(clip_annot_1, fp)
 
 
