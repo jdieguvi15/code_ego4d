@@ -103,13 +103,10 @@ class VideoDataSet(data.Dataset):
         
         if self.features == 's' or self.features == 'se':
             v_data = v_data_s
-            print("Using Slowfast Features")
         elif self.features == 'o' or self.features == 'oe':
             v_data = v_data_o
-            print("Using Omnivore Features")
         else:
             v_data = torch.cat((v_data_s, v_data_o))
-            print("Using Slowfast and Omnivore Features")
         
         num_frms_v = v_data.shape[-1]
         fps_v = clip_info['fps']

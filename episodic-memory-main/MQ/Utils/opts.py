@@ -129,7 +129,7 @@ def parse_opt():
         '--features',
         default='s',
         type=str,
-        choices=['s', 'o', 'so'])
+        choices=['s', 'o', 'so', 'se', 'oe', 'soe'])
     parser.add_argument(
         '--input_feat_dim',
         type=int,
