@@ -21,7 +21,6 @@ def load_json(file):
 class VideoDataSet(data.Dataset):
     def __init__(self, opt, subset="train", mode="train"):
         self.temporal_scale = opt["temporal_scale"]
-        self.input_feat_dim = opt['input_feat_dim']
         self.temporal_gap = 1. / self.temporal_scale
         self.subset = subset
         self.mode = mode
@@ -33,6 +32,17 @@ class VideoDataSet(data.Dataset):
         self.gap = opt['stitch_gap']
         self.clip_anno = opt['clip_anno']
         self.moment_classes = opt["moment_classes"]
+        
+        #self.input_feat_dim = opt['input_feat_dim']
+        self.input_feat_dim = 0
+        if 's' in self.features:
+            self.input_feat_dim += 2304
+        if 'o' in self.features:
+            self.input_feat_dim += 1536
+        if 'e' in self.features:
+            self.input_feat_dim += 1536
+        opt['input_feat_dim'] = self.input_feat_dim
+    
 
 
         self._getDatasetDict()
