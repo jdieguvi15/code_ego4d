@@ -94,12 +94,14 @@ class VideoDataSet(data.Dataset):
         #hacer switch dependiendo de las opciones
         #hacer codigo juntar con ego4d
         #v_data = torch.load(os.path.join(self.feature_path, video_name + '.pt'))
-        v_data_s = torch.load(os.path.join(self.slowfast_path, video_name + '.pt'))
-        v_data_o = torch.load(os.path.join(self.omnivore_path, video_name + '.pt'))
-        
         #v_data = torch.transpose(v_data, 0, 1)
-        v_data_s = torch.transpose(v_data_s, 0, 1)
-        v_data_o = torch.transpose(v_data_o, 0, 1)
+        
+        if 's' in self.features:
+            v_data_s = torch.load(os.path.join(self.slowfast_path, video_name + '.pt'))
+            v_data_s = torch.transpose(v_data_s, 0, 1)
+        if 'o' in self.features:
+            v_data_o = torch.load(os.path.join(self.omnivore_path, video_name + '.pt'))
+            v_data_o = torch.transpose(v_data_o, 0, 1)
         
         if self.features == 's' or self.features == 'se':
             v_data = v_data_s
@@ -118,9 +120,9 @@ class VideoDataSet(data.Dataset):
         win_data = v_data[:, clip_start: clip_end+1]
         
         #unir con egovlp
-        c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
-        c_data_e = torch.transpose(c_data_e, 0, 1)
-        if self.features == 'se' or self.features == 'oe' or self.features == 'soe':
+        if 'e' in self.features:
+            c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
+            c_data_e = torch.transpose(c_data_e, 0, 1)
             win_data = torch.cat(win_data, c_data_e)
         
         num_frms = min(win_data.shape[-1], self.temporal_scale)
