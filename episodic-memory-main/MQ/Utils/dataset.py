@@ -131,6 +131,7 @@ class VideoDataSet(data.Dataset):
         if 'e' in self.features:
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
+            print("win_data size:", win_data.shape, "c_data_e size:", c_data_e.shape)
             win_data = torch.cat((win_data, c_data_e))
         
         num_frms = min(win_data.shape[-1], self.temporal_scale)
