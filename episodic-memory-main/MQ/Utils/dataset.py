@@ -132,7 +132,8 @@ class VideoDataSet(data.Dataset):
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
             print("win_data size:", win_data.shape, "c_data_e size:", c_data_e.shape)
-            win_data = torch.cat((win_data, c_data_e))
+            win_data2 = c_data_e[:, clip_start: clip_end+1]
+            win_data = torch.cat((win_data, win_data2))
         
         num_frms = min(win_data.shape[-1], self.temporal_scale)
         video_data[:, :num_frms] = win_data[:, :num_frms]
