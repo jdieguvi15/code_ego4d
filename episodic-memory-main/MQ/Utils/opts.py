@@ -141,7 +141,7 @@ def parse_opt():
     parser.add_argument(
         '--egovlp_dim',
         type=int,
-        default=2560)
+        default=256)
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,
