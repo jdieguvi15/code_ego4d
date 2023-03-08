@@ -130,11 +130,11 @@ class VideoDataSet(data.Dataset):
         
         #unir con egovlp
         if 'e' in self.features:
-            self.input_feat_dim += self.egovlp_dim            
+            self.input_feat_dim += self.egovlp_dim
             video_data2 = torch.zeros(self.egovlp_dim, self.temporal_scale)
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
-            num_frms = min(win_data.shape[-1], self.temporal_scale)
+            num_frms = min(c_data_e.shape[-1], self.temporal_scale)
             video_data2[:, :num_frms] = c_data_e[:, :num_frms]
             print("video_data size:", video_data.shape, "video_data2 size:", video_data2.shape)
             video_data = torch.cat((video_data, video_data2))
