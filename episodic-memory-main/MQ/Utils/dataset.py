@@ -12,6 +12,10 @@ import pickle
 import torch.nn.functional as F
 from scipy.io import loadmat
 
+slowfast_dim = 2304
+omnivore_dim = 1536
+egovlp_dim = 256
+
 def load_json(file):
     with open(file) as json_file:
         data = json.load(json_file)
@@ -36,12 +40,10 @@ class VideoDataSet(data.Dataset):
         #self.input_feat_dim = opt['input_feat_dim']
         self.input_feat_dim = 0
         if 's' in self.features:
-            self.input_feat_dim += 2304
+            self.input_feat_dim += slowfast_dim
         if 'o' in self.features:
-            self.input_feat_dim += 1536
-        if 'e' in self.features:
-            self.input_feat_dim += 1536
-        opt['input_feat_dim'] = self.input_feat_dim
+            self.input_feat_dim += omnivore_dim
+        opt['input_feat_dim'] = self.input_feat_dim #TODO DELETE
 
         self._getDatasetDict()
 
@@ -126,17 +128,22 @@ class VideoDataSet(data.Dataset):
 
         video_data = torch.zeros(self.input_feat_dim, self.temporal_scale)
         win_data = v_data[:, clip_start: clip_end+1]
+        num_frms = min(win_data.shape[-1], self.temporal_scale)
+        video_data[:, :num_frms] = win_data[:, :num_frms]
         
         #unir con egovlp
         if 'e' in self.features:
+            self.input_feat_dim += egovlp_dim
+            opt['input_feat_dim'] = self.input_feat_dim #TODO DELETE
+            
+            video_data2 = torch.zeros(egovlp_dim, self.temporal_scale)
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
-            win_data2 = c_data_e[:, clip_start: clip_end+1]
-            print("win_data size:", win_data.shape, "win_data2 size:", win_data2.shape)
-            win_data = torch.cat((win_data, win_data2))
+            num_frms = min(win_data.shape[-1], self.temporal_scale)
+            video_data2[:, :num_frms] = c_data_e[:, :num_frms]
+            print("video_data size:", video_data.shape, "video_data2 size:", video_data2.shape)
+            video_data = torch.cat((video_data, video_data2))
         
-        num_frms = min(win_data.shape[-1], self.temporal_scale)
-        video_data[:, :num_frms] = win_data[:, :num_frms]
         if self.mode == 'train':
             match_score_action, match_score_start, match_score_end, gt_bbox_padding, num_gt, num_frms = \
                 self._get_train_data_label_org(num_frms, clip_name, fps_v)
