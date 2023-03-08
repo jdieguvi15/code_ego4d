@@ -42,8 +42,6 @@ class VideoDataSet(data.Dataset):
         if 'e' in self.features:
             self.input_feat_dim += 1536
         opt['input_feat_dim'] = self.input_feat_dim
-    
-
 
         self._getDatasetDict()
 
@@ -133,7 +131,7 @@ class VideoDataSet(data.Dataset):
         if 'e' in self.features:
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
-            win_data = torch.cat(win_data, c_data_e)
+            win_data = torch.cat((win_data, c_data_e))
         
         num_frms = min(win_data.shape[-1], self.temporal_scale)
         video_data[:, :num_frms] = win_data[:, :num_frms]

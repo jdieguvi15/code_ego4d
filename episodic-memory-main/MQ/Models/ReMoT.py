@@ -216,6 +216,16 @@ class ReMoT(nn.Module):
         self.mask_size = opt['mask_size']
         self.mlp_num_hiddens = opt['mlp_num_hiddens']
         self.dim_attention = opt['dim_attention']
+        
+        self.features = opt['features']
+        self.input_feat_dim = 0
+        if 's' in self.features:
+            self.input_feat_dim += 2304
+        if 'o' in self.features:
+            self.input_feat_dim += 1536
+        if 'e' in self.features:
+            self.input_feat_dim += 1536
+        opt['input_feat_dim'] = self.input_feat_dim
 
         # Reduce the feature dimension from input_feat_dim to bb_hidden_dim
         self.embC = nn.Sequential(

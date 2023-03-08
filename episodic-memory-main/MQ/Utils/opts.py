@@ -135,6 +135,7 @@ def parse_opt():
         type=int,
         default=2304) # for SlowFast
                       # 1536 for Omnivore
+                      # BORRARLO
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,
