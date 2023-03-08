@@ -135,7 +135,6 @@ class VideoDataSet(data.Dataset):
             c_data_e = torch.transpose(c_data_e, 0, 1)
             num_frms = min(c_data_e.shape[-1], self.temporal_scale)
             video_data2[:, :num_frms] = c_data_e[:, :num_frms]
-            print("video_data size:", video_data.shape, "video_data2 size:", video_data2.shape)
             video_data = torch.cat((video_data, video_data2))
         
         if self.mode == 'train':
