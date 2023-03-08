@@ -219,11 +219,11 @@ class ReMoT(nn.Module):
         self.features = opt['features']
         self.input_feat_dim = 0
         if 's' in self.features:
-            self.input_feat_dim += 2304
+            self.input_feat_dim += opt['slowfast_dim']
         if 'o' in self.features:
-            self.input_feat_dim += 1536
+            self.input_feat_dim += opt['omnivore_dim']
         if 'e' in self.features:
-            self.input_feat_dim += 1536
+            self.input_feat_dim += opt['egovlp_dim']
 
         # Reduce the feature dimension from input_feat_dim to bb_hidden_dim
         self.embC = nn.Sequential(
