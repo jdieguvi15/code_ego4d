@@ -84,7 +84,7 @@ def parse_opt():
     parser.add_argument(
         '--train_lr',
         type=float,
-        default=0.00005)
+        default=0.0001)
     parser.add_argument(
         '--weight_decay',
         type=float,
@@ -153,7 +153,7 @@ def parse_opt():
     parser.add_argument(
         '--num_levels',
         type=int,
-        default=5)  # 5
+        default=6)  # 5
     parser.add_argument(
         '--num_head_layers',
         type=int,
@@ -228,7 +228,7 @@ def parse_opt():
     parser.add_argument(
         '--num_heads',
         type=int,
-        default=2)
+        default=8)
     parser.add_argument(
         '--num_blks',
         type=int,
