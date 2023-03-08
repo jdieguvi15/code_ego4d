@@ -131,11 +131,17 @@ def parse_opt():
         type=str,
         choices=['s', 'o', 'so', 'se', 'oe', 'soe'])
     parser.add_argument(
-        '--input_feat_dim',
+        '--slowfast_dim',
         type=int,
-        default=2304) # for SlowFast
-                      # 1536 for Omnivore
-                      # BORRARLO
+        default=2304)
+    parser.add_argument(
+        '--omnivore_dim',
+        type=int,
+        default=1536)
+    parser.add_argument(
+        '--egovlp_dim',
+        type=int,
+        default=2560)
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,

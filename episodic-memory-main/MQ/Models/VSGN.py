@@ -23,7 +23,6 @@ class VSGN(nn.Module):
         self.tem_best_loss = 10000000
         self.hidden_dim_2d = 128
         self.hidden_dim_3d = 512
-        self.input_feat_dim = opt['input_feat_dim']
         self.testing = opt["testing"]
         self.opt = opt
         

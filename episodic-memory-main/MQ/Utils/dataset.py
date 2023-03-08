@@ -12,10 +12,6 @@ import pickle
 import torch.nn.functional as F
 from scipy.io import loadmat
 
-slowfast_dim = 2304
-omnivore_dim = 1536
-egovlp_dim = 256
-
 def load_json(file):
     with open(file) as json_file:
         data = json.load(json_file)
@@ -33,17 +29,18 @@ class VideoDataSet(data.Dataset):
         self.slowfast_path = opt["slowfast_path"]
         self.omnivore_path = opt["omnivore_path"]
         self.egovlp_path = opt["egovlp_path"]
+        self.slowfast_dim = opt["slowfast_dim"]
+        self.omnivore_dim = opt["omnivore_dim"]
+        self.egovlp_dim = opt["egovlp_dim"]
         self.gap = opt['stitch_gap']
         self.clip_anno = opt['clip_anno']
         self.moment_classes = opt["moment_classes"]
         
-        #self.input_feat_dim = opt['input_feat_dim']
         self.input_feat_dim = 0
         if 's' in self.features:
-            self.input_feat_dim += slowfast_dim
+            self.input_feat_dim += self.slowfast_dim
         if 'o' in self.features:
-            self.input_feat_dim += omnivore_dim
-        opt['input_feat_dim'] = self.input_feat_dim #TODO DELETE
+            self.input_feat_dim += self.omnivore_dim
 
         self._getDatasetDict()
 
@@ -133,10 +130,10 @@ class VideoDataSet(data.Dataset):
         
         #unir con egovlp
         if 'e' in self.features:
-            self.input_feat_dim += egovlp_dim
+            self.input_feat_dim += self.egovlp_dim
             opt['input_feat_dim'] = self.input_feat_dim #TODO DELETE
             
-            video_data2 = torch.zeros(egovlp_dim, self.temporal_scale)
+            video_data2 = torch.zeros(self.egovlp_dim, self.temporal_scale)
             c_data_e = torch.load(os.path.join(self.egovlp_path, clip_name + '.pt'))
             c_data_e = torch.transpose(c_data_e, 0, 1)
             num_frms = min(win_data.shape[-1], self.temporal_scale)

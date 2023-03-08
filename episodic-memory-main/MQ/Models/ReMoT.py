@@ -208,7 +208,6 @@ class ReMoT(nn.Module):
     def __init__(self, opt):
         super(ReMoT, self).__init__()
         print("Creating the Transformer Pyramid")
-        self.input_feat_dim = opt['input_feat_dim']
         self.bb_hidden_dim = opt['bb_hidden_dim']
         self.tem_best_loss = 10000000
         self.num_levels = opt['num_levels']
@@ -225,7 +224,6 @@ class ReMoT(nn.Module):
             self.input_feat_dim += 1536
         if 'e' in self.features:
             self.input_feat_dim += 1536
-        opt['input_feat_dim'] = self.input_feat_dim
 
         # Reduce the feature dimension from input_feat_dim to bb_hidden_dim
         self.embC = nn.Sequential(
