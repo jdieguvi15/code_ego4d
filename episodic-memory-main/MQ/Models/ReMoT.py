@@ -254,11 +254,9 @@ class ReMoT(nn.Module):
         
         # Different projections for each set of features
         
-        s, o, e = torch.Tensor([]), torch.Tensor([]), torch.Tensor([])
+        s, o, e = torch.Tensor([]).to('cuda'), torch.Tensor([]).to('cuda'), torch.Tensor([]).to('cuda')
         if 's' in self.features:
             s, input = input[:,:self.s_dim], input[:,self.s_dim:]
-            print("s.shape", s.shape)
-            print("s_dim", self.s_dim)
             s = self.embS(s)
         if 'o' in self.features:
             o, input = input[:,:self.o_dim], input[:,self.o_dim:]
