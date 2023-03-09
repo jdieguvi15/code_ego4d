@@ -103,30 +103,31 @@ class VideoDataSet(data.Dataset):
         #v_data = torch.load(os.path.join(self.feature_path, video_name + '.pt'))
         #v_data = torch.transpose(v_data, 0, 1)
         
-        if 's' in self.features:
-            v_data_s = torch.load(os.path.join(self.slowfast_path, video_name + '.pt'))
-            v_data_s = torch.transpose(v_data_s, 0, 1)
-        if 'o' in self.features:
-            v_data_o = torch.load(os.path.join(self.omnivore_path, video_name + '.pt'))
-            v_data_o = torch.transpose(v_data_o, 0, 1)
-        
-        if self.features == 's' or self.features == 'se':
-            v_data = v_data_s
-        elif self.features == 'o' or self.features == 'oe':
-            v_data = v_data_o
-        else:
-            v_data = torch.cat((v_data_s, v_data_o))
-        
-        num_frms_v = v_data.shape[-1]
-        fps_v = clip_info['fps']
+        if 's' in self.features or 'o' in self.features:
+            if 's' in self.features:
+                v_data_s = torch.load(os.path.join(self.slowfast_path, video_name + '.pt'))
+                v_data_s = torch.transpose(v_data_s, 0, 1)
+            if 'o' in self.features:
+                v_data_o = torch.load(os.path.join(self.omnivore_path, video_name + '.pt'))
+                v_data_o = torch.transpose(v_data_o, 0, 1)
+            
+            if self.features == 's' or self.features == 'se':
+                v_data = v_data_s
+            elif self.features == 'o' or self.features == 'oe':
+                v_data = v_data_o
+            else:
+                v_data = torch.cat((v_data_s, v_data_o))
+            
+            num_frms_v = v_data.shape[-1]
+            fps_v = clip_info['fps']
 
-        clip_start = int(clip_info['parent_start_sec'] * fps_v)
-        clip_end = min(int(clip_info['parent_end_sec'] * fps_v), num_frms_v-1)
+            clip_start = int(clip_info['parent_start_sec'] * fps_v)
+            clip_end = min(int(clip_info['parent_end_sec'] * fps_v), num_frms_v-1)
 
-        video_data = torch.zeros(self.input_feat_dim, self.temporal_scale)
-        win_data = v_data[:, clip_start: clip_end+1]
-        num_frms = min(win_data.shape[-1], self.temporal_scale)
-        video_data[:, :num_frms] = win_data[:, :num_frms]
+            video_data = torch.zeros(self.input_feat_dim, self.temporal_scale)
+            win_data = v_data[:, clip_start: clip_end+1]
+            num_frms = min(win_data.shape[-1], self.temporal_scale)
+            video_data[:, :num_frms] = win_data[:, :num_frms]
         
         #unir con egovlp
         if 'e' in self.features:
@@ -135,7 +136,11 @@ class VideoDataSet(data.Dataset):
             c_data_e = torch.transpose(c_data_e, 0, 1)
             num_frms = min(c_data_e.shape[-1], self.temporal_scale)
             video_data2[:, :num_frms] = c_data_e[:, :num_frms]
-            video_data = torch.cat((video_data, video_data2))
+            if 's' in self.features or 'o' in self.features:
+                video_data = torch.cat((video_data, video_data2))
+            else:
+                video_data = video_data2
+                    
         
         if self.mode == 'train':
             match_score_action, match_score_start, match_score_end, gt_bbox_padding, num_gt, num_frms = \

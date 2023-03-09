@@ -217,25 +217,20 @@ class ReMoT(nn.Module):
         self.dim_attention = opt['dim_attention']
         
         self.features = opt['features']
-        self.input_feat_dim = 0
+        self.s_dim, self.o_dim, self.e_dim = opt['slowfast_dim'], opt['omnivore_dim'], opt['egovlp_dim']
+        self.proj_dim = opt['proj_dim']
+        
+        # Reduce the feature dimension from input_feat_dim to proj_dim
         if 's' in self.features:
-            self.input_feat_dim += opt['slowfast_dim']
+            self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         if 'o' in self.features:
-            self.input_feat_dim += opt['omnivore_dim']
+            self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         if 'e' in self.features:
-            self.input_feat_dim += opt['egovlp_dim']
-
-        # Reduce the feature dimension from input_feat_dim to bb_hidden_dim
-        self.embC = nn.Sequential(
-            nn.Conv1d(in_channels=self.input_feat_dim, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1),
-            nn.GELU(),)
-        # second option:
-        #self.emb = nn.Sequential(
-        #    nn.LazyLinear(self.mlp_num_hiddens),
-        #    nn.GELU(),
-        #    nn.LazyLinear(self.bb_hidden_dim),
-        #    nn.GELU(),)
-
+            self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+        
+        in_ch = len(self.features) * self.proj_dim
+        self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+        
         # PARAMETERS:
         # num_hiddens is the dimension with which we represent the data,
         # in this case, the temporal steps, it will be reduced
@@ -256,8 +251,21 @@ class ReMoT(nn.Module):
     
         if self.testing:
             print("Transformer: input.shape:", input.shape)
-    
-        X = self.embC(input)
+        
+        # Different projections for each set of features
+        
+        s, o, e = torch.Tensor([]), torch.Tensor([]), torch.Tensor([])
+        if 's' in self.features:
+            s, input = input[:s_dim], input[s_dim:]
+            s = self.embS(s)
+        if 'o' in self.features:
+            o, input = input[:o_dim], input[o_dim:]
+            o = self.embO(o)
+        if 'e' in self.features:
+            e = self.embE(input)
+        
+        X = torch.cat((s, o, e))
+        X = self.embX(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
         #X = X + self.pos_encoding

@@ -143,6 +143,10 @@ def parse_opt():
         type=int,
         default=256)
     parser.add_argument(
+        '--proj_dim',
+        type=int,
+        default=256)
+    parser.add_argument(
         '--bb_hidden_dim',
         type=int,
         default=256)
