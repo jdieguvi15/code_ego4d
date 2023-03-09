@@ -264,7 +264,7 @@ class ReMoT(nn.Module):
         if 'e' in self.features:
             e = self.embE(input)
         
-        X = torch.cat((s, o, e))
+        X = torch.cat((s, o, e), 1)
         X = self.embX(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
