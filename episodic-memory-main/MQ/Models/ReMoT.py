@@ -256,12 +256,12 @@ class ReMoT(nn.Module):
         
         s, o, e = torch.Tensor([]), torch.Tensor([]), torch.Tensor([])
         if 's' in self.features:
-            s, input = input[:self.s_dim], input[self.s_dim:]
+            s, input = input[:,:self.s_dim], input[:,self.s_dim:]
             print("s.shape", s.shape)
             print("s_dim", self.s_dim)
             s = self.embS(s)
         if 'o' in self.features:
-            o, input = input[:self.o_dim], input[self.o_dim:]
+            o, input = input[:,:self.o_dim], input[:,self.o_dim:]
             o = self.embO(o)
         if 'e' in self.features:
             e = self.embE(input)
