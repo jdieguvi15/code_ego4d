@@ -95,6 +95,7 @@ class VideoDataSet(data.Dataset):
         clip_name = self.clip_list[index]
         clip_info = self.clip_dict[clip_name]
         video_name = clip_info['video_id']
+        fps_v = clip_info['fps']
 
         # Get video features
         #extraer las features de omnivore y slowfast juntarlas
@@ -119,8 +120,6 @@ class VideoDataSet(data.Dataset):
                 v_data = torch.cat((v_data_s, v_data_o))
             
             num_frms_v = v_data.shape[-1]
-            fps_v = clip_info['fps']
-
             clip_start = int(clip_info['parent_start_sec'] * fps_v)
             clip_end = min(int(clip_info['parent_end_sec'] * fps_v), num_frms_v-1)
 

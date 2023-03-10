@@ -218,27 +218,30 @@ class ReMoT(nn.Module):
         
         self.features = opt['features']
         self.s_dim, self.o_dim, self.e_dim = opt['slowfast_dim'], opt['omnivore_dim'], opt['egovlp_dim']
-        self.proj_dim = opt['proj_dim']
-        
-        # Reduce the feature dimension from input_feat_dim to proj_dim
-        if 's' in self.features:
-            self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-        if 'o' in self.features:
-            self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-        if 'e' in self.features:
-            self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=self.proj_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-        
-        in_ch = len(self.features) * self.proj_dim
-        self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=self.bb_hidden_dim, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         
         # PARAMETERS:
-        # num_hiddens is the dimension with which we represent the data,
-        # in this case, the temporal steps, it will be reduced
-        num_hiddens = self.bb_hidden_dim   # number of elements in each feature
         num_blks = opt['num_blks']    # we will only use 1
         self.dropout = 0.2
         ffn_num_hiddens = opt["mlp_num_hiddens"]    # it's basically the same
         num_heads = opt["num_heads"]
+        # PROYECCIONES FIJAS
+        #self.proj_dim = opt['proj_dim']
+        #num_hiddens = self.bb_hidden_dim   # number of elements in each feature
+        
+        num_hiddens = 0
+        # Reduce the feature dimension from input_feat_dim to 384, 384, 256
+        if 's' in self.features:
+            self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+            num_hiddens += 384
+        if 'o' in self.features:
+            self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+            num_hiddens += 384
+        if 'e' in self.features:
+            self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=256, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+            num_hiddens += 256
+        
+        #in_ch = len(self.features) * self.proj_dim
+        #self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         
         #Pos enc can be removed
         #self.pos_encoding = nn.Parameter(torch.randn(1, 928, num_hiddens)) # learnable
@@ -265,7 +268,7 @@ class ReMoT(nn.Module):
             e = self.embE(input)
         
         X = torch.cat((s, o, e), 1)
-        X = self.embX(X)
+        #X = self.embX(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
         #X = X + self.pos_encoding
