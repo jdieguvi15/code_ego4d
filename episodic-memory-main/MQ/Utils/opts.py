@@ -149,7 +149,7 @@ def parse_opt():
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,
-        default=256)
+        default=1024)
     parser.add_argument(
         '--decoder_num_classes',
         type=int,
@@ -228,7 +228,7 @@ def parse_opt():
     parser.add_argument(
         '--dim_attention',
         type=int,
-        default=256)
+        default=1024)
     parser.add_argument(
         '--num_heads',
         type=int,
@@ -313,5 +313,15 @@ def parse_opt():
         default="test")
         
     args = parser.parse_args()
+    
+    num_hiddens = 0
+    if 's' in self.features:
+        num_hiddens += 384
+    if 'o' in self.features:
+        num_hiddens += 384
+    if 'e' in self.features:
+        num_hiddens += 256
+    
+    args[bb_hidden_dim] = num_hiddens
 
     return args

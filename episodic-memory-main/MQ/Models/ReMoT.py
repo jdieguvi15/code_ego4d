@@ -228,17 +228,13 @@ class ReMoT(nn.Module):
         #self.proj_dim = opt['proj_dim']
         #num_hiddens = self.bb_hidden_dim   # number of elements in each feature
         
-        num_hiddens = 0
         # Reduce the feature dimension from input_feat_dim to 384, 384, 256
         if 's' in self.features:
             self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-            num_hiddens += 384
         if 'o' in self.features:
             self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-            num_hiddens += 384
         if 'e' in self.features:
             self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=256, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-            num_hiddens += 256
         
         #in_ch = len(self.features) * self.proj_dim
         #self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
