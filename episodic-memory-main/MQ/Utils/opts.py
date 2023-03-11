@@ -315,11 +315,11 @@ def parse_opt():
     args = parser.parse_args()
     
     num_hiddens = 0
-    if 's' in self.features:
+    if 's' in args[features]:
         num_hiddens += 384
-    if 'o' in self.features:
+    if 'o' in args[features]:
         num_hiddens += 384
-    if 'e' in self.features:
+    if 'e' in args[features]:
         num_hiddens += 256
     
     args[bb_hidden_dim] = num_hiddens
