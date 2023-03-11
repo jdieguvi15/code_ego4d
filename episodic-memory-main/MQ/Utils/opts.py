@@ -313,15 +313,19 @@ def parse_opt():
         default="test")
         
     args = parser.parse_args()
-    
-    num_hiddens = 0
-    if 's' in args['features']:
-        num_hiddens += 384
-    if 'o' in args['features']:
-        num_hiddens += 384
-    if 'e' in args['features']:
-        num_hiddens += 256
-    
-    args['bb_hidden_dim'] = num_hiddens
 
     return args
+    
+    
+def improve_opt(opt):
+    num_hiddens = 0
+    if 's' in opt['features']:
+        num_hiddens += 384
+    if 'o' in opt['features']:
+        num_hiddens += 384
+    if 'e' in opt['features']:
+        num_hiddens += 256
+    
+    opt['bb_hidden_dim'] = num_hiddens
+    
+    return opt

@@ -136,6 +136,7 @@ if __name__ == '__main__':
 
     opt = opts.parse_opt()
     opt = vars(opt)
+    opt = improve_opt(opt)
 
     if not os.path.exists(opt["checkpoint_path"]):
         os.makedirs(opt["checkpoint_path"])

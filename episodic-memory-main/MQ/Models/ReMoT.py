@@ -220,13 +220,13 @@ class ReMoT(nn.Module):
         self.s_dim, self.o_dim, self.e_dim = opt['slowfast_dim'], opt['omnivore_dim'], opt['egovlp_dim']
         
         # PARAMETERS:
+        num_hiddens = self.bb_hidden_dim   # number of elements in each feature
         num_blks = opt['num_blks']    # we will only use 1
         self.dropout = 0.2
         ffn_num_hiddens = opt["mlp_num_hiddens"]    # it's basically the same
         num_heads = opt["num_heads"]
         # PROYECCIONES FIJAS
         #self.proj_dim = opt['proj_dim']
-        #num_hiddens = self.bb_hidden_dim   # number of elements in each feature
         
         # Reduce the feature dimension from input_feat_dim to 384, 384, 256
         if 's' in self.features:
