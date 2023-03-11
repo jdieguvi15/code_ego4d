@@ -225,6 +225,7 @@ class ReMoT(nn.Module):
         self.dropout = 0.2
         ffn_num_hiddens = opt["mlp_num_hiddens"]    # it's basically the same
         num_heads = opt["num_heads"]
+        feature_dim = opt["feature_dim"]
         # PROYECCIONES FIJAS
         #self.proj_dim = opt['proj_dim']
         
@@ -233,8 +234,7 @@ class ReMoT(nn.Module):
             self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         if 'o' in self.features:
             self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-        if 'e' in self.features:
-            self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=256, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+        self.embX = nn.Sequential(nn.Conv1d(in_channels=self.feature_dim, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         
         #in_ch = len(self.features) * self.proj_dim
         #self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
@@ -261,7 +261,8 @@ class ReMoT(nn.Module):
             o, input = input[:,:self.o_dim], input[:,self.o_dim:]
             o = self.embO(o)
         if 'e' in self.features:
-            e = self.embE(input)
+            #e = self.embE(input)
+            e = input.to('cuda')
         
         X = torch.cat((s, o, e), 1)
         #X = self.embX(X)

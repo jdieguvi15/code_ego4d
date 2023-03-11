@@ -149,7 +149,7 @@ def parse_opt():
     parser.add_argument(
         '--bb_hidden_dim',
         type=int,
-        default=1024)
+        default=256)
     parser.add_argument(
         '--decoder_num_classes',
         type=int,
@@ -326,6 +326,6 @@ def improve_opt(opt):
     if 'e' in opt['features']:
         num_hiddens += 256
     
-    opt['bb_hidden_dim'] = num_hiddens
+    opt['feature_dim'] = num_hiddens
     
     return opt
