@@ -234,7 +234,7 @@ class ReMoT(nn.Module):
             self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         if 'o' in self.features:
             self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=384, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
-        self.embX = nn.Sequential(nn.Conv1d(in_channels=self.feature_dim, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
+        self.embX = nn.Sequential(nn.Conv1d(in_channels=feature_dim, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
         
         #in_ch = len(self.features) * self.proj_dim
         #self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
