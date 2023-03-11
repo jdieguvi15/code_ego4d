@@ -154,7 +154,7 @@ if __name__ == '__main__':
 
     opt = opts.parse_opt()
     opt = vars(opt)
-    opt = improve_opt(opt)
+    opt = opts.improve_opt(opt)
 
     print(opt)
 
