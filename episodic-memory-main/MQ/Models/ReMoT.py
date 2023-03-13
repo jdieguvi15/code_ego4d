@@ -265,7 +265,7 @@ class ReMoT(nn.Module):
             e = input.to('cuda')
         
         X = torch.cat((s, o, e), 1)
-        #X = self.embX(X)
+        X = self.embX(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
         #X = X + self.pos_encoding
