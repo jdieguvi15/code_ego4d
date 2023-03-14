@@ -321,6 +321,10 @@ def parse_opt():
         '--scheduler',
         type=int,
         default=0)
+    parser.add_argument(
+        '--ks',
+        type=int,
+        default=3)
         
     args = parser.parse_args()
 

@@ -32,7 +32,8 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "num_levels": opt["num_levels"],
         "mask_size": opt["mask_size"],
         "optim": opt["optim"],
-        "scheduler":opt["scheduler"]
+        "scheduler":opt["scheduler"],
+        "ks":opt["ks"]
     }
     if best_epoch != None:
         config["best_epoch"]= best_epoch
