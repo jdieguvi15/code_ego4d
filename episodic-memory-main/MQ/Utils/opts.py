@@ -268,6 +268,10 @@ def parse_opt():
         default=False,
         action='store_true')
     parser.add_argument(
+        '--use_ReMoTtests',
+        default=False,
+        action='store_true')
+    parser.add_argument(
         '--use_VSS',
         default=False,
         action='store_true')

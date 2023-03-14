@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from .XGPN import XGPN
 from .ReMoT import ReMoT
+from .ReMoTtests import ReMoT as ReMoTtests
 import torch.nn.functional as F
 from .Head import Head
 from .AnchorGenerator import AnchorGenerator
@@ -29,6 +30,8 @@ class VSGN(nn.Module):
         # Choose the algorithm
         if opt["use_ReMoT"]:
             self.trans = ReMoT(opt)
+        elif opt["use_ReMoTtests"]:
+            self.trans = ReMoTtests(opt)
         else:
             self.xGPN = XGPN(opt)
 
@@ -74,7 +77,7 @@ class VSGN(nn.Module):
         if self.testing:
             print("VSGN: input.shape = ", input.shape)
         
-        if self.opt["use_ReMoT"]:
+        if self.opt["use_ReMoT"] or self.opt["use_ReMoTtests"]:
             feats_enc, feats_dec = self.trans(input)
             if self.testing:
                 print("VSGN: feats_enc.shape before = ", [f.shape for f in feats_enc])
