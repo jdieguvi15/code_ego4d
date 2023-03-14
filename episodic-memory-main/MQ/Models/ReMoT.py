@@ -225,17 +225,38 @@ class ReMoT(nn.Module):
         self.dropout = 0.2
         ffn_num_hiddens = opt["mlp_num_hiddens"]    # it's basically the same
         num_heads = opt["num_heads"]
-        feature_dim = opt["feature_dim"]
         ks = opt["ks"]
         # PROYECCIONES FIJAS
         #self.proj_dim = opt['proj_dim']
         
-        # Reduce the feature dimension from input_feat_dim to 384, 384, 256
+        # This chain of ifs is intended to project the features using the minimum number of transformations.
+        # If the standard 256, 512, 1024 sizes are used, they will only be projected
+        # and concatenated, in all other cases we will need another projection.
+        if num_hiddens == 256:
+            if len(self.features) == 1: s_out, o_out, e_out = 256, 256, 256
+            elif len(self.features) == 2: s_out, o_out, e_out = 128, 128, 128
+            elif len(self.features) == 3: s_out, o_out, e_out = 90, 90, 76
+        elif num_hiddens == 512:
+            if len(self.features) == 1: s_out, o_out, e_out = 512, 512, 512
+            elif len(self.features) == 2: s_out, o_out, e_out = 256, 256, 256
+            elif len(self.features) == 3: s_out, o_out, e_out = 180, 180, 152
+        else:
+            if len(self.features) == 1: s_out, o_out, e_out = 1024, 1024, 1024
+            elif len(self.features) == 2: s_out, o_out, e_out = 512, 512, 512
+            elif len(self.features) == 3: s_out, o_out, e_out = 384, 384, 256
+        
+        self.e_needs_proj = 'e' in self.features and e_out != 256
+        self.need_proj = num_hiddens not in [256, 512, 1024]
+        
         if 's' in self.features:
-            self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=384, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
+            self.embS = nn.Sequential(nn.Conv1d(in_channels=self.s_dim, out_channels=s_out, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
         if 'o' in self.features:
-            self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=384, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
-        self.embX = nn.Sequential(nn.Conv1d(in_channels=feature_dim, out_channels=num_hiddens, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
+            self.embO = nn.Sequential(nn.Conv1d(in_channels=self.o_dim, out_channels=o_out, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
+        if self.e_needs_proj:
+            self.embE = nn.Sequential(nn.Conv1d(in_channels=self.e_dim, out_channels=e_out, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
+        
+        if self.need_proj:
+            self.embX = nn.Sequential(nn.Conv1d(in_channels=1024, out_channels=num_hiddens, kernel_size=ks,stride=1,padding=1,groups=1), nn.GELU(),)
         
         #in_ch = len(self.features) * self.proj_dim
         #self.embX = nn.Sequential(nn.Conv1d(in_channels=in_ch, out_channels=num_hiddens, kernel_size=3,stride=1,padding=1,groups=1), nn.GELU(),)
@@ -261,12 +282,14 @@ class ReMoT(nn.Module):
         if 'o' in self.features:
             o, input = input[:,:self.o_dim], input[:,self.o_dim:]
             o = self.embO(o)
-        if 'e' in self.features:
-            #e = self.embE(input)
+        if self.e_needs_proj:
+            e = self.embE(input)
+        elif 'e' in self.features:
             e = input.to('cuda')
         
         X = torch.cat((s, o, e), 1)
-        X = self.embX(X)
+        if self.need_proj:
+            X = self.embX(X)
         X = X.transpose(1, 2)
         #X = self.emb(input)
         #X = X + self.pos_encoding
