@@ -47,7 +47,7 @@ def Train_VSGN(opt):
     if opt["scheduler"] == 1:
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=opt["step_size"], gamma=opt["step_gamma"])
     else:
-        scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer) # probar parametros
+        scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer, max_lr=opt["train_lr"]) # probar parametros
     
     start_time = time.time()
     best_epoch, best_time = 0, 0
