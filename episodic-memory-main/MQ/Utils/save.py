@@ -10,7 +10,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
     """
     
     architecture = "default"
-    for a in {"use_xGPN", "use_ViT2", "use_ReMoT"}:
+    for a in {"use_xGPN", "use_ViT2", "use_ReMoT", "use_ReMoTtests"}:
         if opt[a]:
             architecture = a
                         

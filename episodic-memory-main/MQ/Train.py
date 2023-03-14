@@ -161,7 +161,7 @@ if __name__ == '__main__':
     name1 = opt["features"] + version
     
     architecture = "default"
-    for a in {"use_xGPN", "use_ViT2", "use_ReMoT"}:
+    for a in {"use_xGPN", "use_ViT2", "use_ReMoT", "use_ReMoTtests"}:
         if opt[a]:
             architecture = a
     
