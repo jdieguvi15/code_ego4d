@@ -30,7 +30,9 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "bb_hidden_dim": opt["bb_hidden_dim"],
         "mlp_num_hiddens": opt["mlp_num_hiddens"],
         "num_levels": opt["num_levels"],
-        "mask_size": opt["mask_size"]
+        "mask_size": opt["mask_size"],
+        "optim": opt["optim"],
+        "scheduler":opt["scheduler"]
     }
     if best_epoch != None:
         config["best_epoch"]= best_epoch
