@@ -21,7 +21,7 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "features": opt["features"],
         "version": "v2" if opt["clip_anno"].endswith("v2.json") else "v1",
         "batch_size": opt["batch_size"],
-        "optimizer_name": "AdamW",
+        "optimizer_name": opt["optim"],
         "learning_rate": opt["train_lr"],
         "num_epoch": opt["num_epoch"],
         "num_heads": opt["num_heads"],
@@ -31,7 +31,6 @@ def save_results(opt, best_epoch=None, best_time=None, n_params=None, average_mA
         "mlp_num_hiddens": opt["mlp_num_hiddens"],
         "num_levels": opt["num_levels"],
         "mask_size": opt["mask_size"],
-        "optim": opt["optim"],
         "scheduler":opt["scheduler"],
         "ks":opt["ks"]
     }
