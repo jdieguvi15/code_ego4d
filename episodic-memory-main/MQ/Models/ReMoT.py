@@ -245,7 +245,7 @@ class ReMoT(nn.Module):
             elif len(self.features) == 2: s_out, o_out, e_out = 512, 512, 512
             elif len(self.features) == 3: s_out, o_out, e_out = 384, 384, 256
         
-        self.e_needs_proj = 'e' in self.features and e_out != e_dim
+        self.e_needs_proj = 'e' in self.features and e_out != self.e_dim
         self.need_proj = num_hiddens not in [256, 512, 1024]
         
         if 's' in self.features:
