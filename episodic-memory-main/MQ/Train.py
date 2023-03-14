@@ -24,8 +24,14 @@ def Train_VSGN(opt):
     device = "cuda"
     model = torch.nn.DataParallel(model)
     model.to(device)
-
-    optimizer = optim.AdamW(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
+    
+    if opt["optim"] == "Adam":
+        optimizer = optim.Adam(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
+    elif opt["optim"] == "AdamW":
+        optimizer = optim.AdamW(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
+    elif opt["optim"] == "SGD":
+        optimizer = optim.SGD(model.parameters(), lr=opt["train_lr"], weight_decay=opt["weight_decay"])
+        
 
     start_epoch = 0
     kwargs = {'num_workers': 12, 'pin_memory': True, 'drop_last': True}
@@ -38,7 +44,10 @@ def Train_VSGN(opt):
                                               batch_size=opt["batch_size"], shuffle=False,
                                               **kwargs)
 
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=opt["step_size"], gamma=opt["step_gamma"])
+    if opt["scheduler"] == 1:
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=opt["step_size"], gamma=opt["step_gamma"])
+    else:
+        scheduler = torch.optim.lr_scheduler.OneCycleLR(optimizer) # probar parametros
     
     start_time = time.time()
     best_epoch, best_time = 0, 0

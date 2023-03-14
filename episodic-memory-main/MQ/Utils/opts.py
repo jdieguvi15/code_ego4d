@@ -312,6 +312,16 @@ def parse_opt():
         type=str,
         default="test")
         
+    parser.add_argument(
+        '--optim',
+        default='AdamW',
+        type=str,
+        choices=['Adam', 'AdamW', 'SGD'])
+    parser.add_argument(
+        '--scheduler',
+        type=int,
+        default=0)
+        
     args = parser.parse_args()
 
     return args
