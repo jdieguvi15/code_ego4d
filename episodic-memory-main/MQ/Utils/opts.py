@@ -228,7 +228,7 @@ def parse_opt():
     parser.add_argument(
         '--dim_attention',
         type=int,
-        default=1024)
+        default=256)
     parser.add_argument(
         '--num_heads',
         type=int,
@@ -324,7 +324,7 @@ def parse_opt():
     parser.add_argument(
         '--scheduler',
         type=int,
-        default=0)
+        default=1)
     parser.add_argument(
         '--ks',
         type=int,
